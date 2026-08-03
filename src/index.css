@@ -1,0 +1,77 @@
+:root {
+  --accent: #007aff;
+  --accent-soft: #eaf3ff;
+  --bg: #ffffff;
+  --bg-warm: #f5f4f0;
+  --text: #16181d;
+  --text-muted: #6b6f76;
+  --text-faint: #9a9da3;
+  --border: #e7e6e2;
+  --placeholder: #d9d9d9;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SFMono-Regular', ui-monospace, Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-editorial: 'Editorial Today', 'Newsreader', Georgia, serif;
+  --font-editorial-italic: 'Instrument Serif', 'Newsreader', Georgia, serif;
+  --content-width: 1160px;
+  --page-padding: 72px;
+  --page-padding-mobile: 32px;
+}
+
+@font-face {
+  font-family: 'Editorial Today';
+  src: url('/fonts/editorial-new/EditorialToday-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+.page {
+  flex: 1;
+  width: 100%;
+}

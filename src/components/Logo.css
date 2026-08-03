@@ -1,0 +1,17 @@
+.logo {
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  transition: opacity 0.15s ease;
+}
+
+.logo:hover {
+  opacity: 0.75;
+}
+
+.logo__mark {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
