@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // lottie-react's CJS "main" build lacks an __esModule marker, which makes
 // Vite's CJS interop double-wrap the default export. Importing the real ESM
 // build directly sidesteps that entirely.
@@ -13,9 +13,14 @@ export default function LottieSlot({
   className = '',
   rounded = true,
   scale = 1,
+  heightScale = 100,
+  playWhenCentered = false,
 }) {
   const [data, setData] = useState(null)
   const [failed, setFailed] = useState(false)
+  const [isCentered, setIsCentered] = useState(false)
+  const wrapperRef = useRef(null)
+  const lottieRef = useRef(null)
 
   useEffect(() => {
     if (!src) return
@@ -36,6 +41,26 @@ export default function LottieSlot({
     }
   }, [src])
 
+  // Fires only when the element crosses the vertical midline of the viewport,
+  // since shrinking the root by 50% top and bottom leaves a single center line.
+  useEffect(() => {
+    if (!playWhenCentered || !wrapperRef.current) return
+    const observer = new IntersectionObserver(([entry]) => setIsCentered(entry.isIntersecting), {
+      rootMargin: '-50% 0px -50% 0px',
+    })
+    observer.observe(wrapperRef.current)
+    return () => observer.disconnect()
+  }, [playWhenCentered, data])
+
+  useEffect(() => {
+    if (!playWhenCentered || !lottieRef.current) return
+    if (isCentered) {
+      lottieRef.current.play()
+    } else {
+      lottieRef.current.pause()
+    }
+  }, [isCentered, playWhenCentered])
+
   if (!src || failed || !data) {
     return <ImageSlot src={fallback} alt={alt} className={className} rounded={rounded} />
   }
@@ -45,12 +70,23 @@ export default function LottieSlot({
     .join(' ')
 
   return (
-    <div className={classes} style={{ overflow: 'hidden', background: 'var(--placeholder)' }} aria-label={alt}>
+    <div
+      ref={wrapperRef}
+      className={classes}
+      style={{ overflow: 'hidden', background: 'var(--placeholder)' }}
+      aria-label={alt}
+    >
       <Lottie
+        lottieRef={lottieRef}
         animationData={data}
         loop
-        autoplay
-        style={{ width: '100%', height: '100%', transform: `scale(${scale})`, transformOrigin: 'center' }}
+        autoplay={!playWhenCentered}
+        style={{
+          width: '100%',
+          height: `${heightScale}%`,
+          transform: `scale(${scale})`,
+          transformOrigin: 'center',
+        }}
         rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
       />
     </div>

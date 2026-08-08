@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import Logo from './Logo.jsx'
 import './Nav.css'
 
@@ -35,37 +35,47 @@ const links = [
 ]
 
 export default function Nav() {
+  const location = useLocation()
+  const isProjectDetail = location.pathname.startsWith('/work/')
+
   return (
     <header className="nav">
       <div className="nav__inner">
         <Logo />
-        <nav className="nav__links">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              className={({ isActive }) => `nav__link${isActive ? ' nav__link--active' : ''}`}
-            >
-              {link.label}
-              <svg
-                className="nav__squiggle"
-                width={link.width}
-                viewBox={link.viewBox}
-                fill="none"
-                aria-hidden="true"
+        <div className="nav__stack">
+          <nav className="nav__links">
+            {links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                className={({ isActive }) => `nav__link${isActive ? ' nav__link--active' : ''}`}
               >
-                <path
-                  d={link.d}
-                  stroke="#007AFF"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  pathLength="1"
-                />
-              </svg>
-            </NavLink>
-          ))}
-        </nav>
+                {link.label}
+                <svg
+                  className="nav__squiggle"
+                  width={link.width}
+                  viewBox={link.viewBox}
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d={link.d}
+                    stroke="#007AFF"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    pathLength="1"
+                  />
+                </svg>
+              </NavLink>
+            ))}
+          </nav>
+          {isProjectDetail && (
+            <Link to="/" className="nav__back">
+              ← back to work
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   )
