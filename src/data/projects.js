@@ -84,6 +84,9 @@ export const projects = [
           heading: 'Vote with No Distractions',
           body: 'When you vote it appears on the app or as a notification. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up because group cohesion can lead to silent dissent.',
           image: '/images/work/google-caravan/votecaravan.gif',
+          imageAspect: 'votecaravan',
+          imageCrop: true,
+          imageCropPosition: '35% center',
         },
         {
           eyebrow: 'Design Decisions',
@@ -113,7 +116,9 @@ export const projects = [
           heading: 'Trip Progress Bar - "Are we there yet?"',
           body: 'Visually see how far you are in the trip. But this clutters the space too much, and we already have an estimated time of arrival',
           image: '/images/work/google-caravan/Progress%20Bar.svg',
-          imageSize: 'small',
+          imageAspect: 'progress-bottom',
+          imageCrop: true,
+          imageCropPosition: 'bottom',
         },
         {
           eyebrow: 'Explorations',

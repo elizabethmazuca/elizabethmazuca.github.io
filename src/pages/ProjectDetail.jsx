@@ -94,7 +94,12 @@ function CaseStudySection({ section }) {
                   src={section.image}
                   alt=""
                   className={aspectClass}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: section.imageCropPosition || 'top',
+                  }}
                 />
               )
             }
@@ -139,7 +144,7 @@ export default function ProjectDetail() {
       </div>
       <div className="project-detail__cover">
         {project.lottie ? (
-          <LottieSlot src={project.lottie} fallback={project.cover} alt={project.title} />
+          <LottieSlot src={project.lottie} fallback={project.cover} alt={project.title} align="top" />
         ) : (
           <ImageSlot src={project.cover} alt={project.title} />
         )}

@@ -233,6 +233,21 @@
   flex: 0 0 auto;
 }
 
+.case-study__placeholder.case-study__placeholder--progress-bottom {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 393 / 426;
+  max-width: 260px;
+  flex: 0 0 auto;
+}
+
+.case-study__placeholder.case-study__placeholder--votecaravan {
+  width: 92%;
+  height: auto;
+  aspect-ratio: 736 / 450;
+  flex: 0 0 auto;
+}
+
 .case-study__placeholder.case-study__placeholder--tall {
   width: 100%;
   height: auto;

@@ -14,6 +14,7 @@ export default function LottieSlot({
   rounded = true,
   scale = 1,
   heightScale = 100,
+  align = 'center',
   playWhenCentered = false,
 }) {
   const [data, setData] = useState(null)
@@ -69,6 +70,8 @@ export default function LottieSlot({
     .filter(Boolean)
     .join(' ')
 
+  const transformOrigin = align === 'top' ? 'top center' : align === 'bottom' ? 'bottom center' : 'center'
+
   return (
     <div
       ref={wrapperRef}
@@ -85,9 +88,11 @@ export default function LottieSlot({
           width: '100%',
           height: `${heightScale}%`,
           transform: `scale(${scale})`,
-          transformOrigin: 'center',
+          transformOrigin,
         }}
-        rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
+        rendererSettings={{
+          preserveAspectRatio: `xMidY${align === 'top' ? 'Min' : align === 'bottom' ? 'Max' : 'Mid'} slice`,
+        }}
       />
     </div>
   )
