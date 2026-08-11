@@ -50,11 +50,19 @@ function CaseStudySection({ section }) {
         <div className="case-study__media-row">
           {section.media.map((item, i) =>
             item.crop ? (
-              <div key={i} className="case-study__media-crop">
+              <div
+                key={i}
+                className="case-study__media-crop"
+                style={item.aspect ? { aspectRatio: item.aspect } : undefined}
+              >
                 <img
                   src={item.src}
                   alt=""
-                  style={{ transform: `scale(${item.scale || 1})`, transformOrigin: 'center' }}
+                  style={{
+                    transform: `scale(${item.scale || 1})`,
+                    transformOrigin: 'center',
+                    objectPosition: item.position || 'center',
+                  }}
                 />
               </div>
             ) : (

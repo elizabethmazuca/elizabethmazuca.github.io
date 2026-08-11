@@ -152,7 +152,7 @@
 .case-study__media-row {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   flex-wrap: wrap;
   margin-top: 8px;
@@ -215,6 +215,13 @@
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+}
+
+.case-study__placeholder.case-study__placeholder--notification {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1024 / 434;
+  max-width: 520px;
 }
 
 .case-study__placeholder.case-study__placeholder--phone {

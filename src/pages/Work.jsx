@@ -10,7 +10,13 @@ function ProjectCard({ project }) {
     <Link to={`/work/${project.slug}`} className="project-card">
       <div className="project-card__image">
         {project.lottie ? (
-          <LottieSlot src={project.lottie} fallback={project.cover} alt={project.title} scale={1.15} />
+          <LottieSlot
+            src={project.lottie}
+            fallback={project.cover}
+            alt={project.title}
+            scale={project.thumbnailScale || 1.15}
+            align={project.thumbnailAlign || 'center'}
+          />
         ) : (
           <ImageSlot src={project.cover} alt={project.title} />
         )}

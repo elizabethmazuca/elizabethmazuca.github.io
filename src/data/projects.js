@@ -7,6 +7,8 @@ export const projects = [
     tags: ['mobile', 'maps', 'concept'],
     cover: '/images/work/google-caravan/caravan-cover.jpg',
     lottie: '/images/work/google-caravan/GoogleMaps.json',
+    thumbnailAlign: 'top',
+    thumbnailScale: 1.6,
     column: 'left',
     caseStudy: {
       meta: [
@@ -92,10 +94,9 @@ export const projects = [
           eyebrow: 'Design Decisions',
           heading: 'Keeping All The Ducks In Line',
           body: 'Caravan Mode lets you see where everyone is on the map. If a car falls way behind, you\'ll get a heads-up, and you still keep your own directions going.',
-          media: [
-            { src: '/images/work/google-caravan/Progress%20Bar.svg' },
-            { src: '/images/work/google-caravan/MapNotif2.jpg', crop: true, scale: 1.4 },
-          ],
+          lottie: '/images/work/google-caravan/NotificationCaravan.json',
+          lottieHeightScale: 118,
+          imageAspect: 'notification',
           caption:
             "If you need an emergency stop it'll only take 2 minutes and 34 seconds for the other cars to get notified",
         },
