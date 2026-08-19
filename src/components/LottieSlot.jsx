@@ -16,6 +16,7 @@ export default function LottieSlot({
   heightScale = 100,
   align = 'center',
   playWhenCentered = false,
+  background = 'var(--placeholder)',
 }) {
   const [data, setData] = useState(null)
   const [failed, setFailed] = useState(false)
@@ -76,7 +77,7 @@ export default function LottieSlot({
     <div
       ref={wrapperRef}
       className={classes}
-      style={{ overflow: 'hidden', background: 'var(--placeholder)' }}
+      style={{ overflow: 'hidden', background }}
       aria-label={alt}
     >
       <Lottie

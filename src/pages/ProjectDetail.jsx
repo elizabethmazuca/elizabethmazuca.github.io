@@ -25,101 +25,125 @@ function CaseStudySection({ section }) {
   const placeholderCount = section.images || (section.image || section.lottie ? 1 : 0)
   const className = section.centered ? 'case-study__section case-study__section--centered' : 'case-study__section'
 
+  const bodyEl = section.body && (
+    <p className="case-study__body">{renderBody(section.body, section.bodyLinkText, section.bodyLinkHref)}</p>
+  )
+
+  const cardsEl = section.cards && (
+    <div className="case-study__cards">
+      {section.cards.map((card) => (
+        <div className="case-study__card" key={card.title}>
+          <h3 className="case-study__card-title">{card.title}</h3>
+          <p className="case-study__card-body">{card.body}</p>
+        </div>
+      ))}
+    </div>
+  )
+
+  const carouselEl = section.carousel && (
+    <Carousel
+      slides={section.carousel}
+      alt={section.heading}
+      aspect={section.carouselAspect}
+      maxWidth={section.carouselMaxWidth}
+    />
+  )
+
+  const mediaRowEl = section.media && (
+    <div className="case-study__media-row">
+      {section.media.map((item, i) =>
+        item.crop ? (
+          <div
+            key={i}
+            className="case-study__media-crop"
+            style={item.aspect ? { aspectRatio: item.aspect } : undefined}
+          >
+            <img
+              src={item.src}
+              alt=""
+              style={{
+                transform: `scale(${item.scale || 1})`,
+                transformOrigin: 'center',
+                objectPosition: item.position || 'center',
+              }}
+            />
+          </div>
+        ) : (
+          <img
+            key={i}
+            src={item.src}
+            alt=""
+            className="case-study__media-item"
+            style={item.width ? { maxWidth: item.width } : undefined}
+          />
+        ),
+      )}
+    </div>
+  )
+
+  const placeholderRowEl = placeholderCount > 0 && (
+    <div className="case-study__placeholder-row">
+      {Array.from({ length: placeholderCount }).map((_, i) => {
+        const aspectClass = `case-study__placeholder case-study__placeholder--${section.imageAspect || 'wide'}`
+        if (i === 0 && section.lottie) {
+          return (
+            <LottieSlot
+              key={i}
+              src={section.lottie}
+              alt=""
+              className={aspectClass}
+              scale={section.lottieScale || 1}
+              heightScale={section.lottieHeightScale || 100}
+              playWhenCentered={section.lottiePlayWhenCentered}
+              background={section.lottieBackground}
+            />
+          )
+        }
+        if (i === 0 && typeof section.image === 'string' && section.imageCrop) {
+          return (
+            <img
+              key={i}
+              src={section.image}
+              alt=""
+              className={aspectClass}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: section.imageCropPosition || 'top',
+              }}
+            />
+          )
+        }
+        if (i === 0 && typeof section.image === 'string') {
+          const imageClass = section.imageSize
+            ? `case-study__image case-study__image--${section.imageSize}`
+            : 'case-study__image'
+          return <img key={i} src={section.image} alt="" className={imageClass} />
+        }
+        return <div key={i} className={aspectClass} />
+      })}
+    </div>
+  )
+
   return (
     <section className={className}>
       {section.eyebrow && <p className="case-study__eyebrow">{section.eyebrow}</p>}
       <h2 className="case-study__heading">{section.heading}</h2>
-      {section.body && (
-        <p className="case-study__body">{renderBody(section.body, section.bodyLinkText, section.bodyLinkHref)}</p>
-      )}
 
-      {section.cards && (
-        <div className="case-study__cards">
-          {section.cards.map((card) => (
-            <div className="case-study__card" key={card.title}>
-              <h3 className="case-study__card-title">{card.title}</h3>
-              <p className="case-study__card-body">{card.body}</p>
-            </div>
-          ))}
+      {section.sideBySide ? (
+        <div className="case-study__split">
+          <div className="case-study__split-media">{placeholderRowEl}</div>
+          <div className="case-study__split-text">{bodyEl}</div>
         </div>
-      )}
-
-      {section.carousel && <Carousel images={section.carousel} alt={section.heading} />}
-
-      {section.media && (
-        <div className="case-study__media-row">
-          {section.media.map((item, i) =>
-            item.crop ? (
-              <div
-                key={i}
-                className="case-study__media-crop"
-                style={item.aspect ? { aspectRatio: item.aspect } : undefined}
-              >
-                <img
-                  src={item.src}
-                  alt=""
-                  style={{
-                    transform: `scale(${item.scale || 1})`,
-                    transformOrigin: 'center',
-                    objectPosition: item.position || 'center',
-                  }}
-                />
-              </div>
-            ) : (
-              <img
-                key={i}
-                src={item.src}
-                alt=""
-                className="case-study__media-item"
-                style={item.width ? { maxWidth: item.width } : undefined}
-              />
-            ),
-          )}
-        </div>
-      )}
-
-      {placeholderCount > 0 && (
-        <div className="case-study__placeholder-row">
-          {Array.from({ length: placeholderCount }).map((_, i) => {
-            const aspectClass = `case-study__placeholder case-study__placeholder--${section.imageAspect || 'wide'}`
-            if (i === 0 && section.lottie) {
-              return (
-                <LottieSlot
-                  key={i}
-                  src={section.lottie}
-                  alt=""
-                  className={aspectClass}
-                  scale={section.lottieScale || 1}
-                  heightScale={section.lottieHeightScale || 100}
-                  playWhenCentered={section.lottiePlayWhenCentered}
-                />
-              )
-            }
-            if (i === 0 && typeof section.image === 'string' && section.imageCrop) {
-              return (
-                <img
-                  key={i}
-                  src={section.image}
-                  alt=""
-                  className={aspectClass}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: section.imageCropPosition || 'top',
-                  }}
-                />
-              )
-            }
-            if (i === 0 && typeof section.image === 'string') {
-              const imageClass = section.imageSize
-                ? `case-study__image case-study__image--${section.imageSize}`
-                : 'case-study__image'
-              return <img key={i} src={section.image} alt="" className={imageClass} />
-            }
-            return <div key={i} className={aspectClass} />
-          })}
-        </div>
+      ) : (
+        <>
+          {bodyEl}
+          {cardsEl}
+          {carouselEl}
+          {mediaRowEl}
+          {placeholderRowEl}
+        </>
       )}
 
       {section.caption && <p className="case-study__caption">{section.caption}</p>}

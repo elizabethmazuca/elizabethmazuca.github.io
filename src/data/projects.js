@@ -170,6 +170,124 @@ export const projects = [
     tags: ['shipped', 'onboarding', 'leadership'],
     cover: '/images/work/fullyhacks-cover.jpg',
     column: 'left',
+    caseStudy: {
+      meta: [
+        { label: 'Role', value: 'Product Design Lead' },
+        { label: 'Skill', value: ['Team Leadership', 'Onboarding Design', 'Web Design'] },
+        { label: 'Timeline', value: 'September 2024 - May 2026' },
+        { label: 'Tools', value: ['Figma'] },
+      ],
+      sections: [
+        {
+          eyebrow: 'The Challenge',
+          heading: '374 Applicants, only 17 were freshmen',
+          body: 'We wanted to attract more new hackers that would return next year so I explored how onboarding could make FullyHacks more approachable to first-time hackers.',
+          lottie: '/images/work/fullyhacks/FullyHacksPieChart3.json',
+          lottieHeightScale: 118,
+          lottieBackground: 'transparent',
+          imageAspect: 'piechart',
+          sideBySide: true,
+        },
+        {
+          heading: 'How can we make first time hackers feel confident enough to apply?',
+          centered: true,
+        },
+        {
+          eyebrow: 'Research',
+          heading: 'What other hackathons and companies did to appeal to new people',
+          body: 'We compared hackathon websites and onboarding patterns from consumer products to understand how other experiences welcome and guide new users.',
+          carousel: [
+            {
+              src: '/images/work/fullyhacks/Research1.jpg',
+              note: {
+                title: 'Show the experience',
+                body: "TreeHacks played a YouTube video that recaps last year's event. Strava included screenshots of the app and its potential before users create an account.",
+              },
+            },
+            {
+              src: '/images/work/fullyhacks/Research2.jpg',
+              note: {
+                title: 'Lower the perceived skill barrier',
+                body: 'CalHacks uses language that communicates that different backgrounds and experience levels belong: beginner projects, workshops, mentorship, FAQs, and beginner tracks.',
+              },
+            },
+            {
+              src: '/images/work/fullyhacks/Research3.jpg',
+              note: {
+                title: 'Give users a reason to commit',
+                body: "Duolingo has concrete benefits: make your first project, meet other students, learn Figma, try hardware, get mentorship, swag, etc. Duolingo's onboarding highlights the perks of joining.",
+              },
+            },
+          ],
+          carouselAspect: '3 / 2',
+          carouselMaxWidth: '680px',
+        },
+        {
+          heading: 'Key Insights',
+          centered: true,
+          cards: [
+            {
+              title: 'Reduce Uncertainty',
+              body: "Newcomers need to know what they're signing up for.",
+            },
+            {
+              title: 'Belonging',
+              body: 'Belonging begins before personalization.',
+            },
+            {
+              title: 'Early Value',
+              body: 'Show value before asking for commitment.',
+            },
+          ],
+        },
+        {
+          eyebrow: 'Insights',
+          heading: 'Signup forms are dead, onboarding is in',
+          body: "Auditing the sign up flow we had last year, we picked what worked and what didn't. Strong flows use progressive disclosure, short sections, and contextual guidance instead of presenting everything at once. Our team initially decided to make a separate sign up flow for new hackers, but decided that it was good information for every experience.",
+          image: true,
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'New Hackathon Onboarding',
+          body: 'FullyHacks Sign Up flow',
+          image: true,
+          imageAspect: 'phone',
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'Reduce Uncertainty',
+          body: "We brought exposure by showing the user videos that the marketing team made during the event. We also linked the hackathon's social media pages so they can see a glimpse of what the previous years were like.",
+          image: true,
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'A sense of belonging',
+          body: 'We prioritized using friendly language like "Come build something cool" vs. intimidating technical/corporate language. We also added a not sure tag if someone is unsure what they want out of the experience.',
+          image: true,
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'Early Value',
+          body: 'We made sure to ask the user what they want out of the experience, then provide concrete evidence on how they can explore their interests if they sign up.',
+          image: true,
+        },
+        {
+          eyebrow: 'Explorations',
+          heading: "Making \"I don't have a team\" feel less scary.",
+          body: "The Tidepool brings solo hackers together in one playful space. Attendees can browse other hackers looking for teammates, share what they're interested in building, and express themselves through doodles, fun facts, and emojis — making the first interaction about the person, not their résumé.",
+        },
+        {
+          eyebrow: 'Impact',
+          heading: 'Impact',
+          images: 2,
+        },
+        {
+          eyebrow: 'Impact',
+          heading: 'The Results',
+          body: '% increase for hackathon applicants',
+        },
+      ],
+    },
   },
   {
     slug: 'wordle-definition',

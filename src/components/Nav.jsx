@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Logo from './Logo.jsx'
 import './Nav.css'
 
@@ -35,9 +35,6 @@ const links = [
 ]
 
 export default function Nav() {
-  const location = useLocation()
-  const isProjectDetail = location.pathname.startsWith('/work/')
-
   return (
     <header className="nav">
       <div className="nav__inner">
@@ -70,11 +67,6 @@ export default function Nav() {
               </NavLink>
             ))}
           </nav>
-          {isProjectDetail && (
-            <Link to="/" className="nav__back">
-              ← back to work
-            </Link>
-          )}
         </div>
       </div>
     </header>

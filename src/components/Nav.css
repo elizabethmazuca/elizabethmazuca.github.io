@@ -19,11 +19,6 @@
   gap: 44px;
 }
 
-.nav__back {
-  font-size: 14px;
-  color: var(--accent);
-}
-
 .nav__link {
   position: relative;
   font-size: 17px;
