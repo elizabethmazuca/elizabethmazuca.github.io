@@ -208,14 +208,14 @@ export const projects = [
               src: '/images/work/fullyhacks/Research2.jpg',
               note: {
                 title: 'Lower the perceived skill barrier',
-                body: 'CalHacks uses language that communicates that different backgrounds and experience levels belong: beginner projects, workshops, mentorship, FAQs, and beginner tracks.',
+                body: "CalHacks uses language that communicates that different backgrounds and experience levels belong. They make it personable by saying and underlying the word You. Bronco hacks states that if you're just starting you are welcomed into this community.",
               },
             },
             {
               src: '/images/work/fullyhacks/Research3.jpg',
               note: {
                 title: 'Give users a reason to commit',
-                body: "Duolingo has concrete benefits: make your first project, meet other students, learn Figma, try hardware, get mentorship, swag, etc. Duolingo's onboarding highlights the perks of joining.",
+                body: 'Duolingo communicates its value early by showing users concrete outcomes they can achieve.',
               },
             },
           ],
@@ -232,7 +232,7 @@ export const projects = [
             },
             {
               title: 'Belonging',
-              body: 'Belonging begins before personalization.',
+              body: 'Show newcomers that they have a place here.',
             },
             {
               title: 'Early Value',
@@ -243,8 +243,10 @@ export const projects = [
         {
           eyebrow: 'Insights',
           heading: 'Signup forms are dead, onboarding is in',
-          body: "Auditing the sign up flow we had last year, we picked what worked and what didn't. Strong flows use progressive disclosure, short sections, and contextual guidance instead of presenting everything at once. Our team initially decided to make a separate sign up flow for new hackers, but decided that it was good information for every experience.",
-          image: true,
+          body: "Auditing the sign up flow we had last year, we picked what worked and what didn't. Strong flows use progressive disclosure, short sections, and contextual guidance instead of presenting everything at once.",
+          image: '/images/work/fullyhacks/MyApplication.svg',
+          imageSize: 'half',
+          caption: '2025 Fullyhacks Application',
         },
         {
           eyebrow: 'The Solution',

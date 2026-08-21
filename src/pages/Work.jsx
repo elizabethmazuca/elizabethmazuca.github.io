@@ -39,10 +39,11 @@ export default function Work() {
   return (
     <main className="page work-page">
       <h1 className="work-page__heading">
-        Hello! I <em>build</em> interactive worlds through iteration and storytelling{' '}
-        <span className="work-page__glyphs" aria-hidden="true">
-          ₊ ⊹
-        </span>
+        Hello! I <em>build</em>{' '}
+        <img src="/images/wrench.svg" alt="" className="work-page__icon work-page__icon--wrench" />{' '}
+        <span className="work-page__highlight">interactive worlds</span>{' '}
+        through iteration and <em>storytelling</em>{' '}
+        <img src="/images/star.svg" alt="" className="work-page__icon work-page__icon--star" />
       </h1>
       <p className="work-page__subtext">
         I&rsquo;ve designed rover interfaces, led hackathon onboarding, and deployed a dozen

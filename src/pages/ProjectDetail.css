@@ -235,6 +235,12 @@
   margin: 0 auto;
 }
 
+.case-study__image--half {
+  flex: 0 0 auto;
+  width: 28%;
+  margin: 0 auto;
+}
+
 .case-study__placeholder.case-study__placeholder--wide {
   width: 100%;
   height: auto;
