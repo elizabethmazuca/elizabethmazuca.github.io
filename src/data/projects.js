@@ -259,7 +259,7 @@ export const projects = [
           eyebrow: 'The Solution',
           heading: 'Reduce Uncertainty',
           body: "We brought exposure by showing the user videos that the marketing team made during the event. We also linked the hackathon's social media pages so they can see a glimpse of what the previous years were like.",
-          image: true,
+          image: '/images/work/fullyhacks/OnboardingPage1.svg',
         },
         {
           eyebrow: 'The Solution',
@@ -271,7 +271,7 @@ export const projects = [
           eyebrow: 'The Solution',
           heading: 'Early Value',
           body: 'We made sure to ask the user what they want out of the experience, then provide concrete evidence on how they can explore their interests if they sign up.',
-          image: true,
+          image: '/images/work/fullyhacks/OnboardingPage2.svg',
         },
         {
           eyebrow: 'Explorations',
