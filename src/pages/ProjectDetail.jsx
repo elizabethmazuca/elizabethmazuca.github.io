@@ -29,6 +29,18 @@ function CaseStudySection({ section }) {
     <p className="case-study__body">{renderBody(section.body, section.bodyLinkText, section.bodyLinkHref)}</p>
   )
 
+  const videoEl = section.video && (
+    <video
+      className="case-study__image"
+      src={section.video}
+      autoPlay
+      loop
+      muted
+      playsInline
+      controls
+    />
+  )
+
   const cardsEl = section.cards && (
     <div className="case-study__cards">
       {section.cards.map((card) => (
@@ -139,6 +151,7 @@ function CaseStudySection({ section }) {
       ) : (
         <>
           {bodyEl}
+          {videoEl}
           {cardsEl}
           {carouselEl}
           {mediaRowEl}

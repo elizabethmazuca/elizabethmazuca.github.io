@@ -317,6 +317,14 @@
   flex: 0 0 auto;
 }
 
+.case-study__placeholder.case-study__placeholder--half-left {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 756 / 982;
+  flex: 0 0 auto;
+  margin: 0 auto;
+}
+
 .case-study__caption {
   font-size: 13px;
   color: var(--text-faint);

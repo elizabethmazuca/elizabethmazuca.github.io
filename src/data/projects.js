@@ -243,7 +243,7 @@ export const projects = [
         {
           eyebrow: 'Insights',
           heading: 'Signup forms are dead, onboarding is in',
-          body: "Auditing the sign up flow we had last year, we picked what worked and what didn't. Strong flows use progressive disclosure, short sections, and contextual guidance instead of presenting everything at once.",
+          body: "Auditing the sign up flow we had last year, we picked out what worked and what didn't. We wanted a flow that used progressive disclosure, short sections, and contextual guidance instead of presenting everything at once.",
           image: '/images/work/fullyhacks/MyApplication.svg',
           imageSize: 'half',
           caption: '2025 Fullyhacks Application',
@@ -260,6 +260,9 @@ export const projects = [
           heading: 'Reduce Uncertainty',
           body: "We brought exposure by showing the user videos that the marketing team made during the event. We also linked the hackathon's social media pages so they can see a glimpse of what the previous years were like.",
           image: '/images/work/fullyhacks/OnboardingPage1.svg',
+          imageCrop: true,
+          imageAspect: 'half-left',
+          imageCropPosition: 'left',
         },
         {
           eyebrow: 'The Solution',
@@ -276,7 +279,8 @@ export const projects = [
         {
           eyebrow: 'Explorations',
           heading: "Making \"I don't have a team\" feel less scary.",
-          body: "The Tidepool brings solo hackers together in one playful space. Attendees can browse other hackers looking for teammates, share what they're interested in building, and express themselves through doodles, fun facts, and emojis — making the first interaction about the person, not their résumé.",
+          body: "The Tidepool brings solo hackers together in one playful space. They can browse other hackers looking for teammates, see what they're interested in, and express themselves through doodles, fun facts, and emojis. making the first interaction about the person, not their résumé.",
+          video: '/images/work/fullyhacks/Tidepool2.mp4',
         },
         {
           eyebrow: 'Impact',
