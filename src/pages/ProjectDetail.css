@@ -318,7 +318,8 @@
 }
 
 .case-study__placeholder.case-study__placeholder--half-left {
-  width: 50%;
+  width: 100%;
+  max-width: 320px;
   height: auto;
   aspect-ratio: 756 / 982;
   flex: 0 0 auto;

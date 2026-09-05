@@ -168,20 +168,23 @@ export const projects = [
     title: 'FullyHacks',
     tagline: 'Reducing onboarding friction for hundreds of hackathon attendees.',
     tags: ['shipped', 'onboarding', 'leadership'],
-    cover: '/images/work/fullyhacks-cover.jpg',
+    cover: '/images/work/fullyhacks/fullyhacks-thumb.mp4',
+    lottie: '/images/work/fullyhacks/fullythumb2.json',
+    thumbnailScale: 1.3,
+    thumbnailAlign: 'top',
     column: 'left',
     caseStudy: {
       meta: [
         { label: 'Role', value: 'Product Design Lead' },
         { label: 'Skill', value: ['Team Leadership', 'Onboarding Design', 'Web Design'] },
-        { label: 'Timeline', value: 'September 2024 - May 2026' },
+        { label: 'Timeline', value: 'September 2025 - May 2026' },
         { label: 'Tools', value: ['Figma'] },
       ],
       sections: [
         {
           eyebrow: 'The Challenge',
           heading: '374 Applicants, only 17 were freshmen',
-          body: 'We wanted to attract more new hackers that would return next year so I explored how onboarding could make FullyHacks more approachable to first-time hackers.',
+          body: 'We wanted to attract more new hackers that would return next year so my team and I explored how onboarding could make FullyHacks more approachable to first-time hackers.',
           lottie: '/images/work/fullyhacks/FullyHacksPieChart3.json',
           lottieHeightScale: 118,
           lottieBackground: 'transparent',
@@ -268,7 +271,7 @@ export const projects = [
           eyebrow: 'The Solution',
           heading: 'A sense of belonging',
           body: 'We prioritized using friendly language like "Come build something cool" vs. intimidating technical/corporate language. We also added a not sure tag if someone is unsure what they want out of the experience.',
-          image: true,
+          video: '/images/work/fullyhacks/fullyhackswalkthruvid.mp4',
         },
         {
           eyebrow: 'The Solution',

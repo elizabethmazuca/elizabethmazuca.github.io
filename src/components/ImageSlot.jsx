@@ -29,6 +29,23 @@ export default function ImageSlot({
     )
   }
 
+  if (/\.(mp4|webm)$/i.test(src)) {
+    return (
+      <video
+        src={src}
+        className={classes}
+        style={{ objectFit: fit, ...style }}
+        onClick={onClick}
+        onError={() => setFailed(true)}
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-label={alt || undefined}
+      />
+    )
+  }
+
   return (
     <img
       src={src}

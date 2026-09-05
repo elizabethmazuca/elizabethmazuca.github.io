@@ -19,20 +19,14 @@ const communities = [
     back: 'Hosting workshops, growing with a community of student designers and developers, and eating a lot of pizza...',
   },
   {
-    label: 'Friends of Figma',
-    image: '/images/about/communities/friends-of-figma.jpg',
-    rotation: 3,
-    back: 'Connecting with design talent in my own backyard.',
-  },
-  {
     label: 'Fullyhacks',
     image: '/images/about/communities/fullyhacks.jpg',
     rotation: -3,
-    back: "Leading design for CSUF's largest hackathon, from early ideas to shipped experiences.",
+    back: "Leading design for CSUF's largest hackathon.",
   },
   {
     label: 'CKI',
-    image: '/images/about/communities/cki.jpg',
+    image: '/images/about/communities/cki.png',
     rotation: 4,
     back: 'Volunteering with my community for 100+ hours and focusing on service and giving back.',
   },
