@@ -246,17 +246,18 @@ export const projects = [
         {
           eyebrow: 'Insights',
           heading: 'Signup forms are dead, onboarding is in',
-          body: "Auditing the sign up flow we had last year, we picked out what worked and what didn't. We wanted a flow that used progressive disclosure, short sections, and contextual guidance instead of presenting everything at once.",
+          body: "Auditing the sign up flow we had last year, we picked out what worked and what didn't. We wanted a flow that used progressive disclosure and short sections instead of presenting everything at once.",
           image: '/images/work/fullyhacks/MyApplication.svg',
           imageSize: 'half',
-          caption: '2025 Fullyhacks Application',
+          caption: 'Previous Fullyhacks Application',
+          sideBySide: true,
+          splitCompact: true,
         },
         {
           eyebrow: 'The Solution',
           heading: 'New Hackathon Onboarding',
           body: 'FullyHacks Sign Up flow',
-          image: true,
-          imageAspect: 'phone',
+          video: '/images/work/fullyhacks/fullyhackswalkthruvid.mp4',
         },
         {
           eyebrow: 'The Solution',
@@ -271,7 +272,8 @@ export const projects = [
           eyebrow: 'The Solution',
           heading: 'A sense of belonging',
           body: 'We prioritized using friendly language like "Come build something cool" vs. intimidating technical/corporate language. We also added a not sure tag if someone is unsure what they want out of the experience.',
-          video: '/images/work/fullyhacks/fullyhackswalkthruvid.mp4',
+          image: '/images/work/fullyhacks/BeginnerFriendly.svg',
+          imageSize: 'compact',
         },
         {
           eyebrow: 'The Solution',

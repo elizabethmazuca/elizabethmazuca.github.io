@@ -48,6 +48,7 @@
   backface-visibility: hidden;
   background: #fff;
   border: 6px solid #fff;
+  overflow: hidden;
 }
 
 .flip-card__face--back {

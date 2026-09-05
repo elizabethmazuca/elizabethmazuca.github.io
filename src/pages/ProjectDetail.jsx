@@ -144,9 +144,24 @@ function CaseStudySection({ section }) {
       <h2 className="case-study__heading">{section.heading}</h2>
 
       {section.sideBySide ? (
-        <div className="case-study__split">
-          <div className="case-study__split-media">{placeholderRowEl}</div>
-          <div className="case-study__split-text">{bodyEl}</div>
+        <div
+          className={
+            section.splitCompact
+              ? 'case-study__split case-study__split--compact'
+              : 'case-study__split'
+          }
+        >
+          {section.sideBySide === 'reverse' ? (
+            <>
+              <div className="case-study__split-text">{bodyEl}</div>
+              <div className="case-study__split-media">{placeholderRowEl}</div>
+            </>
+          ) : (
+            <>
+              <div className="case-study__split-media">{placeholderRowEl}</div>
+              <div className="case-study__split-text">{bodyEl}</div>
+            </>
+          )}
         </div>
       ) : (
         <>

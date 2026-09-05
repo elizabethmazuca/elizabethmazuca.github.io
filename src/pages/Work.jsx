@@ -46,7 +46,7 @@ export default function Work() {
         <img src="/images/star.svg" alt="" className="work-page__icon work-page__icon--star" />
       </h1>
       <p className="work-page__subtext">
-        I&rsquo;ve designed rover interfaces, led hackathon onboarding, and deployed a dozen
+        I&rsquo;ve designed rover interfaces, led hackathon onboarding, and used AI to deploy
         passion projects along the way.
       </p>
 

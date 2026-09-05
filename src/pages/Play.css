@@ -20,6 +20,38 @@
   cursor: pointer;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  animation: play-grid-drop 0.65s linear backwards;
+  animation-delay: calc(var(--i, 0) * 220ms);
+}
+
+@keyframes play-grid-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-140px) scale(0.9);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(18px) scale(1.05);
+  }
+  48% {
+    transform: translateY(-20px) scale(0.96);
+  }
+  66% {
+    transform: translateY(9px) scale(1.02);
+  }
+  84% {
+    transform: translateY(-3px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play-grid__item {
+    animation: none;
+  }
 }
 
 .play-grid__item .img-slot {

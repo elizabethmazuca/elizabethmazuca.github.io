@@ -136,6 +136,25 @@
   margin-top: 0;
 }
 
+.case-study__split-media .case-study__image--half {
+  width: 280px;
+  max-width: 100%;
+}
+
+.case-study__split--compact {
+  justify-content: center;
+}
+
+.case-study__split--compact .case-study__split-text {
+  padding: 24px;
+  flex: 0 1 420px;
+  max-width: 420px;
+}
+
+.case-study__split--compact .case-study__split-media .case-study__image--half {
+  width: 200px;
+}
+
 .case-study__link {
   color: var(--accent);
   text-decoration: none;
@@ -238,6 +257,11 @@
 .case-study__image--half {
   flex: 0 0 auto;
   width: 28%;
+  margin: 0 auto;
+}
+
+.case-study__image--compact {
+  width: 85%;
   margin: 0 auto;
 }
 

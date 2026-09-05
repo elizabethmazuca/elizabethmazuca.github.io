@@ -28,6 +28,7 @@ const communities = [
     label: 'CKI',
     image: '/images/about/communities/cki.png',
     rotation: 4,
+    imageScale: 1.4,
     back: 'Volunteering with my community for 100+ hours and focusing on service and giving back.',
   },
   {
@@ -108,6 +109,7 @@ export default function About() {
               image={c.image}
               rotation={c.rotation}
               back={c.back}
+              imageScale={c.imageScale}
             />
           ))}
         </div>

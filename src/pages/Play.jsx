@@ -46,6 +46,13 @@ const items = [
     ratio: '1824 / 2507',
     caption: 'Drawn by me on procreate',
   },
+  {
+    id: 'raspberrypi',
+    src: '/images/play/raspberrypi.jpeg',
+    alt: 'Raspberry Pi',
+    ratio: '480 / 640',
+    caption: 'My first cyberdeck ft Raspberry Pi Pico',
+  },
 ]
 
 export default function Play() {
@@ -55,11 +62,11 @@ export default function Play() {
   return (
     <main className="page play-page">
       <div className="play-grid">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <button
             key={item.id}
             className="play-grid__item"
-            style={{ aspectRatio: item.ratio }}
+            style={{ aspectRatio: item.ratio, '--i': index }}
             onClick={() => setActive(item)}
             onMouseMove={(e) => setHover({ caption: item.caption, x: e.clientX, y: e.clientY })}
             onMouseLeave={() => setHover(null)}
