@@ -169,8 +169,8 @@ export const projects = [
     tagline: 'Reducing onboarding friction for hundreds of hackathon attendees.',
     tags: ['shipped', 'onboarding', 'leadership'],
     cover: '/images/work/fullyhacks/fullyhacks-thumb.mp4',
-    lottie: '/images/work/fullyhacks/fullythumb2.json',
-    thumbnailScale: 1.3,
+    lottie: '/images/work/fullyhacks/sanddollaaaaa.json',
+    thumbnailScale: 1.1,
     thumbnailAlign: 'top',
     column: 'left',
     caseStudy: {

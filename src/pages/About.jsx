@@ -59,7 +59,7 @@ export default function About() {
 
       <section className="about-intro">
         <div className="about-intro__photo">
-          <ImageSlot src="/images/about/photo.jpg" alt="Elizabeth Mazuca" />
+          <ImageSlot src="/images/about/icon.jpg" alt="Elizabeth Mazuca" />
         </div>
         <div className="about-intro__content">
           <p className="about-intro__bio">
