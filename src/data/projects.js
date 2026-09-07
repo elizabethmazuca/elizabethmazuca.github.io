@@ -289,13 +289,10 @@ export const projects = [
         },
         {
           eyebrow: 'Impact',
-          heading: 'Impact',
-          images: 2,
-        },
-        {
-          eyebrow: 'Impact',
           heading: 'The Results',
-          body: '% increase for hackathon applicants',
+          body: 'By creating a more welcoming onboarding experience for first-time hackers, the redesign contributed to a 13% increase in applications. This outcome was especially meaningful to me because my own computer science journey truly began when I stepped beyond the classroom and attended my first hackathon. I hope another student was able to have that experience too. :)',
+          image: '/images/work/fullyhacks/fullyhacksresults.svg',
+          imageSize: 'medium',
         },
       ],
     },
