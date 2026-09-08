@@ -1,8 +1,8 @@
 export const contact = {
   name: 'Elizabeth Mazuca',
   title: 'Product Designer',
-  site: 'elzie.me',
-  siteLink: 'https://elzie.me',
+  site: 'elzie.dev',
+  siteLink: 'https://elzie.dev',
   email: 'mazucachu@gmail.com',
   phone: '714-559-0097',
 }

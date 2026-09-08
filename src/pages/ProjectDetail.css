@@ -172,7 +172,7 @@
 }
 
 .case-study__card {
-  background: var(--accent-soft);
+  background: var(--card-bg, var(--accent-soft));
   border-radius: var(--radius-md);
   padding: 20px;
   text-align: center;
@@ -181,7 +181,7 @@
 .case-study__card-title {
   font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--card-title, var(--text));
   margin: 0 0 8px;
 }
 
@@ -268,7 +268,14 @@
 }
 
 .case-study__image--compact {
+  flex: 0 0 auto;
   width: 85%;
+  margin: 0 auto;
+}
+
+.case-study__image--large {
+  flex: 0 0 auto;
+  width: 95%;
   margin: 0 auto;
 }
 

@@ -158,15 +158,142 @@ export const projects = [
     title: 'Titan Rover',
     tagline:
       'Designing an interface that helps operators make fast and confident decisions',
-    tags: ['mobile', 'maps', 'prototype'],
+    tags: ['a/b testing', 'shipped', 'robotics'],
     cover: '/images/work/titan-rover-cover.jpg',
     lottie: '/images/work/TitanRoverCover.json',
     column: 'right',
+    caseStudy: {
+      meta: [
+        { label: 'Role', value: 'UI/UX Lead' },
+        { label: 'Skill', value: ['Prototyping', 'Interaction Design'] },
+        { label: 'Timeline', value: 'October 2 - Current' },
+        { label: 'Tools', value: ['Figma', 'Arduino'] },
+      ],
+      sections: [
+        {
+          eyebrow: 'The Challenge',
+          heading: 'Designing for Mars Missions',
+          body: "Our team competed in the annual Rover Challenge where teams operate next generation Mars rovers under intense time pressure. As the UI/UX lead I knew every second counted so I focused on making an intuitive interface as the UI wasn't just a dashboard it was a competitive advantage.",
+        },
+        {
+          image: '/images/work/titan-rover/contestinfo.png',
+        },
+        {
+          eyebrow: 'Unexpected Terrain',
+          heading: 'Clean UI, Messy Reality',
+          body: "I had to design something that worked in a competitive setting, so it was really important that key info was easy to find. I had to fit a lot onto the screen while still keeping it visually clean. But the worst (but kind of fun) part was that we were constantly adding and removing features. As a result, the UI was always changing and I just had to keep redesigning it over and over and somehow make it still look clean every time.",
+          image: '/images/work/titan-rover/amazonroversc.png',
+          imageSize: 'compact',
+        },
+        {
+          eyebrow: 'Unexpected Terrain',
+          heading: 'Highly Technical Hiccups',
+          body: 'Operators needed to understand system status instantly to avoid delays and errors. Backend concepts like "linear actuator," "manual override," or raw voltage values didn\'t instantly correlate to how users think about movement, power, and control. An interface that mirrors system architecture instead of user intent increases learning time and operational friction.',
+          image: '/images/work/titan-rover/roveranswer.png',
+          caption: 'Rover controls survey to gather more insight',
+        },
+        {
+          eyebrow: 'Research',
+          heading: 'Studying What Works',
+          body: 'To design for a competitive environment, we researched proven control interface handbooks, including the NASA Crew Interface Encyclopedia. We examined how these system rules prioritize information, use color to signal urgency, and organize data to support fast, confident decisions. A recent thesis (Arzberger 2022) prototyped UIs for astronaut teleoperation of field robots. Best practices included alerting operators via pop-up dialogs for critical events (e.g. automatic scans) and one-button actions with progress bars and countdown warnings to prevent errors. These patterns ensured that crew attention was drawn to important status changes and that necessary actions required confirmation.',
+          bodyLinks: [
+            { text: 'NASA Crew Interface Encyclopedia', href: '#' },
+            { text: 'Arzberger 2022', href: '#' },
+          ],
+          image: true,
+          caption: 'Figure 39. The rover tested displays.',
+        },
+        {
+          eyebrow: 'Design Principles',
+          heading: 'Defining core principles to consider both clarity and flexibility',
+          cardsColor: '#F7E2CC',
+          cardsTitleColor: '#C46D10',
+          cards: [
+            {
+              title: 'Cognitive Load',
+              body: 'Operators had to interpret complex data in real time to make quick decisions.',
+            },
+            {
+              title: 'Critical Information',
+              body: 'Kill-switch status, video, and battery health needed to remain visible.',
+            },
+            {
+              title: 'Evolving Requirements',
+              body: 'Late feature and hardware additions required a flexible interface.',
+            },
+          ],
+        },
+        {
+          eyebrow: 'Problem Statement',
+          heading:
+            'How might we reduce operator cognitive load while designing for constantly changing requirements?',
+          centered: true,
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'Titan Rover UI',
+          body: 'Important data readily available.',
+          image: true,
+        },
+        {
+          eyebrow: 'Design Decisions',
+          heading: 'Navigation Bar',
+          body: "I prioritized which pages should sit closest to the user's thumb to make them easiest to reach. Based on urgency and frequency of use, the final layout from left to right is: science, navigation, arm controls, and the kill switch.",
+          image: true,
+        },
+        {
+          eyebrow: 'Design Decisions',
+          heading: 'Technical-to-User Terminology Mapping',
+          body: 'The final design contextualized engineering jargon so that users see familiar terms. I created this table to standardize all the action verbs.',
+          image: true,
+        },
+        {
+          eyebrow: 'Design Decisions',
+          heading: 'Magic Trick: 2 cameras becomes 6',
+          body: 'In the beginning we had the budget for 2 cameras, then 3, then 4, then 6! Putting the camera feed into the UI like tetris blocks, at the end I decided one page of cameras would not be as effective as arm cameras on the arm and wheel cameras at the navigation page.',
+          image: true,
+        },
+        {
+          eyebrow: 'Design Decisions',
+          heading: 'A/B testing',
+          body: 'I put the two prototypes head to head in a speed battle. We had teammates pilot the rover 3 different times and took the median speed. Prototype A speed was 2 minutes 5 seconds. Prototype B speed was 2 minutes 47 seconds.',
+          video: '/images/work/titan-rover/testing.mp4',
+          imageSize: 'small',
+          caption: 'A/B testing with the team',
+        },
+        {
+          eyebrow: 'Explorations',
+          heading: 'Rover State Data',
+          body: 'I made an autonomous navigation data to show what the system was "thinking," giving engineers clearer visibility into the rover\'s decisions. However, the feature consumed too much computing power so it wasn\'t included in the final build.',
+          image: true,
+        },
+        {
+          eyebrow: 'The Journey',
+          heading: 'Organizing new information',
+          body: "After the first prototype, the engineering team expanded the system with additional cameras, new types of arms that required their own controls, and updated navigation features. As a designer, I'm used to iterating based on user needs, but this was my first time adapting the UI to evolving hardware I hadn't initially accounted for. It ended up being a great learning experience, especially in understanding how important close collaboration with engineers is.",
+          image: true,
+        },
+        {
+          eyebrow: 'Getting Ready for competition',
+          heading: 'Rover on standby',
+          body: "As of right now we submitted our project and are waiting to see if we are able to compete in the collegiate rover competition. But of course, that doesn't stop us from adding new features and fun!",
+          image: '/images/work/titan-rover/roverpic.jpg',
+          imageSize: 'small',
+        },
+        {
+          heading: 'Thank You for Reading!',
+          body: "My first rover UI was really exciting to make. Feel free to contact me to ask about the details and ideas that didn't quite make it, including future haptic feedback ideas.",
+          image: true,
+          sideBySide: true,
+        },
+      ],
+    },
   },
   {
     slug: 'fullyhacks',
     title: 'FullyHacks',
-    tagline: 'Reducing onboarding friction for hundreds of hackathon attendees.',
+    tagline:
+      'Leading onboarding for **hundreds** of hackathon applicants resulting in a **13%** applicant increase.',
     tags: ['shipped', 'onboarding', 'leadership'],
     cover: '/images/work/fullyhacks/fullyhacks-thumb.mp4',
     lottie: '/images/work/fullyhacks/sanddollaaaaa.json',

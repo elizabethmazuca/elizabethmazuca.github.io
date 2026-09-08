@@ -4,34 +4,59 @@ import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
+import { renderRichText } from '../utils/richText.jsx'
 import './ProjectDetail.css'
 
-function renderBody(body, linkText, linkHref) {
-  if (!linkText) return body
-  const idx = body.indexOf(linkText)
-  if (idx === -1) return body
-  return (
-    <>
-      {body.slice(0, idx)}
-      <a href={linkHref} target="_blank" rel="noopener noreferrer" className="case-study__link">
-        {linkText}
-      </a>
-      {body.slice(idx + linkText.length)}
-    </>
-  )
+function renderBody(body, links) {
+  if (!links || !links.length) return body
+  const matches = links
+    .map((link) => ({ ...link, idx: body.indexOf(link.text) }))
+    .filter((link) => link.idx !== -1)
+    .sort((a, b) => a.idx - b.idx)
+  if (!matches.length) return body
+
+  const nodes = []
+  let cursor = 0
+  matches.forEach((match, i) => {
+    nodes.push(body.slice(cursor, match.idx))
+    nodes.push(
+      <a
+        key={i}
+        href={match.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="case-study__link"
+      >
+        {match.text}
+      </a>,
+    )
+    cursor = match.idx + match.text.length
+  })
+  nodes.push(body.slice(cursor))
+  return nodes
 }
 
 function CaseStudySection({ section }) {
   const placeholderCount = section.images || (section.image || section.lottie ? 1 : 0)
   const className = section.centered ? 'case-study__section case-study__section--centered' : 'case-study__section'
 
+  const bodyLinks = section.bodyLinks
+    ? section.bodyLinks
+    : section.bodyLinkText
+      ? [{ text: section.bodyLinkText, href: section.bodyLinkHref }]
+      : undefined
+
   const bodyEl = section.body && (
-    <p className="case-study__body">{renderBody(section.body, section.bodyLinkText, section.bodyLinkHref)}</p>
+    <p className="case-study__body">{renderBody(section.body, bodyLinks)}</p>
   )
 
   const videoEl = section.video && (
     <video
-      className="case-study__image"
+      className={
+        section.imageSize
+          ? `case-study__image case-study__image--${section.imageSize}`
+          : 'case-study__image'
+      }
       src={section.video}
       autoPlay
       loop
@@ -42,7 +67,13 @@ function CaseStudySection({ section }) {
   )
 
   const cardsEl = section.cards && (
-    <div className="case-study__cards">
+    <div
+      className="case-study__cards"
+      style={{
+        '--card-bg': section.cardsColor || undefined,
+        '--card-title': section.cardsTitleColor || undefined,
+      }}
+    >
       {section.cards.map((card) => (
         <div className="case-study__card" key={card.title}>
           <h3 className="case-study__card-title">{card.title}</h3>
@@ -141,7 +172,7 @@ function CaseStudySection({ section }) {
   return (
     <section className={className}>
       {section.eyebrow && <p className="case-study__eyebrow">{section.eyebrow}</p>}
-      <h2 className="case-study__heading">{section.heading}</h2>
+      {section.heading && <h2 className="case-study__heading">{section.heading}</h2>}
 
       {section.sideBySide ? (
         <div
@@ -196,7 +227,7 @@ export default function ProjectDetail() {
   return (
     <main className="page project-detail">
       <h1 className="project-detail__title">{project.title}</h1>
-      <p className="project-detail__tagline">{project.tagline}</p>
+      <p className="project-detail__tagline">{renderRichText(project.tagline)}</p>
       <div className="project-detail__tags">
         {project.tags.map((tag) => (
           <Tag key={tag}>{tag}</Tag>

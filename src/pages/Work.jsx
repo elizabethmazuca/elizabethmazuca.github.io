@@ -3,6 +3,7 @@ import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
+import { renderRichText } from '../utils/richText.jsx'
 import './Work.css'
 
 function ProjectCard({ project }) {
@@ -22,7 +23,7 @@ function ProjectCard({ project }) {
         )}
       </div>
       <h3 className="project-card__title">{project.title}</h3>
-      <p className="project-card__tagline">{project.tagline}</p>
+      <p className="project-card__tagline">{renderRichText(project.tagline)}</p>
       <div className="project-card__tags">
         {project.tags.map((tag) => (
           <Tag key={tag}>{tag}</Tag>
