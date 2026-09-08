@@ -9,6 +9,7 @@ import {
   education,
   skills,
 } from '../data/resume.js'
+import { renderRichText } from '../utils/richText.jsx'
 import './Resume.css'
 
 function OrgLink({ href, children }) {
@@ -39,7 +40,7 @@ function ExperienceEntry({ entry }) {
         </h3>
         <span className="resume-entry__date">{entry.date}</span>
       </div>
-      <p className="resume-entry__description">{entry.description}</p>
+      <p className="resume-entry__description">{renderRichText(entry.description)}</p>
     </div>
   )
 }
