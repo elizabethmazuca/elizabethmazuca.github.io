@@ -53,6 +53,14 @@ const items = [
     ratio: '480 / 640',
     caption: 'My first cyberdeck ft Raspberry Pi Pico',
   },
+  {
+    id: 'valtodo',
+    src: '/images/play/valtodo.png',
+    alt: 'Valtodo',
+    ratio: '1918 / 870',
+    caption: 'Valorant themed to-do list, click to view',
+    link: 'https://5dailies.vercel.app/',
+  },
 ]
 
 export default function Play() {
@@ -66,8 +74,10 @@ export default function Play() {
           <button
             key={item.id}
             className="play-grid__item"
-            style={{ aspectRatio: item.ratio, '--i': index }}
-            onClick={() => setActive(item)}
+            style={{ aspectRatio: item.ratio, '--i': Math.min(index, 8) }}
+            onClick={() =>
+              item.link ? window.open(item.link, '_blank', 'noopener') : setActive(item)
+            }
             onMouseMove={(e) => setHover({ caption: item.caption, x: e.clientX, y: e.clientY })}
             onMouseLeave={() => setHover(null)}
             aria-label={`Open ${item.alt}`}

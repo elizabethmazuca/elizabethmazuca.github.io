@@ -114,6 +114,10 @@
   margin: 0;
 }
 
+.case-study__body + .case-study__body {
+  margin-top: 12px;
+}
+
 .case-study__split {
   display: flex;
   align-items: center;
@@ -283,6 +287,13 @@
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+}
+
+.case-study__placeholder.case-study__placeholder--search {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 680 / 120;
+  max-width: 640px;
 }
 
 .case-study__placeholder.case-study__placeholder--notification {

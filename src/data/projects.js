@@ -156,8 +156,7 @@ export const projects = [
   {
     slug: 'titan-rover',
     title: 'Titan Rover',
-    tagline:
-      'Designing an interface that helps operators make fast and confident decisions',
+    tagline: 'Designing a rover interface that **reduced task completion time by 22%**',
     tags: ['a/b testing', 'shipped', 'robotics'],
     cover: '/images/work/titan-rover-cover.jpg',
     lottie: '/images/work/TitanRoverCover.json',
@@ -181,7 +180,7 @@ export const projects = [
         {
           eyebrow: 'Unexpected Terrain',
           heading: 'Clean UI, Messy Reality',
-          body: "I had to design something that worked in a competitive setting, so it was really important that key info was easy to find. I had to fit a lot onto the screen while still keeping it visually clean. But the worst (but kind of fun) part was that we were constantly adding and removing features. As a result, the UI was always changing and I just had to keep redesigning it over and over and somehow make it still look clean every time.",
+          body: "As new hardware was added throughout development, the worst (but kind of fun) part was that the interface had to continuously adapt without becoming cluttered.",
           image: '/images/work/titan-rover/amazonroversc.png',
           imageSize: 'compact',
         },
@@ -191,6 +190,11 @@ export const projects = [
           body: 'Operators needed to understand system status instantly to avoid delays and errors. Backend concepts like "linear actuator," "manual override," or raw voltage values didn\'t instantly correlate to how users think about movement, power, and control. An interface that mirrors system architecture instead of user intent increases learning time and operational friction.',
           image: '/images/work/titan-rover/roveranswer.png',
           caption: 'Rover controls survey to gather more insight',
+        },
+        {
+          lottie: '/images/work/titan-rover/search.json',
+          imageAspect: 'search',
+          lottieBackground: 'transparent',
         },
         {
           eyebrow: 'Research',
@@ -237,20 +241,20 @@ export const projects = [
         },
         {
           eyebrow: 'Design Decisions',
-          heading: 'Navigation Bar',
-          body: "I prioritized which pages should sit closest to the user's thumb to make them easiest to reach. Based on urgency and frequency of use, the final layout from left to right is: science, navigation, arm controls, and the kill switch.",
+          heading: '2..3..4...6 Cameras?',
+          body: 'In the beginning we had the budget for 2 cameras, then 3, then 4, then 6! Putting the camera feed into the UI like tetris blocks, at the end I decided one page of cameras but it was way too overstimulating',
+          image: true,
+        },
+        {
+          eyebrow: 'Design Decisions',
+          heading: 'Operator Task > Hardware Type',
+          body: 'Rather than redesigning the interface every time new hardware was added, I created a structure that could grow with the rover. I organized the UI around operator workflows, giving new hardware a predictable place before it even existed.\n\nNavigation cameras and driving controls lived together, while arm and sample-collection cameras were grouped with arm controls.',
           image: true,
         },
         {
           eyebrow: 'Design Decisions',
           heading: 'Technical-to-User Terminology Mapping',
           body: 'The final design contextualized engineering jargon so that users see familiar terms. I created this table to standardize all the action verbs.',
-          image: true,
-        },
-        {
-          eyebrow: 'Design Decisions',
-          heading: 'Magic Trick: 2 cameras becomes 6',
-          body: 'In the beginning we had the budget for 2 cameras, then 3, then 4, then 6! Putting the camera feed into the UI like tetris blocks, at the end I decided one page of cameras would not be as effective as arm cameras on the arm and wheel cameras at the navigation page.',
           image: true,
         },
         {

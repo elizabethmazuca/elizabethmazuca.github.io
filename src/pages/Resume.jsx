@@ -54,7 +54,7 @@ export default function Resume() {
             <h1 className="resume-card__name">{contact.name}</h1>
             <p className="resume-card__subtitle">{contact.title}</p>
             <p className="resume-card__contact">
-              {contact.email} · {contact.phone} ·{' '}
+              {contact.email} ·{' '}
               <a
                 href={contact.siteLink}
                 className="resume-entry__link"
@@ -65,13 +65,7 @@ export default function Resume() {
               </a>
             </p>
           </div>
-          <a
-            className="resume-card__download"
-            href="/resume/Elizabeth_Mazuca_Resume.pdf"
-            download
-          >
-            ↓ Download PDF
-          </a>
+          <span className="resume-card__download">↓ Download PDF</span>
         </div>
 
         <div className="resume-card__section">

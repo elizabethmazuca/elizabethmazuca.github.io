@@ -4,7 +4,6 @@ export const contact = {
   site: 'elzie.dev',
   siteLink: 'https://elzie.dev',
   email: 'mazucachu@gmail.com',
-  phone: '714-559-0097',
 }
 
 export const summary =

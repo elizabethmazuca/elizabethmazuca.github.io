@@ -47,7 +47,13 @@ function CaseStudySection({ section }) {
       : undefined
 
   const bodyEl = section.body && (
-    <p className="case-study__body">{renderBody(section.body, bodyLinks)}</p>
+    <>
+      {section.body.split('\n\n').map((paragraph, i) => (
+        <p key={i} className="case-study__body">
+          {renderBody(paragraph, bodyLinks)}
+        </p>
+      ))}
+    </>
   )
 
   const videoEl = section.video && (
