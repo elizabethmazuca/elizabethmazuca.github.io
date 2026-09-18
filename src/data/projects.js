@@ -171,7 +171,7 @@ export const projects = [
       sections: [
         {
           eyebrow: 'The Challenge',
-          heading: 'Designing for Mars Missions',
+          heading: 'Designing for Speedy Mars Missions',
           body: "Our team competed in the annual Rover Challenge where teams operate next generation Mars rovers under intense time pressure. As the UI/UX lead I knew every second counted so I focused on making an intuitive interface as the UI wasn't just a dashboard it was a competitive advantage.",
         },
         {
@@ -185,9 +185,9 @@ export const projects = [
           imageSize: 'compact',
         },
         {
-          eyebrow: 'Unexpected Terrain',
+          eyebrow: 'Research',
           heading: 'Highly Technical Hiccups',
-          body: 'Operators needed to understand system status instantly to avoid delays and errors. Backend concepts like "linear actuator," "manual override," or raw voltage values didn\'t instantly correlate to how users think about movement, power, and control. An interface that mirrors system architecture instead of user intent increases learning time and operational friction.',
+          body: "I created a survey with the science team revealed two key problems.\n\n1. Technical jargon was difficult to understand\n\n2. Critical system information wasn't always visible when operators needed it.\n\nThese findings guided me to simplify technical labels and keep essential system states visible across the interface.",
           image: '/images/work/titan-rover/roveranswer.png',
           caption: 'Rover controls survey to gather more insight',
         },
@@ -234,21 +234,21 @@ export const projects = [
           centered: true,
         },
         {
-          eyebrow: 'The Solution',
-          heading: 'Titan Rover UI',
-          body: 'Important data readily available.',
-          image: true,
-        },
-        {
           eyebrow: 'Design Decisions',
-          heading: '2..3..4...6 Cameras?',
+          heading: 'Every hardware update created a UI problem',
           body: 'In the beginning we had the budget for 2 cameras, then 3, then 4, then 6! Putting the camera feed into the UI like tetris blocks, at the end I decided one page of cameras but it was way too overstimulating',
           image: true,
         },
         {
           eyebrow: 'Design Decisions',
-          heading: 'Operator Task > Hardware Type',
+          heading: 'Instead of designing around hardware, I designed around tasks',
           body: 'Rather than redesigning the interface every time new hardware was added, I created a structure that could grow with the rover. I organized the UI around operator workflows, giving new hardware a predictable place before it even existed.\n\nNavigation cameras and driving controls lived together, while arm and sample-collection cameras were grouped with arm controls.',
+          image: true,
+        },
+        {
+          eyebrow: 'The Solution',
+          heading: 'Titan Rover UI',
+          body: 'Important data readily available.',
           image: true,
         },
         {
