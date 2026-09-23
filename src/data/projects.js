@@ -14,7 +14,7 @@ export const projects = [
       meta: [
         { label: 'Role', value: 'Product Designer' },
         { label: 'Skill', value: ['Prototyping', 'Interaction Design', 'Automotive UX'] },
-        { label: 'Timeline', value: 'June 6 - July 31' },
+        { label: 'Timeline', value: 'June 2025 - July 2025' },
         { label: 'Tools', value: ['Figma', 'Protopie'] },
       ],
       sections: [
@@ -165,7 +165,7 @@ export const projects = [
       meta: [
         { label: 'Role', value: 'UI/UX Lead' },
         { label: 'Skill', value: ['Prototyping', 'Interaction Design'] },
-        { label: 'Timeline', value: 'October 2 - Current' },
+        { label: 'Timeline', value: 'Sept 2025 - Jan 2026' },
         { label: 'Tools', value: ['Figma', 'Arduino'] },
       ],
       sections: [
@@ -308,7 +308,7 @@ export const projects = [
       meta: [
         { label: 'Role', value: 'Product Design Lead' },
         { label: 'Skill', value: ['Team Leadership', 'Onboarding Design', 'Web Design'] },
-        { label: 'Timeline', value: 'September 2025 - May 2026' },
+        { label: 'Timeline', value: 'Sept 2025 - May 2026' },
         { label: 'Tools', value: ['Figma'] },
       ],
       sections: [
