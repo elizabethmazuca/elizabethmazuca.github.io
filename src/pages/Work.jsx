@@ -40,11 +40,18 @@ export default function Work() {
   return (
     <main className="page work-page">
       <h1 className="work-page__heading">
-        Hello! I <em>build</em>{' '}
+        I&rsquo;m <span className="work-page__highlight">Elizabeth Mazuca</span>
+        <br />
+        I <em>build</em>{' '}
         <img src="/images/wrench.svg" alt="" className="work-page__icon work-page__icon--wrench" />{' '}
-        <span className="work-page__highlight">interactive worlds</span>{' '}
+        interactive worlds
+        <br />
         through iteration and <em>storytelling</em>{' '}
-        <img src="/images/star.svg" alt="" className="work-page__icon work-page__icon--star" />
+        <span className="work-page__icon work-page__icon--star" aria-hidden="true">
+          <img src="/images/work/VectorStarTails.svg" alt="" className="work-page__star-part work-page__star-part--tails" />
+          <img src="/images/work/VectorSmallStar.svg" alt="" className="work-page__star-part work-page__star-part--small" />
+          <img src="/images/work/VectorBigStar.svg" alt="" className="work-page__star-part work-page__star-part--big" />
+        </span>
       </h1>
       <p className="work-page__subtext">
         I&rsquo;ve designed rover interfaces, led hackathon onboarding, and used AI to deploy
