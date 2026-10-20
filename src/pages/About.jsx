@@ -45,9 +45,7 @@ export default function About() {
       <section className="about-hero">
         <h1 className="about-hero__heading">
           Hello! I&rsquo;m <em>Elizabeth Mazuca</em>{' '}
-          <span className="about-hero__glyphs" aria-hidden="true">
-            ₊ ⊹
-          </span>
+          <span className="about-hero__smile">:)</span>
           <br />
           <span className="about-hero__facts">
             I <Typewriter phrases={factsPhrases} />

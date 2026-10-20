@@ -22,9 +22,8 @@
   font-weight: 400;
 }
 
-.about-hero__glyphs {
-  font-size: 20px;
-  color: var(--text-faint);
+.about-hero__smile {
+  color: var(--accent);
   font-family: var(--font-sans);
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ImageSlot from '../components/ImageSlot.jsx'
 import Lightbox from '../components/Lightbox.jsx'
 import './Play.css'
@@ -67,52 +67,88 @@ const items = [
     src: '/images/play/valtodo.png',
     alt: 'Valtodo',
     ratio: '1918 / 870',
-    caption: 'Valorant themed to-do list, click to view',
+    title: 'Daily Ace',
+    caption: 'Valorant themed to-do list including the Valorant dopamine hit',
     link: 'https://5dailies.vercel.app/',
+    linkLabel: '5dailies.vercel.app',
+    wide: true,
   },
 ]
 
 export default function Play() {
   const [active, setActive] = useState(null)
   const [hover, setHover] = useState(null)
+  const gridRef = useRef(null)
+  const [layout, setLayout] = useState({ cols: 3, colWidth: 0, gap: 32 })
+
+  // Masonry via CSS grid: each item spans enough 1px rows to fit its height.
+  useEffect(() => {
+    const grid = gridRef.current
+    const measure = () => {
+      const styles = getComputedStyle(grid)
+      const cols = styles.gridTemplateColumns.split(' ').length
+      const gap = parseFloat(styles.columnGap) || 0
+      const colWidth = (grid.clientWidth - gap * (cols - 1)) / cols
+      setLayout({ cols, colWidth, gap })
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(grid)
+    return () => observer.disconnect()
+  }, [])
+
+  const spanFor = (item) => {
+    const colSpan = item.wide ? Math.min(2, layout.cols) : 1
+    const width = layout.colWidth * colSpan + layout.gap * (colSpan - 1)
+    const [w, h] = item.ratio.split('/').map(Number)
+    return { colSpan, rowSpan: Math.ceil((width * h) / w + layout.gap) }
+  }
 
   return (
     <main className="page play-page">
-      <div className="play-grid">
-        {items.map((item, index) => (
-          <button
-            key={item.id}
-            className="play-grid__item"
-            style={{ aspectRatio: item.ratio, '--i': Math.min(index, 8) }}
-            onClick={() =>
-              item.link ? window.open(item.link, '_blank', 'noopener') : setActive(item)
-            }
-            onMouseMove={(e) => setHover({ ...item, x: e.clientX, y: e.clientY })}
-            onMouseLeave={() => setHover(null)}
-            aria-label={`Open ${item.alt}`}
-          >
-            <ImageSlot src={item.src} alt={item.alt} />
-          </button>
-        ))}
+      <div className="play-grid" ref={gridRef}>
+        {items.map((item, index) => {
+          const { colSpan, rowSpan } = spanFor(item)
+          return (
+            <button
+              key={item.id}
+              className="play-grid__item"
+              style={{
+                aspectRatio: item.ratio,
+                gridColumn: `span ${colSpan}`,
+                gridRowEnd: `span ${rowSpan}`,
+                '--i': Math.min(index, 8),
+              }}
+              onClick={() =>
+                item.link ? window.open(item.link, '_blank', 'noopener') : setActive(item)
+              }
+              onMouseMove={(e) => setHover({ ...item, x: e.clientX, y: e.clientY })}
+              onMouseLeave={() => setHover(null)}
+              aria-label={`Open ${item.alt}`}
+            >
+              <ImageSlot src={item.src} alt={item.alt} />
+            </button>
+          )
+        })}
       </div>
 
       {hover && (
         <span
-          className="play-grid__tooltip"
+          className={`play-grid__tooltip${
+            hover.x > window.innerWidth / 2 ? ' play-grid__tooltip--left' : ''
+          }`}
           style={{ left: hover.x, top: hover.y }}
           aria-hidden="true"
         >
           {hover.title && <span className="play-grid__tooltip-title">{hover.title}</span>}
           <span className="play-grid__tooltip-caption">{hover.caption}</span>
           {hover.link && (
-            <span className="play-grid__tooltip-link">{hover.link}</span>
+            <span className="play-grid__tooltip-link">{hover.linkLabel ?? hover.link}</span>
           )}
         </span>
       )}
 
-      {active && (
-        <Lightbox src={active.src} alt={active.alt} onClose={() => setActive(null)} />
-      )}
+      {active && <Lightbox src={active.src} alt={active.alt} onClose={() => setActive(null)} />}
     </main>
   )
 }
