@@ -5,6 +5,15 @@ import './Play.css'
 
 const items = [
   {
+    id: 'first-day',
+    src: '/images/play/FirstDay.mp4',
+    alt: 'Your First Day',
+    ratio: '620 / 798',
+    title: 'Your First Day',
+    caption: 'A site that shows you what the world was like when you were born',
+    link: 'https://your-first-day-gules.vercel.app/',
+  },
+  {
     id: 'group-1',
     src: '/images/play/Group%201.jpg',
     alt: 'Group 1',
@@ -78,7 +87,7 @@ export default function Play() {
             onClick={() =>
               item.link ? window.open(item.link, '_blank', 'noopener') : setActive(item)
             }
-            onMouseMove={(e) => setHover({ caption: item.caption, x: e.clientX, y: e.clientY })}
+            onMouseMove={(e) => setHover({ ...item, x: e.clientX, y: e.clientY })}
             onMouseLeave={() => setHover(null)}
             aria-label={`Open ${item.alt}`}
           >
@@ -93,7 +102,11 @@ export default function Play() {
           style={{ left: hover.x, top: hover.y }}
           aria-hidden="true"
         >
-          {hover.caption}
+          {hover.title && <span className="play-grid__tooltip-title">{hover.title}</span>}
+          <span className="play-grid__tooltip-caption">{hover.caption}</span>
+          {hover.link && (
+            <span className="play-grid__tooltip-link">{hover.link}</span>
+          )}
         </span>
       )}
 
