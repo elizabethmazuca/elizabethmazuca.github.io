@@ -1,0 +1,454 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:411px;height:870px;background:transparent;overflow:hidden;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+.emoji{font-family:'Noto Color Emoji'}
+#device{position:absolute;left:0;top:0;width:411px;height:870px;border-radius:64px;background:#0a0a0a;box-shadow:inset 0 0 0 1.5px #3a3a3d}
+#screen{position:absolute;left:9px;top:9px;width:393px;height:852px;border-radius:55px;overflow:hidden;background:#fff;isolation:isolate}
+.abs{position:absolute}
+/* status bar */
+#island{position:absolute;left:133.5px;top:11px;width:126px;height:37px;border-radius:19px;background:#000;z-index:100}
+#sb{position:absolute;left:0;top:0;width:393px;height:54px;z-index:90}
+#sbtime{position:absolute;left:30px;top:17px;width:40px;text-align:center;font-weight:600;font-size:17px;letter-spacing:-.3px;color:#000}
+#sbicons{position:absolute;right:33px;top:22px}
+/* messages */
+#chat{position:absolute;inset:0;background:#fff}
+#hdr{position:absolute;left:0;top:0;width:393px;height:150px;z-index:20;background:linear-gradient(#fff 0,#fff 136px,rgba(255,255,255,0) 150px);height:150px}
+#back{position:absolute;left:11px;top:84px;width:66px;height:40px;border-radius:20px;background:#f7f7f8;box-shadow:0 1px 6px rgba(0,0,0,.07);color:#007aff;font-size:17px;font-weight:500}
+#back span{position:absolute;left:36px;top:10px}
+#avatar{position:absolute;left:173px;top:63px;width:48px;height:48px;border-radius:50%;background:url(catpfphat.jpg) center/cover}
+#name{position:absolute;left:0;width:393px;top:116px;text-align:center;font-size:13.5px;font-weight:600;color:#000;letter-spacing:-.1px}
+#name i{font-style:normal;color:#9a9aa0;font-weight:500;margin-left:5px;font-size:12px}
+#list{position:absolute;left:0;top:0;width:393px;height:852px}
+#today{position:absolute;left:0;width:393px;text-align:center;font-size:11px;color:#8e8e93;font-weight:500}
+.msg{position:absolute;font-size:17px;line-height:22px;letter-spacing:-.25px;padding:8px 13px;border-radius:19px;white-space:nowrap}
+.out{right:17px;background:#007aff;color:#fff}
+.in{left:15px;background:#e9e9eb;color:#000}
+.out::before{content:'';position:absolute;bottom:0;right:-7px;width:20px;height:22px;background:#007aff;border-bottom-left-radius:16px 14px}
+.out::after{content:'';position:absolute;bottom:0;right:-26px;width:26px;height:22px;background:#fff;border-bottom-left-radius:10px}
+.in::before{content:'';position:absolute;bottom:0;left:-7px;width:20px;height:22px;background:#e9e9eb;border-bottom-right-radius:16px 14px}
+.in::after{content:'';position:absolute;bottom:0;left:-26px;width:26px;height:22px;background:#fff;border-bottom-right-radius:10px}
+.msg>*{position:relative;z-index:2}
+.typing{width:62px;height:38px}
+.typing b{position:absolute;top:15px;width:8px;height:8px;border-radius:50%;background:#8e8e93}
+/* outgoing timer widget bubble */
+#wb{padding:0;border-radius:15px;background:transparent}
+#wb::before,#wb::after{display:none}
+.widget{position:relative;background:#19191c;border-radius:15px;color:#fff;overflow:hidden}
+.ring{position:absolute}
+.wtime{position:absolute;left:0;width:100%;text-align:center;font-weight:300;color:#fff;letter-spacing:-.6px;font-variant-numeric:tabular-nums}
+.wtitle{position:absolute;font-size:17px;font-weight:400;letter-spacing:-.3px;color:#fff}
+.wsub{position:absolute;font-size:13.5px;color:#8e8e93;letter-spacing:-.1px}
+#delivered{position:absolute;right:20px;font-size:11px;color:#8e8e93;font-weight:500}
+/* blur overlay for menu */
+#veil{position:absolute;inset:0;background:#f5f5f9;z-index:30;opacity:0}
+/* composer */
+#plus{position:absolute;left:12px;width:33px;height:33px;border-radius:50%;background:#f4f4f6;z-index:40}
+#plus svg{position:absolute;left:8.5px;top:8.5px}
+#field{position:absolute;left:57px;width:326px;border-radius:18px;border:1px solid #dedee2;background:#fff;z-index:40;overflow:hidden}
+#ph{position:absolute;left:13px;font-size:16.5px;color:#b5b5ba;letter-spacing:-.2px;white-space:nowrap}
+#typed{position:absolute;left:13px;font-size:16.5px;color:#000;letter-spacing:-.2px;white-space:nowrap}
+#caret{position:absolute;width:2px;height:20px;background:#007aff;border-radius:1px}
+#mic{position:absolute;right:11px}
+#sendbtn{position:absolute;right:4px;width:28px;height:28px;border-radius:50%;background:#007aff}
+#sendbtn svg{position:absolute;left:7px;top:6.5px}
+#draftw{position:absolute;left:6px;top:6px;width:312px;height:100px}
+#addmsg{position:absolute;left:11px;font-size:15px;color:#a3a3a8;letter-spacing:-.1px}
+/* keyboard */
+#kb{position:absolute;left:0;width:393px;height:290px;background:#e3e5ea;z-index:35}
+.key{position:absolute;height:41px;border-radius:6px;background:#fff;box-shadow:0 1px 0 #8a8b8f;font-size:23px;color:#000;text-align:center;line-height:39px;font-weight:400}
+.key.sp{background:#bfc3ca;font-size:15px}
+.key.sm{font-size:15px}
+.pred{position:absolute;top:13px;font-size:16px;color:#000;letter-spacing:-.2px}
+.psep{position:absolute;top:12px;width:1px;height:22px;background:#c4c6cb}
+#homebar{position:absolute;left:129.5px;width:134px;height:5px;border-radius:3px;z-index:95}
+/* attach menu */
+#menu{position:absolute;left:17px;top:178px;width:346px;height:341px;border-radius:22px;background:rgba(253,253,254,.97);box-shadow:0 10px 40px rgba(0,0,0,.10),0 0 0 .5px rgba(0,0,0,.04);z-index:50;transform-origin:14px 372px}
+.mi{position:absolute;left:0;width:346px;height:47px}
+.mi .ic{position:absolute;left:17px;top:5.5px;width:36px;height:36px;border-radius:50%}
+.mi .lb{position:absolute;left:68px;top:13px;font-size:17px;color:#000;letter-spacing:-.3px}
+#hl{position:absolute;left:9px;width:330px;height:44px;border-radius:12px;background:#eaf2ff}
+/* timer sheet */
+#sheet{position:absolute;left:0;width:393px;height:300px;background:#000;z-index:60;color:#fff}
+#sheet .title{position:absolute;left:0;width:393px;top:11px;text-align:center;font-size:16px;font-weight:600;letter-spacing:-.2px}
+#close{position:absolute;left:353px;top:6px;width:28px;height:28px;border-radius:50%;background:#2c2c2e}
+#close svg{position:absolute;left:9px;top:9px}
+#nfield{position:absolute;left:16px;top:46px;width:367px;height:43px;border-radius:12px;background:#1c1c1e}
+#nlabel{position:absolute;left:12px;top:13px;font-size:13.5px;color:#8a8a8f;letter-spacing:-.1px}
+#nph{position:absolute;left:116px;top:12.5px;font-size:14.5px;color:#545458;letter-spacing:-.1px}
+#nval{position:absolute;left:116px;top:12.5px;font-size:14.5px;color:#fff;letter-spacing:-.1px;white-space:nowrap}
+#ncaret{position:absolute;top:12px;width:2px;height:19px;background:#0a84ff;border-radius:1px}
+#band{position:absolute;left:16px;top:143px;width:367px;height:30px;border-radius:9px;background:#2c2c2e}
+.wl{position:absolute;width:60px;text-align:center;font-weight:300;font-variant-numeric:tabular-nums}
+.wlab{position:absolute;top:149px;font-size:13px;font-weight:600;color:#fff}
+#sendT{position:absolute;left:16px;top:230px;width:367px;height:40px;border-radius:20px;background:#2b2b2e;text-align:center;font-size:15px;font-weight:600;line-height:40px;letter-spacing:-.2px}
+/* lock */
+#lock{position:absolute;inset:0;z-index:200;background:url(catphonebg.jpg) center/cover;opacity:0}
+#lockicon{position:absolute;left:189px;top:65px}
+#ldate{position:absolute;left:0;width:393px;top:107px;text-align:center;color:rgba(255,255,255,.92);font-size:18px;font-weight:500;letter-spacing:-.1px}
+#ltime{position:absolute;left:0;width:393px;top:131px;text-align:center;color:rgba(255,255,255,.95);font-size:94px;font-weight:300;letter-spacing:-1px;line-height:110px}
+#notif{position:absolute;left:13px;top:592px;width:368px;height:70px;border-radius:20px;background:rgba(28,28,30,.62);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);color:#fff}
+#nicon{position:absolute;left:16px;top:16px;width:37px;height:37px;border-radius:9px;background:#0b0b0c}
+#ntitle{position:absolute;left:69px;top:13px;font-size:15px;font-weight:600;letter-spacing:-.2px}
+#nbody{position:absolute;left:69px;top:36px;font-size:15px;letter-spacing:-.2px}
+#nnow{position:absolute;right:16px;top:14px;font-size:13px;color:rgba(235,235,245,.6)}
+#black{position:absolute;inset:0;background:#000;z-index:300;opacity:0}
+/* touch */
+.touch{position:absolute;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;background:rgba(150,150,155,.38);border:1.5px solid rgba(255,255,255,.7);box-shadow:0 0 0 .5px rgba(0,0,0,.08);z-index:500;opacity:0;pointer-events:none}
+</style></head>
+<body>
+<div id="device"><div id="screen">
+
+  <div id="chat">
+    <div id="list">
+      <div id="today">Today 9:41 AM</div>
+      <div class="msg out" id="m0"><span>Are we still on for Saturday?</span></div>
+      <div class="msg in typing" id="ty1"><b style="left:15px"></b><b style="left:27px"></b><b style="left:39px"></b></div>
+      <div class="msg in" id="m1"><span>Noooo, I have so many chores<br>to do. I gotta fold laundry</span></div>
+      <div class="msg out" id="m2"><span>Dude.</span></div>
+      <div class="msg out" id="m3"><span>That’s a 20 minute task. Max.</span></div>
+      <div class="msg in typing" id="ty2"><b style="left:15px"></b><b style="left:27px"></b><b style="left:39px"></b></div>
+      <div class="msg in" id="m4"><span>Yea... I keep putting it off <span class="emoji">😭</span></span></div>
+      <div class="msg out" id="wb"><div class="widget" id="w2" style="width:262px;height:78px"></div></div>
+      <div id="delivered">Delivered</div>
+    </div>
+    <div id="hdr">
+      <div id="back"><svg class="abs" style="left:14px;top:11px" width="11" height="18" viewBox="0 0 11 18"><path d="M9.5 1.5 2 9l7.5 7.5" fill="none" stroke="#007aff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>12</span></div>
+      <div id="avatar"></div>
+      <div id="name">Maya Chen<i>›</i></div>
+    </div>
+    <div id="veil"></div>
+  </div>
+
+  <div id="plus"><svg width="16" height="16" viewBox="0 0 16 16" id="plusg"><path d="M8 1.5v13M1.5 8h13" stroke="#8a8a8f" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+  <div id="field">
+    <div id="ph">iMessage</div>
+    <div id="typed"></div>
+    <div id="caret"></div>
+    <svg id="mic" width="12" height="18" viewBox="0 0 12 18"><rect x="3.2" y="1" width="5.6" height="10" rx="2.8" fill="none" stroke="#a5a5aa" stroke-width="1.4"/><path d="M1 8.5a5 5 0 0 0 10 0M6 13.6v3" fill="none" stroke="#a5a5aa" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div id="sendbtn"><svg width="14" height="15" viewBox="0 0 14 15"><path d="M7 13.5V2M2 6.5 7 1.5l5 5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div id="draftw"><div class="widget" id="w1" style="width:312px;height:100px"></div></div>
+    <div id="addmsg">Add a message...</div>
+  </div>
+
+  <div id="menu">
+    <div id="hl"></div>
+    <div id="items"></div>
+  </div>
+
+  <div id="kb"></div>
+
+  <div id="sheet">
+    <svg class="abs" style="left:20px;top:13px" width="9" height="15" viewBox="0 0 9 15"><path d="M7.5 1.5 1.8 7.5l5.7 6" fill="none" stroke="#d1d1d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="title">Timer</div>
+    <div id="close"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1 1 9" stroke="#d1d1d6" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+    <div id="nfield"><div id="nlabel">Timer name</div><div id="nph">Name your timer</div><div id="nval"></div><div id="ncaret"></div></div>
+    <div id="band"></div>
+    <div id="wheels"></div>
+    <div class="wlab" style="left:136px">hours</div>
+    <div class="wlab" style="left:271px">min</div>
+    <div id="sendT"><svg style="vertical-align:-1px;margin-right:9px" width="11" height="12" viewBox="0 0 11 12"><path d="M5.5 11V1.5M1.3 5.5 5.5 1.3l4.2 4.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Send Timer</div>
+  </div>
+
+  <div id="lock">
+    <svg id="lockicon" width="15" height="19" viewBox="0 0 15 19"><path d="M3.5 8V5.5a4 4 0 0 1 8 0V8" fill="none" stroke="rgba(60,60,67,.55)" stroke-width="1.8"/><rect x="1" y="8" width="13" height="10" rx="2.2" fill="rgba(60,60,67,.55)"/></svg>
+    <div id="ldate">Wednesday, October 14</div>
+    <div id="ltime">10:21</div>
+    <div id="notif">
+      <div id="nicon"></div>
+      <div id="ntitle">Maya</div>
+      <div id="nbody">Completed the Laundry Timer.</div>
+      <div id="nnow">now</div>
+    </div>
+  </div>
+
+  <div id="sb"><div id="sbtime">9:41</div>
+    <svg id="sbicons" width="62" height="13" viewBox="0 0 62 13">
+      <g fill="#000"><rect x="0" y="8" width="3" height="4.5" rx=".8"/><rect x="4.6" y="5.8" width="3" height="6.7" rx=".8"/><rect x="9.2" y="3.4" width="3" height="9.1" rx=".8"/><rect x="13.8" y="1" width="3" height="11.5" rx=".8"/></g>
+      <path d="M27.5 3.2c2.2 0 4.2.9 5.7 2.3l1-1C32.5 2.8 30.1 1.8 27.5 1.8s-5 1-6.7 2.7l1 1c1.5-1.4 3.5-2.3 5.7-2.3zm0 3c1.4 0 2.6.5 3.6 1.4l1-1c-1.2-1.2-2.8-1.9-4.6-1.9s-3.4.7-4.6 1.9l1 1c1-.9 2.2-1.4 3.6-1.4zm0 3c.6 0 1.1.2 1.5.6l-1.5 1.6-1.5-1.6c.4-.4.9-.6 1.5-.6z" fill="#000" stroke="#000" stroke-width=".6"/>
+      <rect x="37.5" y="1" width="21.5" height="11.4" rx="3.4" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="1"/>
+      <rect x="39.5" y="3" width="17.5" height="7.4" rx="1.8" fill="#000"/>
+      <path d="M60.5 4.6v4.2c.9-.3 1.3-1.1 1.3-2.1s-.4-1.8-1.3-2.1z" fill="#000" fill-opacity=".45"/>
+    </svg>
+  </div>
+  <div id="island"></div>
+  <div id="homebar"></div>
+  <div id="black"></div>
+  <div class="touch" id="touch"></div>
+</div></div>
+
+<script>
+// ---------- helpers ----------
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const eOut=p=>1-Math.pow(1-p,3);
+const eInOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eSpring=p=>{ if(p<=0) return 0; if(p>=1) return 1; return 1-Math.exp(-7*p)*Math.cos(9.5*p)*(1-p*0.0); };
+// iOS-like critically-damped-ish curve
+const eIOS=p=>p<=0?0:p>=1?1:1-Math.pow(1-p,4)*(1+0*p);
+
+// ---------- icons ----------
+function clockSVG(size, ring){
+  let ticks='';
+  for(let i=0;i<12;i++){const a=i*Math.PI/6;const r1=i%3==0?11.2:12.2, r2=14.2;
+    ticks+=`<line x1="${18+Math.sin(a)*r1}" y1="${18-Math.cos(a)*r1}" x2="${18+Math.sin(a)*r2}" y2="${18-Math.cos(a)*r2}" stroke="#111" stroke-width="${i%3==0?1.4:.9}" stroke-linecap="round"/>`;}
+  return `<svg width="${size}" height="${size}" viewBox="0 0 36 36"><circle cx="18" cy="18" r="${ring?16.3:17}" fill="#fff" ${ring?'stroke="#111" stroke-width="2.6"':''}/>${ticks}
+  <line x1="18" y1="18" x2="13.5" y2="11.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="18" y1="18" x2="25" y2="20.5" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="18" y1="21.5" x2="18" y2="6" stroke="#ff9500" stroke-width=".9" stroke-linecap="round"/><circle cx="18" cy="18" r="1.4" fill="#ff9500"/></svg>`;
+}
+const W=(s)=>`<svg width="36" height="36" viewBox="0 0 36 36">${s}</svg>`;
+let petals='';const pc=['#fbbc04','#f6802b','#ef4b6a','#c44fd1','#6a62f0','#2f9cf4','#34c2a0','#8bd34f'];
+for(let i=0;i<8;i++){petals+=`<ellipse cx="18" cy="11.2" rx="4" ry="6.6" fill="${pc[i]}" fill-opacity=".85" transform="rotate(${i*45} 18 18)"/>`}
+const items=[
+ ['Camera','#8e8e93',W(`<rect x="10" y="12.5" width="16" height="12" rx="2.6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M14.5 12.5l1.3-2h4.4l1.3 2" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><circle cx="18" cy="18.5" r="3" fill="none" stroke="#fff" stroke-width="1.5"/>`)],
+ ['Photos','#fff',W(petals)],
+ ['Stickers','#34c759',W(`<circle cx="18" cy="18" r="8.5" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="15" cy="16.3" r="1.1" fill="#fff"/><circle cx="21" cy="16.3" r="1.1" fill="#fff"/><path d="M14.2 20.2c1 1.4 2.3 2.1 3.8 2.1s2.8-.7 3.8-2.1" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>`)],
+ ['Audio','#ff9500',W([[11,16,20],[13.6,13,23],[16.2,10.5,25.5],[18.8,14,22],[21.4,12,24],[24,15,21],[26.4,16.8,19.2]].map(b=>`<line x1="${b[0]}" y1="${b[1]}" x2="${b[0]}" y2="${b[2]}" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>`).join(''))],
+ ['Location','#007aff',W(`<path d="M18 27s-6.5-6.4-6.5-11.2a6.5 6.5 0 0 1 13 0C24.5 20.6 18 27 18 27z" fill="none" stroke="#fff" stroke-width="1.6"/><circle cx="18" cy="15.8" r="2.4" fill="none" stroke="#fff" stroke-width="1.5"/>`)],
+ ['Timer','none',clockSVG(36,true)],
+ ['More','#e5e5ea',W(`<circle cx="12.5" cy="18" r="1.5" fill="#8e8e93"/><circle cx="18" cy="18" r="1.5" fill="#8e8e93"/><circle cx="23.5" cy="18" r="1.5" fill="#8e8e93"/>`)],
+];
+const ITEMY=[208,254,301,348,395,442,489].map(y=>y-178-23.5);
+$('items').innerHTML=items.map((it,i)=>`<div class="mi" id="mi${i}" style="top:${ITEMY[i]}px"><div class="ic" style="background:${it[1]}">${it[2]}</div><div class="lb">${it[0]}</div></div>`).join('');
+$('hl').style.top=(ITEMY[5]+1.5)+'px';
+$('nicon').innerHTML=`<div style="position:absolute;left:3.5px;top:3.5px">${clockSVG(30,false)}</div>`;
+
+// widget content
+function widgetHTML(w,h,ringD,timeSize,titleX,id){
+  const rx=(h-ringD)/2;
+  return `<svg class="ring" style="left:${rx}px;top:${rx}px" width="${ringD}" height="${ringD}" viewBox="0 0 ${ringD} ${ringD}">
+   <circle cx="${ringD/2}" cy="${ringD/2}" r="${ringD/2-1.6}" fill="none" stroke="#3a3a3c" stroke-width="2.4"/>
+   <circle id="${id}arc" cx="${ringD/2}" cy="${ringD/2}" r="${ringD/2-1.6}" fill="none" stroke="#ff9f0a" stroke-width="2.4" stroke-linecap="round" transform="rotate(-90 ${ringD/2} ${ringD/2})"/></svg>
+   <div class="wtime" id="${id}t" style="left:${rx}px;width:${ringD}px;top:${rx+ringD/2-timeSize*0.62}px;font-size:${timeSize}px">20:00</div>
+   <div class="wtitle" style="left:${titleX}px;top:${h/2-21}px">Laundry Timer</div>
+   <div class="wsub" style="left:${titleX}px;top:${h/2+3}px">20 minutes</div>`;
+}
+$('w1').innerHTML=widgetHTML(312,100,78,25,104,'w1');
+$('w2').innerHTML=widgetHTML(262,78,62,19.5,82,'w2');
+function setRing(id,frac){const c=$(id+'arc');const r=+c.getAttribute('r');const L=2*Math.PI*r;c.setAttribute('stroke-dasharray',L);c.setAttribute('stroke-dashoffset',L*(1-frac));}
+
+// keyboard
+const KB=$('kb');let kh='';const keyEl={};
+kh+=`<div class="pred" style="left:48px">“I”</div><div class="psep" style="left:131px"></div><div class="pred" style="left:181px">The</div><div class="psep" style="left:262px"></div><div class="pred" style="left:321px">I’m</div>`;
+const R=[['qwertyuiop',0],['asdfghjkl',19.65],['zxcvbnm',58.95]];
+const KT=[54,106,158,210];
+R.forEach((r,ri)=>{[...r[0]].forEach((c,i)=>{const x=3+r[1]+i*39.3;kh+=`<div class="key" id="k_${c}" style="left:${x}px;top:${KT[ri]}px;width:33.3px">${c}</div>`;})});
+kh+=`<div class="key sp" style="left:3px;top:${KT[2]}px;width:43px"><svg style="margin-top:11px" width="18" height="17" viewBox="0 0 18 17"><path d="M9 1.5 1.5 9h4v6.5h7V9h4z" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/></svg></div>`;
+kh+=`<div class="key sp" style="left:347px;top:${KT[2]}px;width:43px"><svg style="margin-top:12px" width="23" height="16" viewBox="0 0 23 16"><path d="M7 1.5h13a1.8 1.8 0 0 1 1.8 1.8v9.4A1.8 1.8 0 0 1 20 14.5H7L1.3 8z" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/><path d="M10.5 5l6 6m0-6-6 6" stroke="#000" stroke-width="1.4" stroke-linecap="round"/></svg></div>`;
+kh+=`<div class="key sp sm" style="left:3px;top:${KT[3]}px;width:44px">123</div>`;
+kh+=`<div class="key sp" style="left:52px;top:${KT[3]}px;width:44px"><svg style="margin-top:10px" width="21" height="21" viewBox="0 0 21 21"><circle cx="10.5" cy="10.5" r="9" fill="none" stroke="#000" stroke-width="1.3"/><circle cx="7.4" cy="8.4" r="1.1"/><circle cx="13.6" cy="8.4" r="1.1"/><path d="M6.3 12.4c1 1.7 2.4 2.5 4.2 2.5s3.2-.8 4.2-2.5" fill="none" stroke="#000" stroke-width="1.3" stroke-linecap="round"/></svg></div>`;
+kh+=`<div class="key sm" id="k_ " style="left:101px;top:${KT[3]}px;width:195px">space</div>`;
+kh+=`<div class="key sp sm" style="left:301px;top:${KT[3]}px;width:89px">return</div>`;
+KB.innerHTML=kh;
+document.querySelectorAll('.key').forEach(k=>{if(k.id) keyEl[k.id.slice(2)]=k;});
+
+// wheels
+const WH=$('wheels');let wh='';
+const ROWY=[675,700,724,748,772].map(y=>y-566);
+function col(vals,cx,id){return vals.map((v,i)=>{const sel=i==2;const fs=sel?24:18;const dist=Math.abs(i-2);
+  const color=sel?'#fff':(dist==1?'#8e8e93':'#5f5f64');
+  return `<div class="wl" style="left:${cx-30}px;top:${ROWY[i]-fs*0.62}px;font-size:${fs}px;color:${color}">${v}</div>`}).join('');}
+wh+=col([22,23,0,1,2],120,'h')+col([18,19,20,21,22],247,'m');
+WH.innerHTML=wh;
+
+// ---------- timeline ----------
+const T={
+  ty1:[0.5,1.15], m1:1.15,
+  tapField:2.0, kbUp:[2.1,2.5],
+  type1:[2.7,0.085,'Dude.'], send1:3.3, m2:3.35,
+  type2:[3.9,0.05,'That’s a 20 minute task. Max.'], send2:5.6, m3:5.65,
+  ty2:[6.05,6.7], m4:6.7,
+  tapPlus:8.1, menu:[8.15,8.6],
+  tapTimer:9.1, toSheet:[9.3,9.75],
+  tapName:10.15, type3:[10.35,0.055,'Laundry Timer'],
+  tapSendT:12.0, fromSheet:[12.1,12.55],
+  tapSend:13.05, widgetIn:[13.1,13.55],
+  lockOff:[15.65,15.8], wake:[16.15,16.5],
+  notif:[17.0,17.55], end:19.6
+};
+// slow the whole sequence to 25 s
+{const S=25/19.6;for(const k in T){const v=T[k];
+  if(typeof v==='number')T[k]=v*S;
+  else T[k]=v.map(x=>typeof x==='number'?x*S:x);}}
+const typeEnd=a=>a[0]+a[1]*a[2].length;
+function typedAt(t,a){if(t<a[0])return '';const n=Math.min(a[2].length,Math.floor((t-a[0])/a[1])+1);return a[2].slice(0,n);}
+const taps=[[T.tapField,200,800],[T.send1,355,538],[T.send2,355,538],[T.tapPlus,28,538],[T.tapTimer,150,442],[T.tapName,230,633],[T.tapSendT,196,816],[T.tapSend,355,538]];
+
+// measure bubble heights once
+const H={};['m0','m1','m2','m3','m4','ty1','ty2','wb'].forEach(id=>H[id]=$(id).offsetHeight);
+const GAP=9;
+
+function render(t){
+  // ---- keyboard / sheet geometry
+  const kbUp=eIOS(seg(t,...T.kbUp));
+  const toSheet=eIOS(seg(t,...T.toSheet));
+  const fromSheet=eIOS(seg(t,...T.fromSheet));
+  const sheetP=toSheet*(1-fromSheet);            // 0..1 sheet visibility
+  const kbTop=lerp(852,566,kbUp);
+  const sheetTop=lerp(852,566,sheetP);
+  const anchor=Math.min(kbTop, sheetTop<852?sheetTop:9999, kbTop);
+  // keyboard stays behind sheet (no motion needed: sheet covers it)
+  const anc = sheetP>0 ? Math.min(kbTop, sheetTop) : kbTop;
+  const down=(anc-566)/(852-566);
+  const fieldBottom=anc-lerp(10,34,down);
+  // draft card
+  const draftIn=eIOS(seg(t,T.fromSheet[0]+0.05,T.fromSheet[1]+0.05));
+  const draftOut=eIOS(seg(t,...T.widgetIn));
+  const draft=draftIn*(1-draftOut);
+  const fh=lerp(36,150,draft);
+  const cardBottom=fieldBottom+5*draft;
+  const fieldTop=cardBottom-fh;
+  $('kb').style.top=kbTop+'px';
+  $('sheet').style.top=sheetTop+'px';
+  $('sheet').style.display=sheetP>0.001?'block':'none';
+  const f=$('field');f.style.top=fieldTop+'px';f.style.height=fh+'px';
+  f.style.left=lerp(57,55,draft)+'px'; f.style.width=lerp(326,327,draft)+'px';
+  f.style.background=draft>0?`rgb(${lerp(255,250,draft)},${lerp(255,250,draft)},${lerp(255,250,draft)})`:'#fff';
+  const pl=$('plus');pl.style.top=(cardBottom-18-2*draft-16.5)+'px';
+  // home indicator
+  const hb=$('homebar');hb.style.top='840px';
+
+  // ---- field contents
+  let txt='';
+  if(t>=T.type1[0]&&t<T.send1+0.05) txt=typedAt(t,T.type1);
+  if(t>=T.type2[0]&&t<T.send2+0.05) txt=typedAt(t,T.type2);
+  const focused=t>=T.tapField+0.08 && t<T.toSheet[0];
+  const lineY=fh-18-12; // center line of the single row (bottom row)
+  $('typed').textContent=txt; $('typed').style.top=(fh-18-10.5)+'px';
+  $('ph').style.top=(fh-18-10.5)+'px';
+  $('ph').style.opacity=(txt||draft>0.02)?0:1;
+  $('typed').style.opacity=draft>0.02?0:1;
+  const tw=$('typed').offsetWidth;
+  const blink=(Math.floor((t*1000)/530)%2==0)||txt.length>0&&false;
+  const caretOn=focused && draft<0.02 && (txt.length>0 || blink || (t-T.tapField)<0.6);
+  const cr=$('caret');cr.style.left=(13+(txt?tw+1:0)-1)+'px';cr.style.top=(fh-18-10)+'px';cr.style.opacity=caretOn?1:0;
+  const hasText=txt.length>0;
+  $('mic').style.top=(fh-18-9)+'px';$('mic').style.opacity=(hasText||draft>0.02)?0:1;
+  const sb=$('sendbtn');sb.style.top=(fh-18-14)+'px';
+  const sbVis=hasText?1:draft;
+  sb.style.opacity=sbVis; sb.style.transform=`scale(${hasText?eOut(clamp((t-(t>=T.type2[0]?T.type2[0]:T.type1[0]))/0.15)):lerp(0.6,1,draft)})`;
+  const dw=$('draftw');dw.style.opacity=clamp((draft-0.35)/0.5);dw.style.transform=`scale(${lerp(0.94,1,draft)})`;dw.style.transformOrigin='50% 100%';
+  $('addmsg').style.top=(fh-18-9.5)+'px';$('addmsg').style.opacity=clamp((draft-0.4)/0.5);
+  // send button pressed feedback
+  [T.send1,T.send2,T.tapSend].forEach(s=>{ if(t>=s&&t<s+0.12) sb.style.filter='brightness(.8)'; });
+  if(!([T.send1,T.send2,T.tapSend].some(s=>t>=s&&t<s+0.12))) sb.style.filter='';
+
+  // ---- plus rotate
+  const rotIn=eIOS(seg(t,T.tapPlus+0.03,T.tapPlus+0.33));
+  const rotOut=eIOS(seg(t,T.toSheet[0],T.toSheet[0]+0.3));
+  $('plusg').style.transform=`rotate(${45*rotIn*(1-rotOut)}deg)`;
+
+  // ---- menu
+  const mIn=seg(t,...T.menu), mOut=eIOS(seg(t,T.toSheet[0]-0.02,T.toSheet[0]+0.22));
+  const menu=$('menu');
+  if(t<T.menu[0]||mOut>=1){menu.style.display='none';}
+  else{menu.style.display='block';
+    const s=eSpring(mIn);
+    const sc=lerp(0.25,1,s)*lerp(1,0.92,mOut);
+    menu.style.transform=`scale(${sc})`;menu.style.opacity=clamp(mIn*3)*(1-mOut);
+    items.forEach((_,i)=>{const el=$('mi'+i);const st=clamp((t-T.menu[0]-0.04*(6-i))/0.28);
+      el.style.opacity=eOut(st);el.style.transform=`translateY(${lerp(10,0,eOut(st))}px)`;});
+    $('hl').style.opacity=t>=T.tapTimer?1:0;
+  }
+  // veil + blur
+  const veil=eIOS(seg(t,T.menu[0],T.menu[0]+0.3))*(1-eIOS(seg(t,T.toSheet[0],T.toSheet[0]+0.3)));
+  $('veil').style.opacity=veil*0.82;
+  const blurPx=veil*14;
+  $('list').style.filter=blurPx>0.05?`blur(${blurPx}px)`:'none';
+  $('hdr').style.filter=blurPx>0.05?`blur(${blurPx}px)`:'none';
+
+  // ---- timer sheet contents
+  const nm=typedAt(t,T.type3);
+  $('nval').textContent=nm;$('nph').style.opacity=nm?0:1;
+  const nf=t>=T.tapName+0.06&&t<T.tapSendT;
+  const nb=(Math.floor((t*1000)/530)%2==0);
+  $('ncaret').style.left=(116+(nm?$('nval').offsetWidth+1:0)-1)+'px';
+  $('ncaret').style.opacity=nf&&(nm.length<T.type3[2].length? true : nb && t<T.tapSendT-0.4 ?1: (nm.length<13))?1:0;
+  if(nf && nm.length===13 && t>typeEnd(T.type3)+0.6) $('ncaret').style.opacity=0;
+  const sTp=t>=T.tapSendT&&t<T.tapSendT+0.15;$('sendT').style.background=sTp?'#3a3a3d':'#2b2b2e';
+
+  // ---- messages layout
+  const vis=[];
+  const pop=(a,d=0.35)=>clamp((t-a)/d);
+  // typing indicators
+  function typ(id,r){const p=seg(t,r[0],r[0]+0.2), q=seg(t,r[1]-0.08,r[1]);return {id,p:p*(1-q),space:p*(1-q)};}
+  const items2=[
+    {id:'m0',p:1,space:1},
+    {...typ('ty1',T.ty1)},
+    {id:'m1',p:pop(T.m1),space:eIOS(pop(T.m1,0.3))},
+    {id:'m2',p:pop(T.m2),space:eIOS(pop(T.m2,0.3))},
+    {id:'m3',p:pop(T.m3),space:eIOS(pop(T.m3,0.3))},
+    {...typ('ty2',T.ty2)},
+    {id:'m4',p:pop(T.m4),space:eIOS(pop(T.m4,0.3))},
+    {id:'wb',p:seg(t,...T.widgetIn),space:eIOS(seg(t,...T.widgetIn))},
+  ];
+  let y=188; $('today').style.top='160px';
+  for(const it of items2){
+    const el=$(it.id);
+    if(it.space<=0.001&&it.p<=0.001){el.style.display='none';continue;}
+    el.style.display='block';
+    const h=H[it.id];
+    el.style.top=(y)+'px';
+    it.y=y; it.h=h;
+    y+= (h+GAP)*it.space;
+  }
+  // delivered label under widget
+  const wbIt=items2[7];
+  const delOp=seg(t,T.widgetIn[1]+0.15,T.widgetIn[1]+0.45);
+  $('delivered').style.display=wbIt.p>0?'block':'none';
+  $('delivered').style.top=(wbIt.y+H.wb+3)+'px';$('delivered').style.opacity=delOp;
+  const contentBottom=y-GAP+ (wbIt.space>0?16*wbIt.space:0);
+  const scroll=Math.max(0,contentBottom+16-fieldTop);
+  $('list').style.transform=`translateY(${-scroll}px)`;
+  // appear animations
+  for(const it of items2){const el=$(it.id);if(el.style.display==='none')continue;
+    const p=it.p;
+    if(it.id==='m0'){el.style.opacity=1;el.style.transform='none';continue;}
+    const s=eSpring(p);
+    if(it.id.startsWith('ty')){el.style.opacity=clamp(p*2);el.style.transform=`scale(${lerp(.5,1,s)})`;el.style.transformOrigin='0% 100%';
+      [...el.querySelectorAll('b')].forEach((b,i)=>{const ph=(t*2.6-i*0.22)%1;const k=Math.max(0,Math.sin(ph*Math.PI*2));b.style.opacity=0.45+0.5*k;b.style.transform=`translateY(${-2.5*k}px)`;});continue;}
+    const isOut=el.classList.contains('out');
+    el.style.transformOrigin=isOut?'100% 100%':'0% 100%';
+    if(isOut){ el.style.opacity=clamp(p*3); el.style.transform=`translateY(${lerp(26,0,eOut(p))}px) scale(${lerp(.86,1,s)})`;}
+    else { el.style.opacity=clamp(p*2.5); el.style.transform=`scale(${lerp(.55,1,s)})`;}
+  }
+  // ---- countdown
+  // timer is not started on send: stays at 20:00 with a full ring
+  $('w2t').textContent='20:00'; $('w1t').textContent='20:00';
+  setRing('w2',1); setRing('w1',1);
+
+  // ---- status bar color & home bar
+  const lockVis=seg(t,...T.wake);
+  const onLock=t>=T.wake[0];
+  $('sb').style.display=onLock?'none':'block';
+  hb.style.background=onLock?'rgba(255,255,255,.85)':'#000';
+  $('kb').style.zIndex=35;
+  if(sheetP>0.5&&!onLock){hb.style.background='#fff';}
+  // ---- lock
+  const off=eInOut(seg(t,...T.lockOff));
+  $('black').style.opacity=t<T.wake[0]?off:1-eInOut(lockVis);
+  $('lock').style.opacity=onLock?1:0;
+  const n=$('notif');const np=seg(t,...T.notif);const ns=eSpring(np);
+  n.style.opacity=clamp(np*2.5);n.style.transform=`translateY(${lerp(-90,0,ns)}px) scale(${lerp(.94,1,ns)})`;
+  n.style.display=np>0?'block':'none';
+
+  // ---- touches
+  const tc=$('touch');let shown=false;
+  for(const [tt,x,y2] of taps){const d=t-tt; if(d>=-0.12&&d<0.32){shown=true;
+      const a=d<0?clamp((d+0.12)/0.12):1-clamp((d-0.08)/0.24);
+      const sc=d<0?lerp(1.25,1,clamp((d+0.12)/0.12)):lerp(1,0.85,clamp(d/0.12));
+      tc.style.left=x+'px';tc.style.top=y2+'px';tc.style.opacity=a*0.95;tc.style.transform=`scale(${sc})`;}}
+  if(!shown)tc.style.opacity=0;
+  // key highlights while typing (only on keyboard)
+  Object.values(keyEl).forEach(k=>k.style.background='');
+  for(const a of [T.type1,T.type2]){ if(t>=a[0]&&t<typeEnd(a)+0.1){const i=Math.floor((t-a[0])/a[1]);const local=(t-a[0])-i*a[1];
+      if(i<a[2].length&&local<0.075){const c=a[2][i].toLowerCase();const k=keyEl[c];if(k)k.style.background='#c9ccd2';}}}
+}
+window.render=render; window.DURATION=T.end;
+document.fonts.ready.then(()=>{render(0);window.READY=true;});
+</script>
+</body></html>

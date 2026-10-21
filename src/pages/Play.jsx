@@ -1,9 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import ImageSlot from '../components/ImageSlot.jsx'
+import HtmlAnimation from '../components/HtmlAnimation.jsx'
 import Lightbox from '../components/Lightbox.jsx'
 import './Play.css'
 
 const items = [
+  {
+    id: 'imessage-timer',
+    src: '/images/play/iMessageTimer.html',
+    alt: 'iMessage Timer',
+    ratio: '411 / 870',
+    title: 'iMessage Timer',
+    caption: 'Concept to help friends stay accountable with timers sent directly in Messages',
+  },
   {
     id: 'first-day',
     src: '/images/play/FirstDay.mp4',
@@ -118,15 +127,22 @@ export default function Play() {
                 gridColumn: `span ${colSpan}`,
                 gridRowEnd: `span ${rowSpan}`,
                 '--i': Math.min(index, 8),
+                cursor: item.src.endsWith('.html') ? 'default' : undefined,
               }}
               onClick={() =>
-                item.link ? window.open(item.link, '_blank', 'noopener') : setActive(item)
+                item.link
+                  ? window.open(item.link, '_blank', 'noopener')
+                  : !item.src.endsWith('.html') && setActive(item)
               }
               onMouseMove={(e) => setHover({ ...item, x: e.clientX, y: e.clientY })}
               onMouseLeave={() => setHover(null)}
               aria-label={`Open ${item.alt}`}
             >
-              <ImageSlot src={item.src} alt={item.alt} />
+              {item.src.endsWith('.html') ? (
+                <HtmlAnimation src={item.src} width={411} height={870} title={item.alt} />
+              ) : (
+                <ImageSlot src={item.src} alt={item.alt} />
+              )}
             </button>
           )
         })}
