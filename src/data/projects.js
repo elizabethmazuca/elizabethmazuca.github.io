@@ -145,8 +145,8 @@ export const projects = [
         {
           heading: 'Thank You for Reading!',
           body: 'I love this project and love to talk about it. Feel free to contact me to ask about the details and ideas that didn\'t make the cut. :)',
-          image: true,
-          imageAspect: 'small',
+          image: '/images/work/google-caravan/ascii-car.svg',
+          imageSize: 'medium',
         },
       ],
     },
@@ -285,8 +285,8 @@ export const projects = [
         {
           heading: 'Thank You for Reading!',
           body: "My first rover UI was really exciting to make. Feel free to contact me to ask about the details and ideas that didn't quite make it, including future haptic feedback ideas.",
-          image: true,
-          sideBySide: true,
+          image: '/images/work/titan-rover/ascii-rover.svg',
+          imageSize: 'medium',
         },
       ],
     },

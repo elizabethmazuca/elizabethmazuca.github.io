@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 596 294" width="954" height="470">
+<style>
+text{font-family:Menlo,Consolas,"DejaVu Sans Mono",monospace;font-weight:700;font-size:7px}
+.s{animation:tw var(--d) ease-in-out var(--o) infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.s{animation:none}}
+</style>
+<rect width="596" height="294" fill="#ffffff"/>
+<text class="s" x="108" y="127" fill="#2f7fe6" text-anchor="middle" style="font-size:16px;--d:3.2s;--o:-0.9s">✩</text>
+<text class="s" x="16" y="77" fill="#2f7fe6" text-anchor="middle" style="font-size:26px;--d:2.2s;--o:-3.2s">⋅</text>
+<text class="s" x="511" y="116" fill="#2f7fe6" text-anchor="middle" style="font-size:24px;--d:3.4s;--o:-2.8s">˚</text>
+<text class="s" x="480" y="30" fill="#2f7fe6" text-anchor="middle" style="font-size:26px;--d:3.7s;--o:-3.2s">‧</text>
+<text class="s" x="16" y="29" fill="#2f7fe6" text-anchor="middle" style="font-size:24px;--d:3.3s;--o:-2.3s">₊</text>
+<text class="s" x="436" y="20" fill="#2f7fe6" text-anchor="middle" style="font-size:16px;--d:3.3s;--o:-2.7s">✩</text>
+<text class="s" x="67" y="22" fill="#2f7fe6" text-anchor="middle" style="font-size:26px;--d:2.2s;--o:-0.5s">⋅</text>
+<text class="s" x="324" y="28" fill="#2f7fe6" text-anchor="middle" style="font-size:24px;--d:2.8s;--o:-2.1s">˚</text>
+<text class="s" x="143" y="163" fill="#2f7fe6" text-anchor="middle" style="font-size:24px;--d:2.1s;--o:-0.7s">₊</text>
+<text x="0" y="48.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                       +++++++++++++                                          </text>
+<text x="0" y="55.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                      +#############+                                         </text>
+<text x="0" y="62.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                      +#############+                                         </text>
+<text x="0" y="69.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                      +#############+                                         </text>
+<text x="0" y="76.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                          +##+                                                </text>
+<text x="0" y="83.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                           ##+                                                </text>
+<text x="0" y="90.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                           ##+                                                </text>
+<text x="0" y="97.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                           ##+                                                </text>
+<text x="0" y="104.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                                                           ##+                                                </text>
+<text x="0" y="111.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                  ++++                                     ##+                                                </text>
+<text x="0" y="118.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                               +#########                                  ##+                                                </text>
+<text x="0" y="125.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                +######+                                   ##+                                                </text>
+<text x="0" y="132.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                   ##                                      ##+                                                </text>
+<text x="0" y="139.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        +++++++++++##++++++++++++++++++++++++++++++++++++++###++++++++                                        </text>
+<text x="0" y="146.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        ##############################################################                                        </text>
+<text x="0" y="153.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        ##############################################################                                        </text>
+<text x="0" y="160.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        ##############################################################                                        </text>
+<text x="0" y="167.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        ##############################################################                                        </text>
+<text x="0" y="174.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        ##############################################################                                        </text>
+<text x="0" y="181.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                         ++++++++++++++++++###################+++++++++++++++++++++++                                         </text>
+<text x="0" y="188.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                                        #######+            +####++                                                           </text>
+<text x="0" y="195.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                          ######     ###+    +###+    +#####+    +####+         +#####+                                       </text>
+<text x="0" y="202.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        #############+          +###+#########+      ++####+  +#########+                                     </text>
+<text x="0" y="209.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                       ###+    +###                ####     ###           +######     ###                                     </text>
+<text x="0" y="216.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                       ##+  ##  +##                ###  ##+  ###             ###  ##+  ###                                    </text>
+<text x="0" y="223.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                       ###  ++  ###                ###  +#  +##+             ###  +#  +##+                                    </text>
+<text x="0" y="230.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                       +###+  +###+                 ###+   +###               ###+   +###                                     </text>
+<text x="0" y="237.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                        +########+                   #########                 #########                                      </text>
+<text x="0" y="244.0" fill="#2f7fe6" xml:space="preserve" textLength="596" lengthAdjust="spacing">                                           ++++                        +++++                     +++++                                        </text>
+<text x="0" y="251.0" fill="#9cc3f5" xml:space="preserve" textLength="596" lengthAdjust="spacing">-....._.-..--_-..._._-_-._._.____.--_-..--..._.-._._---.-_---.__-_-.__-_.-..-._..-.-_.-..-_.__--...____.-__..._-...------._-._.-_-_..--_.-..._</text>
+</svg>
