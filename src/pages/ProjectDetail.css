@@ -244,6 +244,16 @@
   flex: 1 1 240px;
 }
 
+.case-study__embed {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 393 / 500;
+  margin: 0 auto;
+  border: 0;
+  pointer-events: none;
+}
+
 .case-study__image {
   width: 100%;
   flex: 1 1 auto;

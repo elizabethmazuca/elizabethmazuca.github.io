@@ -56,6 +56,16 @@ function CaseStudySection({ section }) {
     </>
   )
 
+  const embedEl = section.embed && (
+    <iframe
+      className="case-study__embed"
+      src={section.embed}
+      title={section.embedTitle || ''}
+      loading="lazy"
+      tabIndex={-1}
+    />
+  )
+
   const videoEl = section.video && (
     <video
       className={
@@ -203,6 +213,7 @@ function CaseStudySection({ section }) {
       ) : (
         <>
           {bodyEl}
+          {embedEl}
           {videoEl}
           {cardsEl}
           {carouselEl}

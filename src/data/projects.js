@@ -27,10 +27,8 @@ export const projects = [
           eyebrow: 'Detours and Surprises',
           heading: 'A way to bridge the gap between multiple vehicles',
           body: 'Unexpected things happen on a trip and you want to know them asap',
-          lottie: '/images/work/google-caravan/DetoursandSurprises.json',
-          lottieHeightScale: 110,
-          lottiePlayWhenCentered: true,
-          imageAspect: 'tall',
+          embed: '/images/work/google-caravan/CaravanCats.html',
+          embedTitle: 'Animated iMessage conversation: Caravan Cats',
         },
         {
           eyebrow: 'Research',
