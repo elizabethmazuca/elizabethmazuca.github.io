@@ -257,7 +257,12 @@ async function play(){
     await wait(3500,id);play();
   }catch(e){}
 }
-play();
+/* start only once the whole embed is in the viewport */
+idle();
+const io=new IntersectionObserver(es=>{
+  if(es.some(e=>e.intersectionRatio>=0.99)){io.disconnect();play();}
+},{threshold:[0.99]});
+io.observe(document.documentElement);
 </script>
 
 </body></html>
