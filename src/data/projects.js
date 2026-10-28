@@ -82,7 +82,7 @@ export const projects = [
         {
           eyebrow: 'Design Decisions',
           heading: 'Vote with No Distractions',
-          body: 'When you vote it appears on the app or as a notification. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up because group cohesion can lead to silent dissent.',
+          body: 'When you vote it appears on the app or as a notification. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up, here’s the view voting with the touch screen and with the steering wheel',
           image: '/images/work/google-caravan/votecaravan.gif',
           imageAspect: 'votecaravan',
           imageCrop: true,
