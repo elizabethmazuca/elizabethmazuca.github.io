@@ -180,6 +180,9 @@
   border-radius: var(--radius-md);
   padding: 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .case-study__card-title {
