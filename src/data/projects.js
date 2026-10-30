@@ -46,7 +46,7 @@ export const projects = [
           cards: [
             {
               title: 'Empowered Group Decision Making',
-              body: 'Planning trips often leads to decision fatigue and scattered input across group chats. With anonymous voting options, groups can decide fairly while reducing pressure or bias.',
+              body: 'Planning trips often leads to decision fatigue and scattered input across group chats. With anonymous voting options, groups can decide in a way that reduces bias.',
             },
             {
               title: 'Safety First',
