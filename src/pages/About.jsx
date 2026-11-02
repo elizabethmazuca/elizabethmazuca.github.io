@@ -29,7 +29,7 @@ const communities = [
     image: '/images/about/communities/cki.png',
     rotation: 4,
     imageScale: 1.4,
-    back: 'Volunteering with my community for 100+ hours and focusing on service and giving back.',
+    back: 'Volunteering with my community for 100+ hours',
   },
   {
     label: 'Titan Rover',
