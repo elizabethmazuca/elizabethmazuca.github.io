@@ -73,20 +73,56 @@ export const projects = [
         },
         {
           eyebrow: 'Design Decisions',
+          heading: 'Vote with No Distractions',
+          body: 'When designing the user flow for the driver voting, I saw a vacant space and thought it was the one very obvious home for my new poll feature.',
+          extraContent: [
+            '/images/work/google-caravan/park-here.gif',
+            {
+              group: true,
+              text: 'These first few iterations below helped shape my design direction. As I tested the interface and got feedback, I found a few areas that needed rethinking.',
+            },
+            {
+              row: [
+                {
+                  src: '/images/work/google-caravan/votecaravan.gif',
+                  aspect: '736 / 450',
+                  position: '35% center',
+                  // grow by aspect ratio so both are the same height
+                  grow: 736 / 450,
+                },
+                { src: '/images/work/google-caravan/big-cards-from-bottom-screen-only.gif', grow: 900 / 506 },
+              ],
+            },
+            {
+              heading: 'Steering Wheel Interaction',
+              text: 'Through user testing with a physical steering wheel, I discovered that drivers intuitively use its navigation buttons to interact with the center display.',
+            },
+            {
+              heading: 'Improving Visibility',
+              text: 'My mentor pointed out that the poll widget was too small. The space I thought was the perfect fit wasn\'t so perfect after all. Inspired by rideshare apps that take over the full screen for important information, I increased the poll\'s visibility.',
+            },
+            {
+              heading: 'Smoother Animations',
+              text: 'I also refined the ETA widget’s animation, replacing the clunky upward movement with a smooth fade-in and fade-out transition.',
+            },
+            {
+              group: true,
+              text: 'The final prototype!',
+              centered: true,
+            },
+            { src: '/images/work/google-caravan/bucees-sharp-photos.mp4', width: '65%' },
+            {
+              text: 'When you vote it appears as so for the driver. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up, here’s the view voting with the touch screen and with the steering wheel.',
+            },
+          ],
+        },
+        {
+          eyebrow: 'Design Decisions',
           heading: 'Making a Simple Yet Effective Poll',
           body: 'A simple one step voting process with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. The design takes inspiration from Google Forms for familiarity and ease but I had fun digging into the history of radio buttons. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
           image: '/images/work/google-caravan/iPhone%2011%20Pro.svg',
           imageAspect: 'iphone-top',
           imageCrop: true,
-        },
-        {
-          eyebrow: 'Design Decisions',
-          heading: 'Vote with No Distractions',
-          body: 'When you vote it appears on the app or as a notification. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up, here’s the view voting with the touch screen and with the steering wheel',
-          image: '/images/work/google-caravan/votecaravan.gif',
-          imageAspect: 'votecaravan',
-          imageCrop: true,
-          imageCropPosition: '35% center',
         },
         {
           eyebrow: 'Design Decisions',

@@ -185,6 +185,71 @@ function CaseStudySection({ section }) {
     </div>
   )
 
+  const renderExtra = (item, i) => {
+    if (item.text) {
+      // Extra space above text that starts a new group, separating it from the media above
+      const groupClass =
+        (item.group ? ' case-study__body--group' : '') + (item.centered ? ' case-study__body--center' : '')
+      if (item.heading) {
+        return (
+          <div key={i} className={`case-study__subsection${groupClass}`}>
+            <h3 className="case-study__subheading">{item.heading}</h3>
+            <p className="case-study__body">{item.text}</p>
+          </div>
+        )
+      }
+      return (
+        <p key={i} className={`case-study__body${groupClass}`}>
+          {item.text}
+        </p>
+      )
+    }
+    if (item.row) {
+      return (
+        <div key={i} className="case-study__extra-row">
+          {item.row.map(renderExtra)}
+        </div>
+      )
+    }
+    const src = typeof item === 'string' ? item : item.src
+    const mediaStyle =
+      item.grow || item.width ? { flexGrow: item.grow, width: item.width } : undefined
+    if (src.endsWith('.mp4')) {
+      return (
+        <video
+          key={i}
+          className="case-study__image case-study__image--extra"
+          style={mediaStyle}
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      )
+    }
+    return (
+      <img
+        key={i}
+        src={src}
+        alt=""
+        className="case-study__image case-study__image--extra"
+        style={
+          item.aspect
+            ? {
+                ...mediaStyle,
+                aspectRatio: item.aspect,
+                objectFit: 'cover',
+                objectPosition: item.position || 'center',
+              }
+            : mediaStyle
+        }
+      />
+    )
+  }
+
+  const extraContentEl = section.extraContent && section.extraContent.map(renderExtra)
+
   return (
     <section className={className}>
       {section.eyebrow && <p className="case-study__eyebrow">{section.eyebrow}</p>}
@@ -219,6 +284,7 @@ function CaseStudySection({ section }) {
           {carouselEl}
           {mediaRowEl}
           {placeholderRowEl}
+          {extraContentEl}
         </>
       )}
 
