@@ -119,7 +119,7 @@ export const projects = [
         {
           eyebrow: 'Design Decisions',
           heading: 'Making a Simple Yet Effective Poll',
-          body: 'A simple one page poll creation with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
+          body: 'A simple one page poll creation with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized. The UI is based on Google\'s Material Design 3 style.',
           prototype: 'poll',
           sideBySide: 'reverse',
           caption: "Try it out it's interactive: pick a quick start or write your own poll!",

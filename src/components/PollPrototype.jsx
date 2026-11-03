@@ -57,10 +57,10 @@ const icons = {
 
 const PRESETS = [
   { key: 'snacks', label: 'Snacks', question: 'Where to get slushies?', options: ['7-Eleven', "Buc-ee's", 'ampm'] },
-  { key: 'gas', label: 'Gas', question: 'Need gas?', options: ['Yes', 'No'] },
-  { key: 'coffee', label: 'Coffee', question: 'Coffee run?', options: ['Starbucks', "Dutch Bros", 'Skip it'] },
-  { key: 'food', label: 'Food', question: 'Where should we eat?', options: ['In-N-Out', 'Chipotle', 'Panda Express'] },
   { key: 'restroom', label: 'Restroom', question: 'Bathroom break soon?', options: ['Next exit', 'Rest stop in 20 min'] },
+  { key: 'gas', label: 'Gas', question: 'Need gas?', options: ['Yes', 'No'] },
+  { key: 'coffee', label: 'Coffee', question: 'Coffee run?', options: ['Starbucks', 'Dutch Bros'], none: true },
+  { key: 'food', label: 'Food', question: 'Where should we eat?', options: ['In-N-Out', 'Chipotle', 'Panda Express'] },
 ]
 
 const emptyOptions = () => ['', '']
@@ -91,6 +91,8 @@ export default function PollPrototype() {
     setPreset(p.key)
     setQuestion(p.question)
     setOptions([...p.options])
+    setIncludeNone(Boolean(p.none))
+    setNoneHint(false)
   }
 
   const updateOption = (i, value) => {
