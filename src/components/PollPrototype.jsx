@@ -187,7 +187,7 @@ export default function PollPrototype() {
                   className="poll-proto__question"
                   placeholder="Ask the caravan..."
                   value={question}
-                  maxLength={60}
+                  maxLength={40}
                   onChange={(e) => {
                     setPreset(null)
                     setQuestion(e.target.value)
@@ -203,7 +203,7 @@ export default function PollPrototype() {
                         className="poll-proto__option-input"
                         placeholder={`Option ${i + 1}`}
                         value={o}
-                        maxLength={24}
+                        maxLength={20}
                         aria-label={`Option ${i + 1}`}
                         onChange={(e) => updateOption(i, e.target.value)}
                       />

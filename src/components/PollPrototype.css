@@ -406,6 +406,11 @@
   text-align: left;
 }
 
+.poll-proto__preview-q,
+.poll-proto__preview-opt {
+  overflow-wrap: anywhere;
+}
+
 .poll-proto__preview-q {
   margin: 0 0 8px;
   font-size: 13px;

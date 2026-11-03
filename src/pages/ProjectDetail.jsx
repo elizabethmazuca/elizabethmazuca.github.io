@@ -294,7 +294,7 @@ function CaseStudySection({ section }) {
                     <p className="case-study__caption case-study__caption--left">{section.caption}</p>
                     <svg
                       className="case-study__try-arrow"
-                      viewBox="0 0 200 24"
+                      viewBox="0 0 120 24"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
@@ -302,7 +302,7 @@ function CaseStudySection({ section }) {
                       strokeLinejoin="round"
                       aria-hidden="true"
                     >
-                      <path d="M2 12h194M184 2l12 10-12 10" />
+                      <path d="M2 12h114M104 2l12 10-12 10" />
                     </svg>
                   </div>
                 )}

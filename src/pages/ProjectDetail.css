@@ -454,6 +454,7 @@
 
 .case-study__split:has(.case-study__prototype) {
   align-items: stretch;
+  justify-content: center;
   column-gap: 64px;
 }
 
@@ -471,7 +472,7 @@
 
 .case-study__try-arrow {
   display: block;
-  width: 200px;
+  width: 120px;
   max-width: 100%;
   margin: 12px 0 0 auto;
 }

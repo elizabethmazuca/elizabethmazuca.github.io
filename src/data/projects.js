@@ -76,7 +76,7 @@ export const projects = [
           heading: 'Vote with No Distractions',
           body: 'When designing the user flow for the driver voting, I saw a vacant space and thought it was the one very obvious home for my new poll feature.',
           extraContent: [
-            '/images/work/google-caravan/park-here.gif',
+            '/images/work/google-caravan/park-zone-blue.gif',
             {
               group: true,
               text: 'These first few iterations below helped shape my design direction. As I tested the interface and got feedback, I found a few areas that needed rethinking.',
@@ -119,7 +119,7 @@ export const projects = [
         {
           eyebrow: 'Design Decisions',
           heading: 'Making a Simple Yet Effective Poll',
-          body: 'A simple one page voting page with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
+          body: 'A simple one page poll creation with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
           prototype: 'poll',
           sideBySide: 'reverse',
           caption: "Try it out it's interactive: pick a quick start or write your own poll!",
