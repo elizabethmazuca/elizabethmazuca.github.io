@@ -112,17 +112,17 @@ export const projects = [
             },
             { src: '/images/work/google-caravan/bucees-sharp-photos.mp4', width: '65%' },
             {
-              text: 'When you vote it appears as so for the driver. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up, here’s the view voting with the touch screen and with the steering wheel.',
+              text: 'When you vote it appears as so for the driver. The anonymous voting brings equal decision power to everyone in the party versus someone dominating their ideas and preferences in the group chat. The votes are hidden while the poll is up, here’s the view voting using the steering wheel.',
             },
           ],
         },
         {
           eyebrow: 'Design Decisions',
           heading: 'Making a Simple Yet Effective Poll',
-          body: 'A simple one step voting process with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. The design takes inspiration from Google Forms for familiarity and ease but I had fun digging into the history of radio buttons. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
-          image: '/images/work/google-caravan/iPhone%2011%20Pro.svg',
-          imageAspect: 'iphone-top',
-          imageCrop: true,
+          body: 'A simple one page voting page with a limit of four choices to avoid decision fatigue. If none of the options work, users can add a "None" option. Not sure what to ask? You can pick from a set of prompts to keep the trip spontaneous yet organized.',
+          prototype: 'poll',
+          sideBySide: 'reverse',
+          caption: "Try it out it's interactive: pick a quick start or write your own poll!",
         },
         {
           eyebrow: 'Design Decisions',

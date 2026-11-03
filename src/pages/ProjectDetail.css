@@ -444,3 +444,44 @@
     grid-template-columns: 1fr;
   }
 }
+
+.case-study__prototype {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 282px;
+}
+
+.case-study__split:has(.case-study__prototype) {
+  align-items: stretch;
+  column-gap: 64px;
+}
+
+.case-study__split-text--prototype {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Caption with an arrow pointing at the phone */
+.case-study__try {
+  color: var(--text-faint);
+}
+
+.case-study__try-arrow {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  margin: 12px 0 0 auto;
+}
+
+@media (max-width: 680px) {
+  .case-study__try-arrow {
+    display: none;
+  }
+}
+
+.case-study__caption--left {
+  text-align: left;
+}

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import Carousel from '../components/Carousel.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
+import PollPrototype from '../components/PollPrototype.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
@@ -248,12 +249,26 @@ function CaseStudySection({ section }) {
     )
   }
 
+  const headingEl = (
+    <>
+      {section.eyebrow && <p className="case-study__eyebrow">{section.eyebrow}</p>}
+      {section.heading && <h2 className="case-study__heading">{section.heading}</h2>}
+    </>
+  )
+  // Prototype sections keep their heading in the text column beside the device
+  const headingInSplit = section.prototype && section.sideBySide
+
+  const prototypeEl = section.prototype === 'poll' && (
+    <div className="case-study__prototype">
+      <PollPrototype />
+    </div>
+  )
+
   const extraContentEl = section.extraContent && section.extraContent.map(renderExtra)
 
   return (
     <section className={className}>
-      {section.eyebrow && <p className="case-study__eyebrow">{section.eyebrow}</p>}
-      {section.heading && <h2 className="case-study__heading">{section.heading}</h2>}
+      {!headingInSplit && headingEl}
 
       {section.sideBySide ? (
         <div
@@ -265,8 +280,37 @@ function CaseStudySection({ section }) {
         >
           {section.sideBySide === 'reverse' ? (
             <>
-              <div className="case-study__split-text">{bodyEl}</div>
-              <div className="case-study__split-media">{placeholderRowEl}</div>
+              <div
+                className={
+                  section.prototype
+                    ? 'case-study__split-text case-study__split-text--prototype'
+                    : 'case-study__split-text'
+                }
+              >
+                {headingInSplit && headingEl}
+                {bodyEl}
+                {section.prototype && section.caption && (
+                  <div className="case-study__try">
+                    <p className="case-study__caption case-study__caption--left">{section.caption}</p>
+                    <svg
+                      className="case-study__try-arrow"
+                      viewBox="0 0 200 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M2 12h194M184 2l12 10-12 10" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div className="case-study__split-media">
+                {prototypeEl}
+                {placeholderRowEl}
+              </div>
             </>
           ) : (
             <>
@@ -278,6 +322,7 @@ function CaseStudySection({ section }) {
       ) : (
         <>
           {bodyEl}
+          {prototypeEl}
           {embedEl}
           {videoEl}
           {cardsEl}
@@ -288,7 +333,7 @@ function CaseStudySection({ section }) {
         </>
       )}
 
-      {section.caption && <p className="case-study__caption">{section.caption}</p>}
+      {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
     </section>
   )
 }
