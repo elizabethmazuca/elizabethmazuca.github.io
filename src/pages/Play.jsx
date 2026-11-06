@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import ImageSlot from '../components/ImageSlot.jsx'
 import HtmlAnimation from '../components/HtmlAnimation.jsx'
 import Lightbox from '../components/Lightbox.jsx'
+import WordleHero from '../components/WordleHero.jsx'
 import './Play.css'
 
 const items = [
@@ -21,6 +22,14 @@ const items = [
     title: 'Your First Day',
     caption: 'A site that shows you what the world was like when you were born',
     link: 'https://your-first-day-gules.vercel.app/',
+  },
+  {
+    id: 'wordle-definition',
+    component: 'wordle',
+    alt: 'Wordle Definition',
+    ratio: '300 / 436',
+    title: 'Wordle Definition',
+    caption: 'Concept to help players learn unfamiliar words without leaving the game',
   },
   {
     id: 'group-1',
@@ -118,6 +127,8 @@ export default function Play() {
       <div className="play-grid" ref={gridRef}>
         {items.map((item, index) => {
           const { colSpan, rowSpan } = spanFor(item)
+          // Live animations (HTML or React) don't open in the lightbox
+          const isLive = Boolean(item.component) || item.src.endsWith('.html')
           return (
             <button
               key={item.id}
@@ -127,18 +138,20 @@ export default function Play() {
                 gridColumn: `span ${colSpan}`,
                 gridRowEnd: `span ${rowSpan}`,
                 '--i': Math.min(index, 8),
-                cursor: item.src.endsWith('.html') ? 'default' : undefined,
+                cursor: isLive ? 'default' : undefined,
               }}
               onClick={() =>
                 item.link
                   ? window.open(item.link, '_blank', 'noopener')
-                  : !item.src.endsWith('.html') && setActive(item)
+                  : !isLive && setActive(item)
               }
               onMouseMove={(e) => setHover({ ...item, x: e.clientX, y: e.clientY })}
               onMouseLeave={() => setHover(null)}
               aria-label={`Open ${item.alt}`}
             >
-              {item.src.endsWith('.html') ? (
+              {item.component === 'wordle' ? (
+                <WordleHero alt={item.alt} bare />
+              ) : item.src.endsWith('.html') ? (
                 <HtmlAnimation src={item.src} width={411} height={870} title={item.alt} />
               ) : (
                 <ImageSlot src={item.src} alt={item.alt} />

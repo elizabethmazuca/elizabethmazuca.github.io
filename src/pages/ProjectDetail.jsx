@@ -1,8 +1,11 @@
 import { Link, useParams } from 'react-router-dom'
+import CaravanHero from '../components/CaravanHero.jsx'
+import WordleHero from '../components/WordleHero.jsx'
 import Carousel from '../components/Carousel.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import PollPrototype from '../components/PollPrototype.jsx'
+import PokeNotification from '../components/PokeNotification.jsx'
 import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
@@ -334,8 +337,9 @@ function CaseStudySection({ section }) {
         </>
       )}
 
-      {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
       {section.demo === 'separation' && <SeparationAlert />}
+      {section.demo === 'poke' && <PokeNotification />}
+      {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
     </section>
   )
 }
@@ -364,7 +368,11 @@ export default function ProjectDetail() {
         ))}
       </div>
       <div className="project-detail__cover">
-        {project.lottie ? (
+        {project.hero === 'caravan' ? (
+          <CaravanHero alt={project.title} align="top" />
+        ) : project.hero === 'wordle' ? (
+          <WordleHero alt={project.title} scale={0.9} />
+        ) : project.lottie ? (
           <LottieSlot src={project.lottie} fallback={project.cover} alt={project.title} align="top" />
         ) : (
           <ImageSlot src={project.cover} alt={project.title} />

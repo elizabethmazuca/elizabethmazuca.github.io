@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import CaravanHero from '../components/CaravanHero.jsx'
+import WordleHero from '../components/WordleHero.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import Tag from '../components/Tag.jsx'
@@ -6,11 +8,20 @@ import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
 import './Work.css'
 
+const HEROES = { caravan: CaravanHero, wordle: WordleHero }
+
 function ProjectCard({ project }) {
+  const Hero = HEROES[project.hero]
   return (
     <Link to={`/work/${project.slug}`} className="project-card">
       <div className="project-card__image">
-        {project.lottie ? (
+        {Hero ? (
+          <Hero
+            alt={project.title}
+            scale={project.thumbnailScale || 1.15}
+            align={project.thumbnailAlign || 'center'}
+          />
+        ) : project.lottie ? (
           <LottieSlot
             src={project.lottie}
             fallback={project.cover}

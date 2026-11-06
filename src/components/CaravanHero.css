@@ -1,0 +1,643 @@
+.caravan-hero {
+  position: relative;
+  overflow: hidden;
+  background: #d6ebf7;
+}
+
+/* Fixed 1024×792 stage; CaravanHero.jsx scales it to cover the box */
+.ch {
+  --ch-dur: 16s;
+  --ch-teal: #0b6e74;
+  --ch-teal-soft: #c9edf2;
+  --ch-teal-ink: #0b4f55;
+  --ch-surface: #eef0f3;
+  --ch-ease: cubic-bezier(0.2, 0.8, 0.3, 1);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1024px;
+  height: 792px;
+  transform-origin: top left;
+  font-family: 'Google Sans', Roboto, var(--font-sans);
+  color: #1f1f1f;
+}
+
+.ch p {
+  margin: 0;
+}
+
+.ch *,
+.ch *::before,
+.ch *::after {
+  animation-duration: var(--ch-dur);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.caravan-hero--paused .ch *,
+.caravan-hero--paused .ch *::before,
+.caravan-hero--paused .ch *::after {
+  animation-play-state: paused;
+}
+
+.ch__map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Title card */
+.ch__intro {
+  position: absolute;
+  top: 104px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation-name: ch-intro;
+}
+
+.ch__logo {
+  width: 300px;
+  animation-name: ch-logo;
+}
+
+/* Pops in oversized, then settles to its resting size */
+@keyframes ch-logo {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+    animation-timing-function: cubic-bezier(0.3, 0.9, 0.4, 1);
+  }
+  3.5% {
+    opacity: 1;
+    transform: scale(1.22);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  7%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ch__pill {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 22px 14px 26px;
+  border-radius: 20px;
+  background: #d3f4fb;
+  color: var(--ch-teal-ink);
+  font-size: 26px;
+  font-weight: 500;
+  animation-name: ch-pill;
+}
+
+.ch__pill-icon {
+  width: 44px;
+  height: 31px;
+}
+
+@keyframes ch-pill {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translateY(14px);
+    animation-timing-function: var(--ch-ease);
+  }
+  8%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ch__tagline {
+  margin-top: 26px !important;
+  font-family: Roboto, var(--font-sans);
+  font-size: 23px;
+  font-weight: 500;
+  color: #4b3f3b;
+  white-space: nowrap;
+  animation-name: ch-type;
+  animation-timing-function: steps(52, end);
+}
+
+/* Typed out left to right */
+@keyframes ch-type {
+  0%,
+  9% {
+    clip-path: inset(0 100% 0 0);
+  }
+  16%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes ch-intro {
+  0%,
+  19% {
+    opacity: 1;
+    transform: none;
+    animation-timing-function: ease-in;
+  }
+  23%,
+  100% {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+}
+
+/* Phone */
+.ch__phone {
+  position: absolute;
+  top: 176px;
+  left: 336px;
+  width: 352px;
+  height: 738px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 56px;
+  background: #1c1c1e;
+  box-shadow:
+    inset 0 0 0 2px #3a3a3c,
+    0 24px 60px rgba(30, 60, 90, 0.28);
+  animation-name: ch-phone;
+}
+
+@keyframes ch-phone {
+  0%,
+  21% {
+    opacity: 1;
+    transform: translateY(640px);
+    animation-timing-function: var(--ch-ease);
+  }
+  28%,
+  63% {
+    opacity: 1;
+    transform: none;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+  }
+  69%,
+  94% {
+    opacity: 1;
+    transform: translateY(-480px);
+  }
+  99%,
+  100% {
+    opacity: 0;
+    transform: translateY(-480px);
+  }
+}
+
+.ch__screen {
+  position: relative;
+  height: 100%;
+  border-radius: 46px;
+  overflow: hidden;
+  background: #eef0f3;
+}
+
+/* Dynamic Island */
+.ch__screen::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  z-index: 5;
+  width: 98px;
+  height: 28px;
+  transform: translateX(-50%);
+  border-radius: 14px;
+  background: #000;
+  animation: none;
+}
+
+.ch__nav {
+  display: block;
+  width: 100%;
+}
+
+.ch__home {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  z-index: 4;
+  width: 118px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  background: #1c1c1e;
+}
+
+/* Separation alert (matches SeparationAlert, sized for the phone) */
+.ch__alert {
+  position: absolute;
+  top: 48px;
+  left: 10px;
+  right: 10px;
+  z-index: 3;
+  padding: 14px 14px 16px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation-name: ch-alert;
+}
+
+@keyframes ch-alert {
+  0%,
+  31% {
+    opacity: 0;
+    transform: translateY(-140%);
+    animation-timing-function: var(--ch-ease);
+  }
+  34%,
+  49% {
+    opacity: 1;
+    transform: none;
+    animation-timing-function: ease-in;
+  }
+  52%,
+  100% {
+    opacity: 0;
+    transform: translateY(-140%);
+  }
+}
+
+.ch__alert-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ch__alert-icon {
+  position: relative;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fbe2c2;
+  color: #8a4500;
+}
+
+.ch__alert-icon svg {
+  position: relative;
+  z-index: 1;
+  animation: ch-wiggle 2.4s ease-in-out infinite;
+}
+
+.ch__alert-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fbe2c2;
+  animation: ch-ping 2.4s ease-out infinite;
+}
+
+@keyframes ch-wiggle {
+  0%,
+  40%,
+  100% {
+    transform: none;
+  }
+  8% {
+    transform: rotate(-14deg) scale(1.1);
+  }
+  16% {
+    transform: rotate(12deg) scale(1.1);
+  }
+  24% {
+    transform: rotate(-8deg) scale(1.05);
+  }
+  32% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes ch-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  60%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.ch__alert-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.ch__alert-meta {
+  margin-top: 2px !important;
+  font-size: 12px;
+  color: #5f6368;
+}
+
+.ch__alert-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ch__btn {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 999px;
+  background: #e8ebf3;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ch__btn--primary {
+  background: var(--ch-teal);
+  color: #fff;
+  animation-name: ch-press;
+}
+
+@keyframes ch-press {
+  0%,
+  45%,
+  49%,
+  100% {
+    transform: none;
+  }
+  46.5% {
+    transform: scale(0.94);
+  }
+}
+
+/* Fingertip that taps "Show Gracie" */
+.ch__touch {
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  background: rgba(32, 33, 36, 0.32);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+  animation-name: ch-touch;
+}
+
+@keyframes ch-touch {
+  0%,
+  41% {
+    opacity: 0;
+    transform: translate(30px, 40px) scale(1.2);
+  }
+  44% {
+    opacity: 1;
+    transform: none;
+  }
+  46.5% {
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  49%,
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* Gracie's pin, shown after the tap */
+.ch__gracie {
+  position: absolute;
+  top: 232px;
+  left: 30px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform-origin: 17px 50%;
+  animation-name: ch-gracie;
+}
+
+@keyframes ch-gracie {
+  0%,
+  51% {
+    opacity: 0;
+    transform: scale(0.5);
+    animation-timing-function: cubic-bezier(0.3, 1.5, 0.5, 1);
+  }
+  54%,
+  93% {
+    opacity: 1;
+    transform: none;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.ch__pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #7b4fd6;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ch__pin::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(123, 79, 214, 0.35);
+  animation: ch-ping 1.8s ease-out infinite;
+}
+
+.ch__pin-label {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+/* Live poll bottom sheet (matches PollPrototype's sent state) */
+.ch__sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 0 18px 30px;
+  border-radius: 26px 26px 0 0;
+  background: #fff;
+  box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.1);
+  animation-name: ch-sheet;
+}
+
+@keyframes ch-sheet {
+  0%,
+  63% {
+    transform: translateY(105%);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+  }
+  69%,
+  100% {
+    transform: none;
+  }
+}
+
+.ch__handle {
+  width: 36px;
+  height: 5px;
+  margin: 9px auto 12px;
+  border-radius: 3px;
+  background: #c4c7ca;
+}
+
+.ch__eyebrow {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+.ch__question {
+  margin-top: 3px !important;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.ch__live {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 11px 14px;
+  border-radius: 16px;
+  background: var(--ch-surface);
+  color: #3c4043;
+}
+
+.ch__live-body {
+  flex: 1;
+}
+
+.ch__live-text {
+  font-size: 13px;
+}
+
+.ch__live-text strong {
+  color: #188038;
+  font-weight: 600;
+}
+
+.ch__progress {
+  height: 4px;
+  margin-top: 7px;
+  border-radius: 2px;
+  background: #d3d7db;
+  overflow: hidden;
+}
+
+.ch__progress span {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--ch-teal);
+  transform-origin: left;
+  animation-name: ch-progress;
+  animation-timing-function: linear;
+}
+
+@keyframes ch-progress {
+  0%,
+  69% {
+    transform: scaleX(0.98);
+  }
+  100% {
+    transform: scaleX(0.8);
+  }
+}
+
+.ch__choices {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+.ch__choice {
+  display: grid;
+  place-items: center;
+  height: 54px;
+  border-radius: 6px;
+  background: var(--ch-surface);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ch__choice--pick {
+  animation-name: ch-pick;
+}
+
+@keyframes ch-pick {
+  0%,
+  79% {
+    background: var(--ch-surface);
+    color: #1f1f1f;
+    box-shadow: inset 0 0 0 0 var(--ch-teal);
+    transform: none;
+  }
+  80% {
+    transform: scale(0.97);
+  }
+  82%,
+  100% {
+    background: var(--ch-teal-soft);
+    color: var(--ch-teal-ink);
+    box-shadow: inset 0 0 0 2px var(--ch-teal);
+    transform: none;
+  }
+}
+
+/* Reduced motion: hold a single frame with the alert showing */
+@media (prefers-reduced-motion: reduce) {
+  .ch *,
+  .ch *::before,
+  .ch *::after {
+    animation: none !important;
+  }
+
+  .ch__intro,
+  .ch__gracie,
+  .ch__touch {
+    opacity: 0;
+  }
+
+  .ch__sheet {
+    transform: translateY(105%);
+  }
+}

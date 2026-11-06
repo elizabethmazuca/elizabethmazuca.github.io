@@ -1,0 +1,144 @@
+.poke {
+  --poke-bg: #f6f6f6;
+  --poke-ink: #0b4f55;
+
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 22px 28px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: var(--poke-bg);
+  box-shadow:
+    0 5px 0 #c4c4c4,
+    0 8px 12px rgba(0, 0, 0, 0.08);
+  font-family: Roboto, var(--font-sans);
+}
+
+.poke__avatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #6941c6;
+  color: #fff;
+  font-size: 28px;
+}
+
+.poke__icon {
+  flex: 0 0 auto;
+  width: 80px;
+  height: 56px;
+  color: var(--poke-ink);
+  overflow: visible;
+}
+
+.poke__text {
+  margin: 0;
+  font-size: 24px;
+  color: #111;
+}
+
+.poke__hand,
+.poke__car,
+.poke__burst {
+  transform-box: fill-box;
+  animation: 2.2s ease-in-out infinite;
+}
+
+.poke__hand {
+  animation-name: poke-hand;
+}
+
+.poke__car {
+  transform-origin: center bottom;
+  animation-name: poke-car;
+}
+
+.poke__burst {
+  transform-origin: center bottom;
+  animation-name: poke-burst;
+}
+
+/* Wind up, jab the car, pull back */
+@keyframes poke-hand {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translateX(4px);
+  }
+  30% {
+    transform: translateX(-8px);
+  }
+  45% {
+    transform: none;
+  }
+}
+
+@keyframes poke-car {
+  0%,
+  28%,
+  100% {
+    transform: none;
+  }
+  34% {
+    transform: translateX(-3px) rotate(-5deg);
+  }
+  42% {
+    transform: translateX(1px) rotate(2deg);
+  }
+  50% {
+    transform: none;
+  }
+}
+
+@keyframes poke-burst {
+  0%,
+  28%,
+  100% {
+    transform: none;
+  }
+  36% {
+    transform: translateY(-6px) scale(1.15);
+  }
+  52% {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .poke {
+    gap: 16px;
+    padding: 16px 18px;
+  }
+
+  .poke__avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+  }
+
+  .poke__icon {
+    width: 61px;
+    height: 43px;
+  }
+
+  .poke__text {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poke__hand,
+  .poke__car,
+  .poke__burst {
+    animation: none;
+  }
+}

@@ -52,6 +52,7 @@
 }
 
 .sep-alert__icon {
+  position: relative;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -60,6 +61,57 @@
   border-radius: 50%;
   background: #fbe2c2;
   color: #8a4500;
+}
+
+/* While the alert is showing, the triangle wiggles and a ring pulses out */
+.sep-alert__card--in .sep-alert__icon svg {
+  animation: sep-alert-wiggle 2.4s ease-in-out 0.5s infinite;
+}
+
+.sep-alert__card--in .sep-alert__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fbe2c2;
+  animation: sep-alert-ping 2.4s ease-out 0.5s infinite;
+}
+
+.sep-alert__icon svg {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes sep-alert-wiggle {
+  0%,
+  40%,
+  100% {
+    transform: none;
+  }
+  8% {
+    transform: rotate(-14deg) scale(1.1);
+  }
+  16% {
+    transform: rotate(12deg) scale(1.1);
+  }
+  24% {
+    transform: rotate(-8deg) scale(1.05);
+  }
+  32% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes sep-alert-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  60%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .sep-alert__title {
@@ -96,23 +148,6 @@
 .sep-alert__btn--primary {
   background: var(--sa-teal);
   color: #fff;
-}
-
-.sep-alert__timer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 5px;
-  background: var(--sa-teal);
-  transform-origin: left;
-  animation: sep-alert-drain linear forwards;
-}
-
-@keyframes sep-alert-drain {
-  to {
-    transform: scaleX(0);
-  }
 }
 
 .sep-alert__gracie {
@@ -162,5 +197,10 @@
   .sep-alert__card,
   .sep-alert__gracie {
     transition: none;
+  }
+
+  .sep-alert__card--in .sep-alert__icon svg,
+  .sep-alert__card--in .sep-alert__icon::after {
+    animation: none;
   }
 }

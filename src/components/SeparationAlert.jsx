@@ -5,14 +5,11 @@ const AUTO_DISMISS_MS = 8000
 const RETURN_MS = 2200
 const SHOW_GRACIE_MS = 3200
 
-const WARNING = 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'
-
 // Caravan separation alert: slides in over the map, auto-dismisses, and loops
 export default function SeparationAlert() {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
   const [state, setState] = useState('out') // 'in' | 'out' | 'gracie'
-  const [cycle, setCycle] = useState(0)
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.6 })
@@ -21,14 +18,9 @@ export default function SeparationAlert() {
   }, [])
 
   useEffect(() => {
-    if (!visible || state === 'in') return
-    const id = setTimeout(
-      () => {
-        setState('in')
-        setCycle((c) => c + 1)
-      },
-      state === 'gracie' ? SHOW_GRACIE_MS : RETURN_MS,
-    )
+    if (!visible) return
+    const delay = state === 'in' ? AUTO_DISMISS_MS : state === 'gracie' ? SHOW_GRACIE_MS : RETURN_MS
+    const id = setTimeout(() => setState(state === 'in' ? 'out' : 'in'), delay)
     return () => clearTimeout(id)
   }, [visible, state])
 
@@ -51,8 +43,18 @@ export default function SeparationAlert() {
       <div className={`sep-alert__card${state === 'in' ? ' sep-alert__card--in' : ''}`} role="status">
         <div className="sep-alert__top">
           <span className="sep-alert__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d={WARNING} />
+            {/* Triangle drawn with a round-joined stroke for softened corners;
+                the mark uses the icon background color */}
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 4.5 20.5 19.5h-17z"
+                fill="currentColor"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinejoin="round"
+              />
+              <path d="M12 10v4.2" stroke="#fbe2c2" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="12" cy="17.1" r="1.1" fill="#fbe2c2" />
             </svg>
           </span>
           <div>
@@ -73,14 +75,6 @@ export default function SeparationAlert() {
             Show Gracie
           </button>
         </div>
-        {state === 'in' && (
-          <span
-            key={cycle}
-            className="sep-alert__timer"
-            style={{ animationDuration: `${AUTO_DISMISS_MS}ms` }}
-            onAnimationEnd={() => setState('out')}
-          />
-        )}
       </div>
     </div>
   )

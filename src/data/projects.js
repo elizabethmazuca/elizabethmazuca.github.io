@@ -6,7 +6,7 @@ export const projects = [
       'Making group road trips easier by reducing coordination and navigation friction.',
     tags: ['mobile', 'maps', 'concept'],
     cover: '/images/work/google-caravan/caravan-cover.jpg',
-    lottie: '/images/work/google-caravan/GoogleMaps.json',
+    hero: 'caravan',
     thumbnailAlign: 'top',
     thumbnailScale: 1.6,
     column: 'left',
@@ -128,9 +128,6 @@ export const projects = [
           eyebrow: 'Design Decisions',
           heading: 'Keeping All The Ducks In Line',
           body: 'Caravan Mode lets you see where everyone is on the map. If a car falls way behind, you\'ll get a heads-up, and you still keep your own directions going.',
-          lottie: '/images/work/google-caravan/NotificationCaravan.json',
-          lottieHeightScale: 118,
-          imageAspect: 'notification',
           caption:
             "If you need an emergency stop it'll only take 2 minutes and 34 seconds for the other cars to get notified",
           demo: 'separation',
@@ -160,9 +157,7 @@ export const projects = [
           eyebrow: 'Explorations',
           heading: 'Send Pokes To Other Cars',
           body: 'Inspired by the classic facebook poke. However, it was ultimately decided that this would be too distracting to other users',
-          lottie: '/images/work/google-caravan/Poke-Notif.json',
-          lottieHeightScale: 140,
-          imageAspect: 'note',
+          demo: 'poke',
         },
         {
           eyebrow: 'The Journey',
@@ -469,7 +464,7 @@ export const projects = [
     tagline: 'Helping players understand unfamiliar words without leaving the game.',
     tags: ['mobile', 'maps', 'prototype'],
     cover: '/images/work/wordle-cover.jpg',
-    lottie: '/images/work/Wordle.json',
+    hero: 'wordle',
     column: 'right',
   },
 ]
