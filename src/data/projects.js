@@ -133,6 +133,7 @@ export const projects = [
           imageAspect: 'notification',
           caption:
             "If you need an emergency stop it'll only take 2 minutes and 34 seconds for the other cars to get notified",
+          demo: 'separation',
         },
         {
           eyebrow: 'Design Decisions',

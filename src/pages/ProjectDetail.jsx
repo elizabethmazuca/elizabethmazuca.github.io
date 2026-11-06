@@ -3,6 +3,7 @@ import Carousel from '../components/Carousel.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import PollPrototype from '../components/PollPrototype.jsx'
+import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
@@ -334,6 +335,7 @@ function CaseStudySection({ section }) {
       )}
 
       {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
+      {section.demo === 'separation' && <SeparationAlert />}
     </section>
   )
 }
