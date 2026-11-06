@@ -26,6 +26,3 @@ dist-ssr
 *:Zone.Identifier
 
 .claude/
-
-# Licensed font, kept local only
-public/fonts/NYTKarnakCondensed.ttf
