@@ -1,0 +1,401 @@
+/* Box keeps the design's 955×622 ratio; RoverScience.jsx scales the stage into it */
+.rover-sci {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 955 / 622;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #2b2c2e;
+}
+
+.rs {
+  --rs-bg: #0f1113;
+  --rs-panel: #141619;
+  --rs-line: #2a2d31;
+  --rs-text: #e6e6e6;
+  --rs-muted: #8b8f94;
+  --rs-orange: #d9782c;
+  --rs-orange-bg: #2a1f16;
+  --rs-orange-line: #4a3220;
+  --rs-btn: #26282b;
+  --rs-green: #3fb950;
+  --rs-red: #e5483b;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 175px 1fr 326px;
+  grid-template-rows: 54px 1fr;
+  width: 955px;
+  height: 622px;
+  box-sizing: border-box;
+  border: 6px solid #2b2c2e;
+  border-radius: 10px;
+  background: var(--rs-bg);
+  transform-origin: top left;
+  font-family: 'Space Grotesk', var(--font-sans);
+  color: var(--rs-text);
+  text-align: left;
+}
+
+.rs *,
+.rs *::before,
+.rs *::after {
+  box-sizing: border-box;
+}
+
+.rs :where(p, h3) {
+  margin: 0;
+}
+
+/* Sidebar */
+.rs__side {
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 22px 22px;
+  background: var(--rs-panel);
+}
+
+.rs__logo,
+.rs__logo-sub,
+.rs__footer p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+.rs__logo {
+  padding-left: 19px;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 3.5px;
+  white-space: nowrap;
+}
+
+/* Upright slashes on the same baseline as TITAN */
+.rs__logo span {
+  color: #ff6a13;
+  letter-spacing: 2px;
+}
+
+.rs__logo-sub {
+  margin-top: 9px !important;
+  padding-left: 19px;
+  font-size: 7.5px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #74787d;
+}
+
+.rs__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 30px;
+}
+
+.rs__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px 0 22px;
+  margin-left: 0;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #a4a8ad;
+}
+
+.rs__nav-item--on {
+  background: linear-gradient(90deg, #3a2414, #5a3418);
+  color: var(--rs-orange);
+}
+
+.rs__footer {
+  margin-top: auto;
+  padding-left: 12px;
+  color: #7d8186;
+}
+
+.rs__footer p {
+  margin-top: 10px !important;
+  font-size: 7.5px;
+  line-height: 1.45;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Top bar */
+.rs__top {
+  grid-column: 2 / 4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 42px;
+  padding: 0 52px 0 0;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.rs__dots {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  margin-left: -7px;
+  background: radial-gradient(circle, #8d9bd8 1px, transparent 1.5px) 0 0 / 5px 3px;
+}
+
+.rs__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--rs-green);
+}
+
+.rs__status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.rs__battery {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #d6d6d6;
+}
+
+.rs__battery svg {
+  color: var(--rs-green);
+}
+
+.rs__mode {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #a4a8ad;
+}
+
+.rs__kill {
+  display: grid;
+  place-items: center;
+  width: 94px;
+  height: 26px;
+  border: 1px solid #a3261d;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--rs-red);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Main column */
+.rs__main {
+  padding: 4px 0 0 20px;
+}
+
+.rs__title,
+.rs__cams-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.rs__cams-title {
+  font-size: 15px;
+}
+
+.rs__subtitle {
+  margin-top: 4px !important;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--rs-muted);
+}
+
+.rs__group {
+  position: relative;
+  width: 398px;
+  margin-top: 14px;
+  padding: 18px 20px 18px;
+  border: 1px solid var(--rs-line);
+  border-radius: 4px;
+}
+
+.rs__group-icon {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  color: var(--rs-orange);
+}
+
+.rs__group--open {
+  margin-top: 12px;
+  padding: 14px 6px 14px;
+  border-color: transparent;
+}
+
+.rs__group-title {
+  padding-left: 30px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rs__group-sub {
+  margin-top: 4px !important;
+  padding-left: 30px;
+  font-size: 10px;
+  color: var(--rs-muted);
+}
+
+.rs__group--open .rs__group-title,
+.rs__group--open .rs__group-sub {
+  padding-left: 44px;
+}
+
+/* Soil collection */
+.rs__drill {
+  display: flex;
+  gap: 13px;
+  margin-top: 18px;
+  margin-left: 8px;
+}
+
+.rs__drill-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: 116px;
+  height: 94px;
+  border: 1px solid var(--rs-orange-line);
+  border-radius: 2px;
+  background: var(--rs-orange-bg);
+  color: var(--rs-orange);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.rs__drill-btn--outline {
+  border-color: #2f3236;
+  background: transparent;
+}
+
+/* Life detection */
+.rs__sensor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  height: 47px;
+  margin-top: 14px;
+  padding: 0 20px;
+  border: 1px solid #2f3236;
+  border-radius: 3px;
+  background: var(--rs-btn);
+  color: #c8cbcf;
+  text-align: left;
+}
+
+.rs__sensor strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rs__sensor small {
+  display: block;
+  margin-top: 3px;
+  font-size: 8.5px;
+  color: var(--rs-muted);
+}
+
+/* Collector drill */
+.rs__collector {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.rs__col-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 105px;
+  height: 47px;
+  border: 1px solid #2f3236;
+  border-radius: 3px;
+  background: var(--rs-btn);
+  color: #c8cbcf;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Cameras */
+.rs__cams {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px 52px 0 0;
+}
+
+.rs__cams .rs__subtitle {
+  margin: -3px 0 6px !important;
+}
+
+.rs__feed {
+  position: relative;
+  height: 147px;
+  border-radius: 2px;
+  background: #16181b;
+  overflow: hidden;
+}
+
+.rs__feed-label {
+  position: absolute;
+  top: 9px;
+  left: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #c8cbcf;
+}
+
+.rs__feed-label svg {
+  color: var(--rs-orange);
+}
+
+.rs__live {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--rs-green);
+}
+
+.rs__live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}

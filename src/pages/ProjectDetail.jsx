@@ -6,6 +6,7 @@ import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
 import PollPrototype from '../components/PollPrototype.jsx'
 import PokeNotification from '../components/PokeNotification.jsx'
+import RoverScience from '../components/RoverScience.jsx'
 import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
 import { projects } from '../data/projects.js'
@@ -339,6 +340,7 @@ function CaseStudySection({ section }) {
 
       {section.demo === 'separation' && <SeparationAlert />}
       {section.demo === 'poke' && <PokeNotification />}
+      {section.demo === 'rover-science' && <RoverScience />}
       {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
     </section>
   )
