@@ -108,7 +108,6 @@ export default function RoverScience() {
         </aside>
 
         <header className="rs__top">
-          <span className="rs__dots" />
           <span className="rs__status">
             <i />
             Connected
