@@ -267,7 +267,7 @@ export const projects = [
           eyebrow: 'Design Decisions',
           heading: 'Every hardware update created a UI problem',
           body: 'In the beginning we had the budget for 2 cameras, then 3, then 4, then 6! Putting the camera feed into the UI like tetris blocks, at the end I decided one page of cameras but it was way too overstimulating',
-          image: true,
+          demo: 'camera-grid',
         },
         {
           eyebrow: 'Design Decisions',

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import CaravanHero from '../components/CaravanHero.jsx'
 import WordleHero from '../components/WordleHero.jsx'
+import CameraGrid from '../components/CameraGrid.jsx'
 import Carousel from '../components/Carousel.jsx'
 import EventLog from '../components/EventLog.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
@@ -343,6 +344,7 @@ function CaseStudySection({ section }) {
       {section.demo === 'poke' && <PokeNotification />}
       {section.demo === 'rover-science' && <RoverScience />}
       {section.demo === 'event-log' && <EventLog />}
+      {section.demo === 'camera-grid' && <CameraGrid />}
       {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
     </section>
   )
