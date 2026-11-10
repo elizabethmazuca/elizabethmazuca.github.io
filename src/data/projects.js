@@ -276,6 +276,12 @@ export const projects = [
           demo: 'rover-science',
         },
         {
+          eyebrow: 'Design Decisions',
+          heading: 'Physical Controls',
+          body: 'For testing we had a joystick interface on a computer.',
+          image: true,
+        },
+        {
           eyebrow: 'The Solution',
           heading: 'Titan Rover UI',
           body: 'Important data readily available.',
@@ -299,7 +305,7 @@ export const projects = [
           eyebrow: 'Explorations',
           heading: 'Rover State Data',
           body: 'I made an autonomous navigation data to show what the system was "thinking," giving engineers clearer visibility into the rover\'s decisions. However, the feature consumed too much computing power so it wasn\'t included in the final build.',
-          image: true,
+          demo: 'event-log',
         },
         {
           eyebrow: 'The Journey',
