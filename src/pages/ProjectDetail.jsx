@@ -11,6 +11,7 @@ import PokeNotification from '../components/PokeNotification.jsx'
 import RoverScience from '../components/RoverScience.jsx'
 import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
+import TerminologyTable from '../components/TerminologyTable.jsx'
 import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
 import './ProjectDetail.css'
@@ -345,6 +346,7 @@ function CaseStudySection({ section }) {
       {section.demo === 'rover-science' && <RoverScience />}
       {section.demo === 'event-log' && <EventLog />}
       {section.demo === 'camera-grid' && <CameraGrid />}
+      {section.demo === 'terminology' && <TerminologyTable />}
       {section.caption && !(section.prototype && section.sideBySide) && <p className="case-study__caption">{section.caption}</p>}
     </section>
   )

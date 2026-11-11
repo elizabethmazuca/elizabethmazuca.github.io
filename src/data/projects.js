@@ -222,20 +222,24 @@ export const projects = [
           caption: 'Rover controls survey to gather more insight',
         },
         {
+          eyebrow: 'Research',
+          heading: 'Lost in Translation?',
+          body: 'For the final design I translated engineering terminology into familiar language that operators could easily understand. I took the technical terms used by the engineering team and mapped them to simpler action verbs to keep language consistent throughout the interface.',
           lottie: '/images/work/titan-rover/search.json',
           imageAspect: 'search',
           lottieBackground: 'transparent',
+          demo: 'terminology',
         },
         {
           eyebrow: 'Research',
           heading: 'Studying What Works',
           body: 'To design for a competitive environment, we researched proven control interface handbooks, including the NASA Crew Interface Encyclopedia. We examined how these system rules prioritize information, use color to signal urgency, and organize data to support fast, confident decisions. A recent thesis (Arzberger 2022) prototyped UIs for astronaut teleoperation of field robots. Best practices included alerting operators via pop-up dialogs for critical events (e.g. automatic scans) and one-button actions with progress bars and countdown warnings to prevent errors. These patterns ensured that crew attention was drawn to important status changes and that necessary actions required confirmation.',
           bodyLinks: [
-            { text: 'NASA Crew Interface Encyclopedia', href: '#' },
-            { text: 'Arzberger 2022', href: '#' },
+            { text: 'NASA Crew Interface Encyclopedia', href: 'https://www.nasa.gov/reference/10-0-crew-interfaces-vol-2/#hds-sidebar-nav-1' },
+            { text: 'Arzberger 2022', href: 'https://robotik.informatik.uni-wuerzburg.de/telematics/download/BSc_Julius_Arzberger.pdf#:~:text=newly%20established%20sensor%20perimeter,To%20ensure' },
           ],
-          image: true,
-          caption: 'Figure 39. The rover tested displays.',
+          image: '/images/work/titan-rover/ArzbergerRoverStudy.png',
+          imageSize: 'medium',
         },
         {
           eyebrow: 'Design Principles',
@@ -289,9 +293,8 @@ export const projects = [
         },
         {
           eyebrow: 'Design Decisions',
-          heading: 'Technical-to-User Terminology Mapping',
-          body: 'The final design contextualized engineering jargon so that users see familiar terms. I created this table to standardize all the action verbs.',
-          image: true,
+          heading: 'Critical Information',
+          body: 'Based on the team survey and the Arzberger thesis, the final design kept critical information visible at all times. Pop-ups were also added to notify operators of important updates.',
         },
         {
           eyebrow: 'Design Decisions',
