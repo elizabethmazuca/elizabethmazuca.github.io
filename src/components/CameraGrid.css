@@ -1,107 +1,68 @@
 .cam-grid {
-  --cg-bg: #0b0d10;
-  --cg-feed: #111418;
-  --cg-line: #1e2226;
-  --cg-active: #3b2a1a;
-  --cg-text: #e6e6e6;
-  --cg-orange: #d9782c;
-  --cg-green: #3fb950;
-
-  box-sizing: border-box;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 14px 10px 10px;
-  border-radius: 10px;
-  background: var(--cg-bg);
-  font-family: 'Space Grotesk', var(--font-sans);
-  color: var(--cg-text);
-  text-align: left;
 }
 
-.cam-grid *,
-.cam-grid *::before,
-.cam-grid *::after {
-  box-sizing: border-box;
+/* Navigation page: no right-hand camera column, the feeds fill the main area */
+.rs--nav {
+  grid-template-columns: 175px 1fr;
 }
 
-.cam-grid__title {
-  margin: 0 0 14px;
-  font-size: clamp(18px, 3.4vw, 22px);
-  font-weight: 700;
-  line-height: 1;
+.rs--nav .rs__top {
+  grid-column: 2 / 3;
+  padding-right: 20px;
+}
+
+/* Feeds stretch to fill whatever height is left under the title, so the
+   bottom row never spills out of the frame */
+.cam-grid__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 4px 90px 14px 20px;
 }
 
 .cam-grid__feeds {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 9px;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: 14px;
+  transition: opacity 0.3s ease-out;
 }
 
+/* End of the loop: the whole grid fades together, then resets out of sight */
+.cam-grid__feeds--fading {
+  opacity: 0;
+}
+
+/* Position and size come from CameraGrid.jsx. Hidden feeds don't animate, so
+   they snap to their landing spot while invisible. */
 .cam-grid__feed {
-  position: relative;
-  aspect-ratio: 284 / 160;
-  border: 1px solid var(--cg-line);
-  border-radius: 6px;
-  background: var(--cg-feed);
+  position: absolute;
+  border: 1px solid #1e2226;
+  border-radius: 5px;
+  background: #121519;
   opacity: 0;
   transform: scale(0.6);
-  transition:
-    opacity 0.15s ease-in,
-    transform 0.15s ease-in;
+  transition: none;
 }
 
-.cam-grid__feed--active {
-  border-color: var(--cg-active);
-}
-
-/* Big overshoot so each feed bounces into place; leaving uses the quick base transition */
+/* Feeds already on screen glide to their new, smaller tile; the newcomer waits a
+   beat for them to make room, then bounces in */
 .cam-grid__feed--on {
   opacity: 1;
   transform: scale(1);
   transition:
-    opacity 0.2s ease-out,
-    transform 0.6s cubic-bezier(0.25, 2.2, 0.5, 0.8);
-}
-
-.cam-grid__label,
-.cam-grid__live {
-  position: absolute;
-  top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: clamp(7px, 1.4vw, 9px);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.cam-grid__label {
-  left: 11px;
-}
-
-.cam-grid__label svg {
-  flex: none;
-  color: var(--cg-orange);
-}
-
-.cam-grid__live {
-  right: 11px;
-  gap: 5px;
-  color: var(--cg-green);
-}
-
-.cam-grid__live i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
+    left 0.5s cubic-bezier(0.3, 0.7, 0.2, 1),
+    top 0.5s cubic-bezier(0.3, 0.7, 0.2, 1),
+    width 0.5s cubic-bezier(0.3, 0.7, 0.2, 1),
+    height 0.5s cubic-bezier(0.3, 0.7, 0.2, 1),
+    opacity 0.2s ease-out 0.2s,
+    transform 0.6s cubic-bezier(0.25, 1.8, 0.5, 0.8) 0.2s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cam-grid__feed {
+  .cam-grid__feed--on,
+  .cam-grid__feeds {
     transition: none;
   }
 }
