@@ -313,7 +313,7 @@ export const projects = [
         {
           eyebrow: 'The Journey',
           heading: 'Organizing new information',
-          body: "After the first prototype, the engineering team expanded the system with additional cameras, new types of arms that required their own controls, and updated navigation features. As a designer, I'm used to iterating based on user needs, but this was my first time adapting the UI to evolving hardware I hadn't initially accounted for. It ended up being a great learning experience, especially in understanding how important close collaboration with engineers is.",
+          body: "After the first prototype, the engineering team introduced additional cameras, new arm configurations, and navigation features. I was used to iterating based on user needs, but this was my first time designing around evolving hardware constraints like overheating and limited computing power. This experience taught me the importance of working closely with engineers to create a UI that could adapt to both user needs and technical limitations.",
           image: true,
         },
         {
