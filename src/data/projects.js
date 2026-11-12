@@ -278,6 +278,7 @@ export const projects = [
           heading: 'Instead of designing around hardware, I designed around tasks',
           body: 'Rather than redesigning the interface every time new hardware was added, I created a structure that could grow with the rover. I organized the UI around operator workflows, giving new hardware a predictable place before it even existed.\n\nNavigation cameras and driving controls lived together, while arm and sample-collection cameras were grouped with arm controls.',
           demo: 'rover-science',
+          caption: 'Science Page For Rover Controls',
         },
         {
           eyebrow: 'Design Decisions',
