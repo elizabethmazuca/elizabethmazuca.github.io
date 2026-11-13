@@ -189,7 +189,9 @@ export const projects = [
     tagline: 'Designing a rover interface that **reduced task completion time by 22%**',
     tags: ['a/b testing', 'shipped', 'robotics'],
     cover: '/images/work/titan-rover-cover.jpg',
-    lottie: '/images/work/TitanRoverCover.json',
+    hero: 'titan',
+    thumbnailScale: 1,
+    thumbnailZoom: 1.25,
     column: 'right',
     caseStudy: {
       meta: [

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import CaravanHero from '../components/CaravanHero.jsx'
+import TitanHero from '../components/TitanHero.jsx'
 import WordleHero from '../components/WordleHero.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 import LottieSlot from '../components/LottieSlot.jsx'
@@ -8,7 +9,7 @@ import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
 import './Work.css'
 
-const HEROES = { caravan: CaravanHero, wordle: WordleHero }
+const HEROES = { caravan: CaravanHero, wordle: WordleHero, titan: TitanHero }
 
 function ProjectCard({ project }) {
   const Hero = HEROES[project.hero]
@@ -20,6 +21,7 @@ function ProjectCard({ project }) {
             alt={project.title}
             scale={project.thumbnailScale || 1.15}
             align={project.thumbnailAlign || 'center'}
+            zoom={project.thumbnailZoom}
           />
         ) : project.lottie ? (
           <LottieSlot

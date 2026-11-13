@@ -11,6 +11,7 @@ import PokeNotification from '../components/PokeNotification.jsx'
 import RoverScience from '../components/RoverScience.jsx'
 import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
+import TitanHero from '../components/TitanHero.jsx'
 import TerminologyTable from '../components/TerminologyTable.jsx'
 import { projects } from '../data/projects.js'
 import { renderRichText } from '../utils/richText.jsx'
@@ -380,6 +381,8 @@ export default function ProjectDetail() {
           <CaravanHero alt={project.title} align="top" />
         ) : project.hero === 'wordle' ? (
           <WordleHero alt={project.title} scale={0.9} />
+        ) : project.hero === 'titan' ? (
+          <TitanHero alt={project.title} />
         ) : project.lottie ? (
           <LottieSlot src={project.lottie} fallback={project.cover} alt={project.title} align="top" />
         ) : (
