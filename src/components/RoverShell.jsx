@@ -63,7 +63,8 @@ const NAV = [
 
 // Titan Rover app frame (sidebar + status bar), scaled from a fixed design-size
 // stage to fit its box. Page content goes in as children, after the top bar.
-export default function RoverShell({ active, width = 955, height = 622, label, variant, children }) {
+// `voltage` is the status bar reading; `lowBattery` turns it red.
+export default function RoverShell({ active, width = 955, height = 622, label, variant, voltage = '12.4 V', lowBattery = false, children }) {
   const ref = useRef(null)
   const { fit } = useStageFit(ref, width, height)
 
@@ -112,13 +113,22 @@ export default function RoverShell({ active, width = 955, height = 622, label, v
             <i />
             Connected
           </span>
-          <span className="rs__battery">
+          <span className={`rs__battery${lowBattery ? ' rs__battery--low' : ''}`}>
             <Icon size={15}>
               <rect x="7" y="4" width="10" height="17" rx="2" />
               <path d="M10 2h4" />
-              <rect x="9.5" y="9" width="5" height="9.5" rx="0.5" fill="currentColor" stroke="none" />
+              {/* Charge level: nearly full normally, just a sliver when low */}
+              <rect
+                x="9.5"
+                y={lowBattery ? 16.5 : 9}
+                width="5"
+                height={lowBattery ? 2 : 9.5}
+                rx="0.5"
+                fill="currentColor"
+                stroke="none"
+              />
             </Icon>
-            12.4 V
+            {voltage}
           </span>
           <span className="rs__mode">
             Manual Mode

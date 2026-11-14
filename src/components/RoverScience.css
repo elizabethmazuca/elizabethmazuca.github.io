@@ -168,6 +168,11 @@
   color: var(--rs-green);
 }
 
+.rs__battery--low,
+.rs__battery--low svg {
+  color: var(--rs-red);
+}
+
 .rs__mode {
   display: flex;
   align-items: center;
@@ -188,6 +193,16 @@
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+/* Full-width pages (Navigation, System): no right-hand camera column */
+.rs--full {
+  grid-template-columns: 175px 1fr;
+}
+
+.rs--full .rs__top {
+  grid-column: 2 / 3;
+  padding-right: 20px;
 }
 
 /* Main column */

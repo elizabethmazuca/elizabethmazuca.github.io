@@ -59,7 +59,7 @@ export default function CameraGrid() {
     <div ref={ref} className="cam-grid">
       <RoverShell
         active="Navigation"
-        variant="nav"
+        variant="full"
         height={682}
         label="Titan Rover navigation page with six live camera feeds: front, rear, mast, left, right and ground"
       >

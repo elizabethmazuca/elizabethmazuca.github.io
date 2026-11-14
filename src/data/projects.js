@@ -276,7 +276,7 @@ export const projects = [
           demo: 'camera-grid',
         },
         {
-          eyebrow: 'Design Decisions',
+          eyebrow: 'The Solution',
           heading: 'Instead of designing around hardware, I designed around tasks',
           body: 'Rather than redesigning the interface every time new hardware was added, I created a structure that could grow with the rover. I organized the UI around operator workflows, giving new hardware a predictable place before it even existed.\n\nNavigation cameras and driving controls lived together, while arm and sample-collection cameras were grouped with arm controls.',
           demo: 'rover-science',
@@ -284,20 +284,9 @@ export const projects = [
         },
         {
           eyebrow: 'Design Decisions',
-          heading: 'Physical Controls',
-          body: 'For testing we had a joystick interface on a computer.',
-          image: true,
-        },
-        {
-          eyebrow: 'The Solution',
-          heading: 'Titan Rover UI',
-          body: 'Important data readily available.',
-          image: true,
-        },
-        {
-          eyebrow: 'Design Decisions',
           heading: 'Critical Information',
           body: 'Based on the team survey and the Arzberger thesis, the final design kept critical information visible at all times. Pop-ups were also added to notify operators of important updates.',
+          demo: 'rover-system',
         },
         {
           eyebrow: 'Design Decisions',

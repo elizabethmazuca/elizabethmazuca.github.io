@@ -2,16 +2,6 @@
   width: 100%;
 }
 
-/* Navigation page: no right-hand camera column, the feeds fill the main area */
-.rs--nav {
-  grid-template-columns: 175px 1fr;
-}
-
-.rs--nav .rs__top {
-  grid-column: 2 / 3;
-  padding-right: 20px;
-}
-
 /* Feeds stretch to fill whatever height is left under the title, so the
    bottom row never spills out of the frame */
 .cam-grid__main {

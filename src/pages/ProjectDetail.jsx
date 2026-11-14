@@ -9,6 +9,7 @@ import LottieSlot from '../components/LottieSlot.jsx'
 import PollPrototype from '../components/PollPrototype.jsx'
 import PokeNotification from '../components/PokeNotification.jsx'
 import RoverScience from '../components/RoverScience.jsx'
+import RoverSystem from '../components/RoverSystem.jsx'
 import SeparationAlert from '../components/SeparationAlert.jsx'
 import Tag from '../components/Tag.jsx'
 import TitanHero from '../components/TitanHero.jsx'
@@ -345,6 +346,7 @@ function CaseStudySection({ section }) {
       {section.demo === 'separation' && <SeparationAlert />}
       {section.demo === 'poke' && <PokeNotification />}
       {section.demo === 'rover-science' && <RoverScience />}
+      {section.demo === 'rover-system' && <RoverSystem />}
       {section.demo === 'event-log' && <EventLog />}
       {section.demo === 'camera-grid' && <CameraGrid />}
       {section.demo === 'terminology' && <TerminologyTable />}
