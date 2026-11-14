@@ -285,7 +285,7 @@ export const projects = [
         {
           eyebrow: 'Design Decisions',
           heading: 'Critical Information',
-          body: 'Based on the team survey and the Arzberger thesis, the final design kept critical information visible at all times. Pop-ups were also added to notify operators of important updates.',
+          body: 'Based on the team survey and the Arzberger thesis, the final design kept critical information visible at all times. I also added pop-ups to notify operators of important updates.',
           demo: 'rover-system',
         },
         {
