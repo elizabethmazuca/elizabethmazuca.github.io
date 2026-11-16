@@ -204,7 +204,7 @@ export const projects = [
         {
           eyebrow: 'The Challenge',
           heading: 'Designing for Speedy Mars Missions',
-          body: "Our team competed in the annual Rover Challenge where teams operate next generation Mars rovers under intense time pressure. As the UI/UX lead I knew every second counted so I focused on making an intuitive interface as the UI wasn't just a dashboard it was a competitive advantage.",
+          body: "Our team competed in the annual Rover Challenge where teams operate next generation Mars rovers under intense time pressure. As the UI/UX lead I knew every second counted so I focused on making an intuitive interface as I realized that an intuitive dashboard would be a competitive advantage.",
         },
         {
           image: '/images/work/titan-rover/contestinfo.png',

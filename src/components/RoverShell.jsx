@@ -63,8 +63,18 @@ const NAV = [
 
 // Titan Rover app frame (sidebar + status bar), scaled from a fixed design-size
 // stage to fit its box. Page content goes in as children, after the top bar.
-// `voltage` is the status bar reading; `lowBattery` turns it red.
-export default function RoverShell({ active, width = 955, height = 622, label, variant, voltage = '12.4 V', lowBattery = false, children }) {
+// `voltage` is the status bar reading; `lowBattery` turns it red. `mode` is the drive mode dropdown.
+export default function RoverShell({
+  active,
+  width = 955,
+  height = 622,
+  label,
+  variant,
+  voltage = '12.4 V',
+  lowBattery = false,
+  mode = 'Manual Mode',
+  children,
+}) {
   const ref = useRef(null)
   const { fit } = useStageFit(ref, width, height)
 
@@ -131,7 +141,7 @@ export default function RoverShell({ active, width = 955, height = 622, label, v
             {voltage}
           </span>
           <span className="rs__mode">
-            Manual Mode
+            {mode}
             <Icon size={13}>
               <path d="m6 9 6 6 6-6" />
             </Icon>

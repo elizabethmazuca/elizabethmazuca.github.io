@@ -80,6 +80,7 @@ export default function RoverSystem() {
         height={692}
         voltage="3.5 V"
         lowBattery
+        mode="Autonomous Mode"
         label="Titan Rover system page showing power, connection and subsystem health, with a pop-up alert warning that the battery is at 19%"
       >
         <main className="sys">
