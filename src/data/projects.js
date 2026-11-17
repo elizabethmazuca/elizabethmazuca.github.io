@@ -226,7 +226,7 @@ export const projects = [
         {
           eyebrow: 'Research',
           heading: 'Lost in Translation?',
-          body: 'For the final design I translated engineering terminology into familiar language that operators could easily understand. I took the technical terms used by the engineering team and mapped them to simpler action verbs to keep language consistent throughout the interface.',
+          body: 'For the final design I translated engineering terminology into familiar language so that all operators could easily understand. I took the technical terms used by the engineering team and mapped them to simpler action verbs to keep language consistent throughout the interface.',
           lottie: '/images/work/titan-rover/search.json',
           imageAspect: 'search',
           lottieBackground: 'transparent',
