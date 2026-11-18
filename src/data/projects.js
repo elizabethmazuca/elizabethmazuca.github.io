@@ -408,7 +408,7 @@ export const projects = [
         {
           eyebrow: 'Insights',
           heading: 'Signup forms are dead, onboarding is in',
-          body: "Auditing the sign up flow we had last year, we picked out what worked and what didn't. We wanted a flow that used progressive disclosure and short sections instead of presenting everything at once.",
+          body: "Auditing the sign up flow we had last year, we picked out what we liked and what had to go. We wanted a flow that used progressive disclosure and short sections instead of presenting everything at once.",
           image: '/images/work/fullyhacks/MyApplication.svg',
           imageSize: 'half',
           caption: 'Previous Fullyhacks Application',
