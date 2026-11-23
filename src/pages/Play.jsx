@@ -136,7 +136,8 @@ export default function Play() {
               style={{
                 aspectRatio: item.ratio,
                 gridColumn: `span ${colSpan}`,
-                gridRowEnd: `span ${rowSpan}`,
+                // One column (phones) needs no masonry: tiles just stack at their own height
+                gridRowEnd: layout.cols > 1 ? `span ${rowSpan}` : undefined,
                 '--i': Math.min(index, 8),
                 cursor: isLive ? 'default' : undefined,
               }}

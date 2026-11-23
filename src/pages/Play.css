@@ -97,5 +97,7 @@
 @media (max-width: 560px) {
   .play-grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    row-gap: 24px;
   }
 }
