@@ -116,6 +116,7 @@ function CaseStudySection({ section }) {
       alt={section.heading}
       aspect={section.carouselAspect}
       maxWidth={section.carouselMaxWidth}
+      device={section.carouselDevice}
     />
   )
 

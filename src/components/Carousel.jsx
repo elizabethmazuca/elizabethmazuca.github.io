@@ -1,13 +1,16 @@
 import { useRef, useState } from 'react'
 import './Carousel.css'
 
-export default function Carousel({ slides, alt = '', aspect = '427 / 858', maxWidth = '260px' }) {
+// `device="iphone"` draws an iPhone around the slides; `aspect` is then the screen's ratio.
+export default function Carousel({ slides, alt = '', aspect = '427 / 858', maxWidth = '260px', device }) {
   const [index, setIndex] = useState(0)
   const [dragging, setDragging] = useState(false)
   const [dragX, setDragX] = useState(0)
   const startX = useRef(0)
 
   const items = slides.map((slide) => (typeof slide === 'string' ? { src: slide } : slide))
+
+  const iphone = device === 'iphone'
 
   const go = (delta) => setIndex((i) => (i + delta + items.length) % items.length)
 
@@ -44,34 +47,38 @@ export default function Carousel({ slides, alt = '', aspect = '427 / 858', maxWi
 
       <div className="carousel__body">
         <div
-          className="carousel__frame"
-          style={{ aspectRatio: aspect, maxWidth }}
+          className={`carousel__frame${iphone ? ' carousel__frame--iphone' : ''}`}
+          style={{ aspectRatio: iphone ? undefined : aspect, maxWidth }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
         >
-          <div className="carousel__track" style={trackStyle}>
-            {items.map((item, i) => (
-              <div className="carousel__slide" key={item.src || i}>
-                {item.src ? (
-                  <img
-                    src={item.src}
-                    alt={`${alt} ${i + 1} of ${items.length}`}
-                    className="carousel__image"
-                    draggable={false}
-                  />
-                ) : (
-                  <div className="carousel__placeholder" />
-                )}
-                {item.note && (
-                  <div className="carousel__note">
-                    <p className="carousel__note-title">{item.note.title}</p>
-                    <p className="carousel__note-body">{item.note.body}</p>
-                  </div>
-                )}
-              </div>
-            ))}
+          {iphone && <span className="carousel__buttons" aria-hidden="true" />}
+          <div className="carousel__screen" style={iphone ? { aspectRatio: aspect } : undefined}>
+            {iphone && <span className="carousel__island" aria-hidden="true" />}
+            <div className="carousel__track" style={trackStyle}>
+              {items.map((item, i) => (
+                <div className="carousel__slide" key={item.src || i}>
+                  {item.src ? (
+                    <img
+                      src={item.src}
+                      alt={`${alt} ${i + 1} of ${items.length}`}
+                      className="carousel__image"
+                      draggable={false}
+                    />
+                  ) : (
+                    <div className="carousel__placeholder" />
+                  )}
+                  {item.note && (
+                    <div className="carousel__note">
+                      <p className="carousel__note-title">{item.note.title}</p>
+                      <p className="carousel__note-body">{item.note.body}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="carousel__dots">

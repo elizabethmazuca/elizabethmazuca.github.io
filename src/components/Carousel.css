@@ -128,3 +128,98 @@
 .carousel__dot--active {
   background: var(--accent);
 }
+
+/* Default (no device): the screen wrapper just fills the frame */
+.carousel__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* iPhone: black bezel around a rounded screen, with the Dynamic Island on top
+   and side buttons drawn on the frame's edges */
+.carousel__frame--iphone {
+  position: relative;
+  padding: 7px;
+  border-radius: 36px;
+  overflow: visible;
+  background: #111214;
+  box-shadow:
+    inset 0 0 0 1.5px #3a3b3f,
+    0 18px 40px rgb(0 0 0 / 0.18);
+}
+
+.carousel__frame--iphone .carousel__screen {
+  height: auto;
+  border-radius: 29px;
+  overflow: hidden;
+  background: #000;
+}
+
+.carousel__frame--iphone .carousel__slide {
+  padding: 0;
+}
+
+.carousel__frame--iphone .carousel__image {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+.carousel__island {
+  position: absolute;
+  top: 2.2%;
+  left: 50%;
+  z-index: 1;
+  width: 31%;
+  height: 3.6%;
+  border-radius: 999px;
+  background: #000;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Action + volume buttons on the left, power on the right */
+.carousel__buttons,
+.carousel__buttons::before,
+.carousel__buttons::after {
+  position: absolute;
+  width: 3px;
+  background: #2a2b2e;
+}
+
+.carousel__buttons {
+  top: 18%;
+  left: -3px;
+  height: 5%;
+  border-radius: 2px 0 0 2px;
+}
+
+.carousel__buttons::before,
+.carousel__buttons::after {
+  content: '';
+  left: 0;
+  height: 180%;
+  border-radius: inherit;
+}
+
+.carousel__buttons::before {
+  top: 160%;
+}
+
+.carousel__buttons::after {
+  top: 380%;
+}
+
+/* Power button: drawn off the frame itself */
+.carousel__frame--iphone::after {
+  content: '';
+  position: absolute;
+  top: 27%;
+  right: -3px;
+  width: 3px;
+  height: 13%;
+  border-radius: 0 2px 2px 0;
+  background: #2a2b2e;
+}
