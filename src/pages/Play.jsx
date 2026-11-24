@@ -32,6 +32,17 @@ const items = [
     caption: 'Concept to help players learn unfamiliar words without leaving the game',
   },
   {
+    id: 'valtodo',
+    src: '/images/play/valtodo.png',
+    alt: 'Valtodo',
+    ratio: '1918 / 870',
+    title: 'Daily Ace',
+    caption: 'Valorant themed to-do list including the Valorant dopamine hit',
+    link: 'https://5dailies.vercel.app/',
+    linkLabel: '5dailies.vercel.app',
+    wide: true,
+  },
+  {
     id: 'group-1',
     src: '/images/play/Group%201.jpg',
     alt: 'Group 1',
@@ -79,16 +90,15 @@ const items = [
     alt: 'Raspberry Pi',
     ratio: '480 / 640',
     caption: 'My first cyberdeck ft Raspberry Pi Pico',
+    column: 'right',
   },
   {
-    id: 'valtodo',
-    src: '/images/play/valtodo.png',
-    alt: 'Valtodo',
-    ratio: '1918 / 870',
-    title: 'Daily Ace',
-    caption: 'Valorant themed to-do list including the Valorant dopamine hit',
-    link: 'https://5dailies.vercel.app/',
-    linkLabel: '5dailies.vercel.app',
+    id: 'maplestory-cosmetics',
+    src: '/images/play/MaplestoryCosmetics.mp4',
+    alt: 'Maplestory Fashion Studio',
+    ratio: '1520 / 878',
+    title: 'Maplestory Fashion Studio',
+    caption: 'Cosmetics finder for the game Maplestory',
     wide: true,
   },
 ]
@@ -135,7 +145,9 @@ export default function Play() {
               className="play-grid__item"
               style={{
                 aspectRatio: item.ratio,
-                gridColumn: `span ${colSpan}`,
+                // `column: 'right'` pins a tile to the last column when there's more than one
+                gridColumn:
+                  item.column === 'right' && layout.cols > 1 ? `${layout.cols} / span 1` : `span ${colSpan}`,
                 // One column (phones) needs no masonry: tiles just stack at their own height
                 gridRowEnd: layout.cols > 1 ? `span ${rowSpan}` : undefined,
                 '--i': Math.min(index, 8),
@@ -171,7 +183,7 @@ export default function Play() {
           aria-hidden="true"
         >
           {hover.title && <span className="play-grid__tooltip-title">{hover.title}</span>}
-          <span className="play-grid__tooltip-caption">{hover.caption}</span>
+          {hover.caption && <span className="play-grid__tooltip-caption">{hover.caption}</span>}
           {hover.link && (
             <span className="play-grid__tooltip-link">{hover.linkLabel ?? hover.link}</span>
           )}
