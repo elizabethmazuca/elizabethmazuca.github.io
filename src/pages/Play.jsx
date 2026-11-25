@@ -32,14 +32,15 @@ const items = [
     caption: 'Concept to help players learn unfamiliar words without leaving the game',
   },
   {
-    id: 'valtodo',
-    src: '/images/play/valtodo.png',
-    alt: 'Valtodo',
-    ratio: '1918 / 870',
-    title: 'Daily Ace',
-    caption: 'Valorant themed to-do list including the Valorant dopamine hit',
-    link: 'https://5dailies.vercel.app/',
-    linkLabel: '5dailies.vercel.app',
+    id: 'resolutions',
+    src: '/images/play/resolutions-popup.dc.html',
+    alt: "New Year's Resolutions",
+    ratio: '1360 / 780',
+    frame: [1360, 780],
+    title: "New Year's Resolutions",
+    caption: 'Google Calendar feature that turns a resolution into monthly milestones',
+    link: '/images/play/resolutions-popup.dc.html',
+    linkLabel: 'Click to try the prototype',
     wide: true,
   },
   {
@@ -64,6 +65,17 @@ const items = [
     caption: "Founding product designer for Fullerton's first design-a-thon",
   },
   {
+    id: 'valtodo',
+    src: '/images/play/valtodo.png',
+    alt: 'Valtodo',
+    ratio: '1918 / 870',
+    title: 'Daily Ace',
+    caption: 'Valorant themed to-do list including the Valorant dopamine hit',
+    link: 'https://5dailies.vercel.app/',
+    linkLabel: '5dailies.vercel.app',
+    wide: true,
+  },
+  {
     id: 'fullyhackz24',
     src: '/images/play/fullyhackz24.png',
     alt: 'FullyHackz 24',
@@ -71,11 +83,11 @@ const items = [
     caption: "Programmed landing page for ACM's largest hackathon",
   },
   {
-    id: 'marchbmad',
-    src: '/images/play/marchbmad.png',
-    alt: 'March BMAD',
-    ratio: '829 / 1907',
-    caption: "Created landing page for ACM's coding competition",
+    id: 'raspberrypi',
+    src: '/images/play/raspberrypi.jpeg',
+    alt: 'Raspberry Pi',
+    ratio: '480 / 640',
+    caption: 'My first cyberdeck ft Raspberry Pi Pico',
   },
   {
     id: 'cakedrawing',
@@ -85,11 +97,11 @@ const items = [
     caption: 'Drawn by me on procreate',
   },
   {
-    id: 'raspberrypi',
-    src: '/images/play/raspberrypi.jpeg',
-    alt: 'Raspberry Pi',
-    ratio: '480 / 640',
-    caption: 'My first cyberdeck ft Raspberry Pi Pico',
+    id: 'marchbmad',
+    src: '/images/play/marchbmad.png',
+    alt: 'March BMAD',
+    ratio: '829 / 1907',
+    caption: "Created landing page for ACM's coding competition",
     column: 'right',
   },
   {
@@ -165,7 +177,12 @@ export default function Play() {
               {item.component === 'wordle' ? (
                 <WordleHero alt={item.alt} bare />
               ) : item.src.endsWith('.html') ? (
-                <HtmlAnimation src={item.src} width={411} height={870} title={item.alt} />
+                <HtmlAnimation
+                  src={item.src}
+                  width={item.frame?.[0] ?? 411}
+                  height={item.frame?.[1] ?? 870}
+                  title={item.alt}
+                />
               ) : (
                 <ImageSlot src={item.src} alt={item.alt} />
               )}

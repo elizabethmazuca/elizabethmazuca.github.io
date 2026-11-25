@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Calendar with New Year's resolutions pop-up</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f8fafd}
+a{color:#0b57d0}a:hover{color:#0842a0}
+button{font-family:inherit;cursor:pointer}
+button:disabled{opacity:.38;cursor:not-allowed}
+input[type=text]{font-family:inherit}
+input[type=text]:focus{outline:2px solid #0b57d0;outline-offset:-1px;border-color:transparent}
+.gs{font-family:'Google Sans','Google Sans Flex',Roboto,Arial,sans-serif}
+.ib{width:40px;height:40px;border:0;background:transparent;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ib:hover{background:#e9ebee}
+.bn{transform-box:fill-box;transform-origin:50% 100%;animation:bn .7s cubic-bezier(.3,.7,.4,1) both}
+@keyframes bn{0%{transform:translateY(36px) scale(.9,1.1);opacity:0}45%{transform:translateY(-12px) scale(.95,1.05);opacity:1}70%{transform:translateY(2px) scale(1.05,.95)}85%{transform:translateY(-3px)}100%{transform:none;opacity:1}}
+.fw-s,.fw-p,.fw-f{animation-duration:2.4s;animation-iteration-count:infinite;animation-delay:var(--d)}
+.fw-s{opacity:0;animation-name:fw-s;animation-timing-function:cubic-bezier(.15,.75,.35,1)}
+.fw-f{opacity:0;animation-name:fw-f;animation-timing-function:ease-out}
+.fw-p{opacity:0;animation-timing-function:cubic-bezier(.1,.8,.3,1)}
+@keyframes fw-s{0%{transform:translateY(var(--h));opacity:0}2%{opacity:1}14%{transform:none;opacity:1}15%,100%{transform:none;opacity:0}}
+@keyframes fw-f{0%,14%{transform:scale(0);opacity:0}16%{transform:scale(1);opacity:.85}26%,100%{transform:scale(1.8);opacity:0}}
+@keyframes fw-p1{0%,14%{transform:translateX(0);opacity:0}15%{opacity:1}50%{transform:translateX(14px);opacity:1}100%{transform:translateX(18px) scaleX(.3);opacity:0}}
+@keyframes fw-p2{0%,14%{transform:translateX(0);opacity:0}15%{opacity:1}50%{transform:translateX(18px);opacity:1}100%{transform:translateX(22px) scaleX(.3);opacity:0}}
+@keyframes fw-p3{0%,14%{transform:translateX(0);opacity:0}15%{opacity:1}50%{transform:translateX(22px);opacity:1}100%{transform:translateX(26px) scaleX(.3);opacity:0}}
+.fw-p1{animation-name:fw-p1}.fw-p2{animation-name:fw-p2}.fw-p3{animation-name:fw-p3}
+@media (prefers-reduced-motion:reduce){.bn{animation:none}.fw-s,.fw-f{display:none}.fw-p{animation:none;opacity:1;transform:translateX(18px)}}
+.chip{display:block;width:100%;text-align:left;font-family:Roboto,Arial,sans-serif;font-size:12px;font-weight:500;padding:2px 8px;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;margin-top:2px;line-height:18px}
+</style>
+</helmet>
+<div class="gs" style="position: relative; min-height: 780px; background: #f8fafd; color: #1f1f1f; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 16px; min-height: 64px; box-sizing: border-box">
+    <button class="ib" aria-label="Main menu" style="width: 48px; height: 48px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+    <div style="display: flex; align-items: center; gap: 10px; margin-right: 40px">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="4" width="34" height="33" rx="6" fill="#0b57d0"></rect><rect x="6" y="11" width="28" height="23" rx="3" fill="#fff"></rect><text x="20" y="23" text-anchor="middle" dominant-baseline="central" font-family="Google Sans, Google Sans Flex, Roboto, sans-serif" font-size="17" font-weight="500" fill="#0b57d0">4</text></svg>
+      <span style="font-size: 22px; font-weight: 400; color: #1f1f1f">Calendar</span>
+    </div>
+    <button onClick="{{ goToday }}" style="height: 40px; padding: 0 24px; border: 1px solid #747775; background: transparent; border-radius: 20px; font-size: 14px; font-weight: 500; color: #1f1f1f; margin-right: 12px">Today</button>
+    <button class="ib" onClick="{{ prev }}" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+    <button class="ib" onClick="{{ next }}" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+    <h1 style="margin: 0 0 0 12px; font-size: 22px; font-weight: 400; color: #1f1f1f; flex: 1 1 220px">{{ title }}</h1>
+    <button class="ib" aria-label="Search" style="width: 48px; height: 48px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg></button>
+    <button class="ib" aria-label="Help" style="width: 48px; height: 48px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4M12 17h.01"></path></svg></button>
+    <button class="ib" aria-label="Settings" style="width: 48px; height: 48px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 14H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1A2 2 0 1 1 7 4.2l.1.1A1.7 1.7 0 0 0 10 3.1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5.9z"></path></svg></button>
+    <div style="position: relative; margin: 0 8px">
+      <button onClick="{{ toggleMenu }}" aria-haspopup="true" aria-expanded="{{ menuOpenStr }}" style="height: 40px; min-width: 112px; padding: 0 14px 0 20px; border: 1px solid #747775; background: transparent; border-radius: 20px; font-size: 14px; font-weight: 500; color: #1f1f1f; display: flex; align-items: center; justify-content: space-between; gap: 12px">{{ viewLabel }}<svg width="12" height="12" viewBox="0 0 24 24" fill="#444746" aria-hidden="true"><path d="M5 8l7 8 7-8z"></path></svg></button>
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <div role="menu" style="position: absolute; right: 0; top: 46px; z-index: 15; background: #fff; border-radius: 4px; box-shadow: 0 2px 6px 2px rgba(60,64,67,.15), 0 1px 2px rgba(60,64,67,.3); padding: 8px 0; min-width: 160px">
+          <button role="menuitem" onClick="{{ toWeek }}" style="display: block; width: 100%; text-align: left; height: 40px; padding: 0 20px; border: 0; background: transparent; font-size: 14px; color: #1f1f1f">Week</button>
+          <button role="menuitem" onClick="{{ toMonth }}" style="display: block; width: 100%; text-align: left; height: 40px; padding: 0 20px; border: 0; background: transparent; font-size: 14px; color: #1f1f1f">Month</button>
+        </div>
+      </sc-if>
+    </div>
+    <div aria-hidden="true" style="width: 40px; height: 40px; border-radius: 50%; background: #8e24aa; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; margin-left: 4px">E</div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px 8px; flex: 1">
+    <aside style="flex: 0 1 256px; display: flex; flex-direction: column; gap: 20px; padding: 8px 8px 0">
+      <button onClick="{{ startPlan }}" style="align-self: flex-start; height: 56px; padding: 0 24px 0 16px; border: 0; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15); display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: #1f1f1f">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1f1f1f" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        Resolution
+      </button>
+
+      <section aria-label="Mini calendar" style="padding: 0 4px">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-left: 8px">
+          <span style="font-size: 14px; font-weight: 500">{{ miniTitle }}</span>
+          <div style="display: flex">
+            <button class="ib" onClick="{{ prev }}" aria-label="Previous month" style="width: 32px; height: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <button class="ib" onClick="{{ next }}" aria-label="Next month" style="width: 32px; height: 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#444746" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg></button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); margin-top: 4px; font-family: Roboto, Arial, sans-serif">
+          <sc-for list="{{ miniDow }}" as="w" hint-placeholder-count="7">
+            <span style="text-align: center; font-size: 11px; font-weight: 500; color: #444746; line-height: 28px">{{ w }}</span>
+          </sc-for>
+          <sc-for list="{{ mini }}" as="m" hint-placeholder-count="42">
+            <button onClick="{{ m.go }}" aria-label="{{ m.aria }}" style="{{ m.style }}">{{ m.num }}</button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="padding: 0 4px">
+        <h2 style="margin: 0 0 6px 8px; font-size: 16px; font-weight: 500">My calendars</h2>
+        <div style="display: flex; flex-direction: column; font-family: Roboto, Arial, sans-serif; font-size: 14px; color: #1f1f1f">
+          <label style="display: flex; align-items: center; gap: 14px; min-height: 36px; padding-left: 10px"><input type="checkbox" checked="{{ true }}" disabled="{{ true }}" style="width: 18px; height: 18px; margin: 0; accent-color: #d81b60"> Elizabeth Mazuca</label>
+          <label style="display: flex; align-items: center; gap: 14px; min-height: 36px; padding-left: 10px"><input type="checkbox" checked="{{ showRes }}" onChange="{{ toggleRes }}" style="width: 18px; height: 18px; margin: 0; accent-color: #0b8043"> Resolutions</label>
+          <label style="display: flex; align-items: center; gap: 14px; min-height: 36px; padding-left: 10px"><input type="checkbox" checked="{{ showHol }}" onChange="{{ toggleHol }}" style="width: 18px; height: 18px; margin: 0; accent-color: #039be5"> Holidays</label>
+        </div>
+      </section>
+
+      <sc-if value="{{ hasGoals }}" hint-placeholder-val="{{ false }}">
+        <section style="padding: 0 4px">
+          <h2 style="margin: 0 0 6px 8px; font-size: 16px; font-weight: 500">2027 resolutions</h2>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <sc-for list="{{ goalList }}" as="g" hint-placeholder-count="1">
+              <button onClick="{{ g.edit }}" style="text-align: left; border: 0; background: transparent; border-radius: 12px; padding: 8px 10px; display: flex; gap: 12px; align-items: flex-start">
+                <span style="{{ g.dotStyle }}"></span>
+                <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                  <span style="font-size: 14px; font-weight: 500; color: #1f1f1f">{{ g.title }}</span>
+                  <span style="font-family: Roboto, Arial, sans-serif; font-size: 12px; color: #444746">{{ g.progress }}</span>
+                  <span style="height: 4px; width: 160px; border-radius: 2px; background: #dde3ea; overflow: hidden"><span style="{{ g.barStyle }}"></span></span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+    </aside>
+
+    <main style="flex: 999 1 560px; min-width: 0; background: #fff; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column">
+      <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ true }}">
+        <div style="overflow-x: auto">
+          <div style="min-width: 640px">
+            <div style="display: grid; grid-template-columns: 72px repeat(7, minmax(0, 1fr)); padding-top: 12px">
+              <div></div>
+              <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding-bottom: 8px">
+                  <span style="{{ d.dowStyle }}">{{ d.dow }}</span>
+                  <span style="{{ d.numStyle }}">{{ d.num }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: grid; grid-template-columns: 72px repeat(7, minmax(0, 1fr)); border-bottom: 1px solid #dde3ea; min-height: 30px">
+              <div style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: #444746; text-align: right; padding: 8px 8px 0 0">GMT-8</div>
+              <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+                <div style="border-left: 1px solid #dde3ea; padding: 0 8px 4px 2px; min-width: 0">
+                  <sc-for list="{{ d.events }}" as="ev" hint-placeholder-count="0">
+                    <sc-if value="{{ ev.isMs }}" hint-placeholder-val="{{ false }}">
+                      <button class="chip" onClick="{{ ev.open }}" style="{{ ev.style }}">{{ ev.label }}</button>
+                    </sc-if>
+                    <sc-if value="{{ ev.isHol }}" hint-placeholder-val="{{ true }}">
+                      <div class="chip" style="background: #c2e7ff; color: #001d35">{{ ev.label }}</div>
+                    </sc-if>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+            <sc-for list="{{ hours }}" as="h" hint-placeholder-count="12">
+              <div style="display: grid; grid-template-columns: 72px repeat(7, minmax(0, 1fr)); height: 48px">
+                <div style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: #444746; text-align: right; padding-right: 8px; transform: translateY(-6px)">{{ h.label }}</div>
+                <sc-for list="{{ h.cells }}" as="c" hint-placeholder-count="7">
+                  <div style="border-left: 1px solid #dde3ea; border-bottom: 1px solid #dde3ea"></div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isMonth }}" hint-placeholder-val="{{ false }}">
+        <div style="overflow-x: auto">
+          <div style="min-width: 640px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr))">
+            <sc-for list="{{ cells }}" as="c" hint-placeholder-count="35">
+              <div style="min-height: 124px; border-right: 1px solid #dde3ea; border-bottom: 1px solid #dde3ea; padding: 8px 4px 6px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 2px">
+                <sc-if value="{{ c.top }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size: 11px; font-weight: 500; color: #444746">{{ c.dow }}</span>
+                </sc-if>
+                <span style="{{ c.numStyle }}">{{ c.num }}</span>
+                <div style="align-self: stretch">
+                  <sc-for list="{{ c.events }}" as="ev" hint-placeholder-count="0">
+                    <sc-if value="{{ ev.isMs }}" hint-placeholder-val="{{ false }}">
+                      <button class="chip" onClick="{{ ev.open }}" style="{{ ev.style }}">{{ ev.label }}</button>
+                    </sc-if>
+                    <sc-if value="{{ ev.isHol }}" hint-placeholder-val="{{ true }}">
+                      <div class="chip" style="background: #c2e7ff; color: #001d35">{{ ev.label }}</div>
+                    </sc-if>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: absolute; left: 24px; bottom: 24px; z-index: 30; background: #303030; color: #f2f2f2; border-radius: 4px; box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px rgba(0,0,0,.14); padding: 6px 8px 6px 16px; display: flex; align-items: center; gap: 16px; font-family: Roboto, Arial, sans-serif; font-size: 14px; max-width: calc(100% - 48px); box-sizing: border-box; min-height: 48px">
+      <span>{{ toast }}</span>
+      <button onClick="{{ dismissToast }}" style="height: 36px; padding: 0 8px; border: 0; background: transparent; color: #a8c7fa; font-size: 14px; font-weight: 500">Dismiss</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ anyModal }}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 0; z-index: 20; background: rgba(0,0,0,.32); display: flex; align-items: flex-start; justify-content: center; padding: 104px 16px 16px; box-sizing: border-box">
+      <div role="dialog" aria-modal="true" aria-labelledby="res-title" style="{{ dialogStyle }}">
+
+        <sc-if value="{{ showAsk }}" hint-placeholder-val="{{ true }}">
+          <div style="padding: 24px 24px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px">
+            <svg width="240" height="160" viewBox="0 -30 240 160" aria-hidden="true" style="overflow: visible">
+              <g transform="translate(38 46)" style="--d: 0s; --h: 84px"><g class="fw-s"><line y1="0" y2="12" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round" opacity=".6"></line><circle r="2.4" fill="#4285f4"></circle></g><g transform="rotate(-0.6)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.7" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(27.6)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.4" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(45.1)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.8" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(63.7)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.5" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(91.6)"><line class="fw-p fw-p2" x1="0" y1="0" x2="9.4" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(107.6)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.9" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(130.1)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.4" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(159.8)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.1" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(185.8)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.9" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(204.3)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.8" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(220.9)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.0" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(247.8)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.2" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(266.3)"><line class="fw-p fw-p1" x1="0" y1="0" x2="7.7" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(286.9)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.4" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(314.3)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.5" y2="0" stroke="#4285f4" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(337.7)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.9" y2="0" stroke="#8ab4f8" stroke-width="2" stroke-linecap="round"></line></g></g>
+              <g transform="translate(92 8)" style="--d: .6s; --h: 122px"><g class="fw-s"><line y1="0" y2="12" stroke="#81c995" stroke-width="2" stroke-linecap="round" opacity=".6"></line><circle r="2.4" fill="#34a853"></circle></g><g transform="rotate(-0.0)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.0" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(22.0)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.8" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(51.0)"><line class="fw-p fw-p3" x1="0" y1="0" x2="10.0" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(71.6)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.1" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(87.8)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.7" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(110.0)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.2" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(138.2)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.2" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(161.7)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.2" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(185.5)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.5" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(196.5)"><line class="fw-p fw-p1" x1="0" y1="0" x2="7.6" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(229.9)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.4" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(253.3)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.2" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(264.9)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.9" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(295.8)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.8" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(310.0)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.0" y2="0" stroke="#34a853" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(343.1)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.3" y2="0" stroke="#81c995" stroke-width="2" stroke-linecap="round"></line></g></g>
+              <g transform="translate(150 14)" style="--d: 1.2s; --h: 116px"><g class="fw-s"><line y1="0" y2="12" stroke="#fdd663" stroke-width="2" stroke-linecap="round" opacity=".6"></line><circle r="2.4" fill="#fbbc04"></circle></g><g transform="rotate(-4.6)"><line class="fw-p fw-p1" x1="0" y1="0" x2="7.7" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(17.7)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.2" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(48.6)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.5" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(68.2)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.3" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(86.3)"><line class="fw-p fw-p2" x1="0" y1="0" x2="9.2" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(108.1)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.9" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(130.4)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.3" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(154.1)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.8" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(185.7)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.4" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(200.1)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.7" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(221.5)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.2" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(251.8)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.9" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(265.2)"><line class="fw-p fw-p1" x1="0" y1="0" x2="10.0" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(289.1)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.8" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(318.3)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.0" y2="0" stroke="#fbbc04" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(335.1)"><line class="fw-p fw-p1" x1="0" y1="0" x2="7.2" y2="0" stroke="#fdd663" stroke-width="2" stroke-linecap="round"></line></g></g>
+              <g transform="translate(204 42)" style="--d: 1.8s; --h: 88px"><g class="fw-s"><line y1="0" y2="12" stroke="#f28b82" stroke-width="2" stroke-linecap="round" opacity=".6"></line><circle r="2.4" fill="#ea4335"></circle></g><g transform="rotate(-4.9)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.7" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(19.4)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.8" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(43.5)"><line class="fw-p fw-p3" x1="0" y1="0" x2="8.4" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(73.0)"><line class="fw-p fw-p1" x1="0" y1="0" x2="8.5" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(90.9)"><line class="fw-p fw-p2" x1="0" y1="0" x2="9.6" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(108.7)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.5" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(139.9)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.5" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(154.5)"><line class="fw-p fw-p2" x1="0" y1="0" x2="7.6" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(182.9)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.8" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(198.9)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.9" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(229.6)"><line class="fw-p fw-p2" x1="0" y1="0" x2="8.8" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(246.6)"><line class="fw-p fw-p3" x1="0" y1="0" x2="7.3" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(264.5)"><line class="fw-p fw-p1" x1="0" y1="0" x2="9.9" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(289.4)"><line class="fw-p fw-p2" x1="0" y1="0" x2="9.1" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(312.1)"><line class="fw-p fw-p3" x1="0" y1="0" x2="9.5" y2="0" stroke="#ea4335" stroke-width="2" stroke-linecap="round"></line></g><g transform="rotate(338.7)"><line class="fw-p fw-p1" x1="0" y1="0" x2="7.9" y2="0" stroke="#f28b82" stroke-width="2" stroke-linecap="round"></line></g></g>
+              <text class="bn" x="67.5" y="112" text-anchor="middle" font-family="Google Sans, Google Sans Flex, Roboto, sans-serif" font-size="60" font-weight="500" fill="#1f1f1f" style="animation-delay: 0s">2</text>
+              <text class="bn" x="102.5" y="112" text-anchor="middle" font-family="Google Sans, Google Sans Flex, Roboto, sans-serif" font-size="60" font-weight="500" fill="#1f1f1f" style="animation-delay: 0.08s">0</text>
+              <text class="bn" x="137.5" y="112" text-anchor="middle" font-family="Google Sans, Google Sans Flex, Roboto, sans-serif" font-size="60" font-weight="500" fill="#1f1f1f" style="animation-delay: 0.16s">2</text>
+              <text class="bn" x="172.5" y="112" text-anchor="middle" font-family="Google Sans, Google Sans Flex, Roboto, sans-serif" font-size="60" font-weight="500" fill="#1f1f1f" style="animation-delay: 0.24s">7</text>
+            </svg>
+            <h2 id="res-title" style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 400; color: #1f1f1f">Any New Year's resolutions?</h2>
+            <p style="margin: 0; font-family: Roboto, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #444746; max-width: 420px">Add a goal for 2027 and break it into monthly milestones.&nbsp;</p>
+            <div style="align-self: stretch; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 8px">
+              <button onClick="{{ notYear }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Not this year</button>
+              <button onClick="{{ later }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Remind me later</button>
+              <button onClick="{{ startPlan }}" style="height: 40px; padding: 0 24px; border: 0; border-radius: 20px; background: #0b57d0; color: #fff; font-size: 14px; font-weight: 500">Add a resolution</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showGoal }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 16px">
+            <span style="font-family: Roboto, Arial, sans-serif; font-size: 12px; font-weight: 500; color: #444746">Step 1 of 2</span>
+            <h2 id="res-title" style="margin: -8px 0 0; font-size: 24px; line-height: 32px; font-weight: 400">What's your resolution?</h2>
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <label for="goal-input" style="font-family: Roboto, Arial, sans-serif; font-size: 12px; color: #444746">Resolution</label>
+              <input id="goal-input" type="text" value="{{ draftTitle }}" onChange="{{ titleChange }}" placeholder="e.g. Run a half marathon" style="height: 48px; border: 1px solid #747775; border-radius: 4px; background: #fff; padding: 0 14px; font-family: Roboto, Arial, sans-serif; font-size: 16px; color: #1f1f1f">
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ suggestions }}" as="sg" hint-placeholder-count="4">
+                <button onClick="{{ sg.pick }}" style="height: 32px; padding: 0 16px; border: 1px solid #747775; border-radius: 8px; background: transparent; font-size: 14px; font-weight: 500; color: #444746">{{ sg.t }}</button>
+              </sc-for>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px">
+              <button onClick="{{ closeModal }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Cancel</button>
+              <button onClick="{{ toMs }}" disabled="{{ noTitle }}" style="height: 40px; padding: 0 24px; border: 0; border-radius: 20px; background: #0b57d0; color: #fff; font-size: 14px; font-weight: 500">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showMs }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 14px">
+            <span style="font-family: Roboto, Arial, sans-serif; font-size: 12px; font-weight: 500; color: #444746">{{ msStep }}</span>
+            <h2 id="res-title" style="margin: -6px 0 0; font-size: 24px; line-height: 32px; font-weight: 400">Monthly milestones</h2>
+            <p style="margin: 0; font-family: Roboto, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #444746">For <strong style="font-weight: 500; color: #1f1f1f">{{ draftTitle }}</strong>. Fill in as many months as you like; blank months are skipped.</p>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <span style="font-size: 14px; font-weight: 500; color: #1f1f1f">Add each milestone on</span>
+              <div role="group" aria-label="Milestone day" style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-for list="{{ dayOpts }}" as="o" hint-placeholder-count="3">
+                  <button onClick="{{ o.pick }}" aria-pressed="{{ o.pressed }}" style="{{ o.style }}">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="max-height: 336px; overflow-y: auto; background: #fff; border: 1px solid #dde3ea; border-radius: 16px; padding: 4px 16px">
+              <sc-for list="{{ msRows }}" as="r" hint-placeholder-count="12">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 6px 0; border-bottom: 1px solid #e9eef6">
+                  <label for="{{ r.id }}" style="width: 60px; flex: none; display: flex; flex-direction: column">
+                    <span style="font-size: 14px; font-weight: 500">{{ r.month }}</span>
+                    <span style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: #444746">{{ r.date }}</span>
+                  </label>
+                  <input id="{{ r.id }}" type="text" value="{{ r.value }}" onChange="{{ r.onChange }}" placeholder="{{ r.ph }}" style="flex: 1; min-width: 0; height: 40px; border: 1px solid #c4c7c5; border-radius: 4px; padding: 0 12px; font-family: Roboto, Arial, sans-serif; font-size: 14px; color: #1f1f1f">
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap">
+              <button onClick="{{ backToGoal }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Back</button>
+              <button onClick="{{ save }}" disabled="{{ cantSave }}" style="height: 40px; padding: 0 24px; border: 0; border-radius: 20px; background: #0b57d0; color: #fff; font-size: 14px; font-weight: 500">{{ saveLabel }}</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showDetail }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 20px 24px 20px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: flex-start; gap: 16px">
+              <span style="{{ dDot }}"></span>
+              <div style="display: flex; flex-direction: column; gap: 4px">
+                <h2 id="res-title" style="margin: 0; font-size: 22px; line-height: 28px; font-weight: 400">{{ dText }}</h2>
+                <span style="font-family: Roboto, Arial, sans-serif; font-size: 14px; color: #444746">{{ dDate }}</span>
+                <span style="font-family: Roboto, Arial, sans-serif; font-size: 14px; color: #444746">{{ dGoal }} · Resolutions</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 12px">
+              <button onClick="{{ closeModal }}" style="height: 40px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Close</button>
+              <button onClick="{{ editGoal }}" style="height: 40px; padding: 0 20px; border: 1px solid #747775; border-radius: 20px; background: transparent; color: #0b57d0; font-size: 14px; font-weight: 500">Edit milestones</button>
+              <button onClick="{{ toggleDone }}" style="height: 40px; padding: 0 24px; border: 0; border-radius: 20px; background: #0b57d0; color: #fff; font-size: 14px; font-weight: 500">{{ doneLabel }}</button>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":780}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: 'ask', goals: [], draftTitle: '', draftDay: 'end', draftMs: Array(12).fill(''), editing: -1, view: 'week', week: 0, month: 0, showRes: true, showHol: true, toast: '', sel: null, menuOpen: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (o) => this.setState(o);
+    const A = '#0b57d0';
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const SH = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+    const COLORS = ['#0b8043','#8e24aa','#d50000','#3f51b5'];
+    const TODAY = new Date(2027, 0, 4);
+    const BASE = new Date(2027, 0, 3);
+    const same = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    const dayFor = (day, m) => day === 'first' ? 1 : day === 'mid' ? 15 : new Date(2027, m + 1, 0).getDate();
+    const isWeek = s.view === 'week';
+
+    const eventsOn = (d) => {
+      const ev = [];
+      if (s.showHol) {
+        if (d.getMonth() === 0 && d.getDate() === 1) ev.push({ isHol: true, isMs: false, label: "New Year's Day" });
+        if (d.getMonth() === 11 && d.getDate() === 31) ev.push({ isHol: true, isMs: false, label: "New Year's Eve" });
+      }
+      if (s.showRes && d.getFullYear() === 2027) {
+        s.goals.forEach((g, gi) => {
+          const m = d.getMonth();
+          const t = g.ms[m];
+          if (t && d.getDate() === dayFor(g.day, m)) {
+            const done = g.done[m];
+            ev.push({ isHol: false, isMs: true, label: (done ? '✓ ' : '') + t,
+              style: `cursor:pointer;border:0;background:${done ? '#e9eef6' : g.color};color:${done ? '#444746' : '#fff'};text-decoration:${done ? 'line-through' : 'none'}`,
+              open: () => set({ sel: { gi, m }, screen: 'detail' }) });
+          }
+        });
+      }
+      return ev;
+    };
+
+    const week = [...Array(7)].map((_, i) => {
+      const d = new Date(2027, 0, 3 + 7 * s.week + i);
+      const t = same(d, TODAY);
+      return { dow: DOW[i], num: d.getDate(),
+        dowStyle: `font-size:11px;font-weight:500;letter-spacing:.8px;color:${t ? A : '#444746'}`,
+        numStyle: `width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:400;background:${t ? A : 'transparent'};color:${t ? '#fff' : '#1f1f1f'}`,
+        events: eventsOn(d) };
+    });
+    const ws = new Date(2027, 0, 3 + 7 * s.week), we = new Date(2027, 0, 9 + 7 * s.week);
+    const weekTitle = ws.getMonth() === we.getMonth()
+      ? `${MONTHS[ws.getMonth()]} ${ws.getFullYear()}`
+      : ws.getFullYear() === we.getFullYear()
+        ? `${SH[ws.getMonth()]} – ${SH[we.getMonth()]} ${we.getFullYear()}`
+        : `${SH[ws.getMonth()]} ${ws.getFullYear()} – ${SH[we.getMonth()]} ${we.getFullYear()}`;
+
+    const first = new Date(2027, s.month, 1);
+    const fm = first.getMonth(), fy = first.getFullYear();
+    const dim = new Date(fy, fm + 1, 0).getDate();
+    const n = Math.ceil((first.getDay() + dim) / 7) * 7;
+    const cells = [...Array(n)].map((_, i) => {
+      const d = new Date(fy, fm, 1 - first.getDay() + i);
+      const inM = d.getMonth() === fm;
+      const t = same(d, TODAY);
+      return { top: i < 7, dow: DOW[i % 7], num: d.getDate() === 1 ? SH[d.getMonth()] + ' 1' : d.getDate(),
+        numStyle: `min-width:24px;height:24px;padding:0 4px;box-sizing:border-box;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;background:${t ? A : 'transparent'};color:${t ? '#fff' : inM ? '#1f1f1f' : '#70757a'}`,
+        events: eventsOn(d) };
+    });
+
+    const mAnchor = isWeek ? new Date(ws.getFullYear(), ws.getMonth(), 1) : first;
+    const mStart = new Date(mAnchor.getFullYear(), mAnchor.getMonth(), 1 - mAnchor.getDay());
+    const mini = [...Array(42)].map((_, i) => {
+      const d = new Date(mStart.getFullYear(), mStart.getMonth(), mStart.getDate() + i);
+      const t = same(d, TODAY);
+      const inWeek = isWeek && d >= ws && d <= we;
+      const inM = d.getMonth() === mAnchor.getMonth();
+      return { num: d.getDate(), aria: `${MONTHS[d.getMonth()]} ${d.getDate()}`,
+        style: `width:28px;height:28px;margin:1px auto;border:0;border-radius:50%;font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:500;background:${t ? A : inWeek ? '#d3e3fd' : 'transparent'};color:${t ? '#fff' : inM ? '#1f1f1f' : '#70757a'}`,
+        go: () => { const diff = Math.floor(Math.round((d - BASE) / 86400000) / 7); set({ view: 'week', week: diff, menuOpen: false }); } };
+    });
+
+    const startPlan = () => set({ screen: 'goal', draftTitle: '', draftMs: Array(12).fill(''), draftDay: 'end', editing: -1, sel: null, menuOpen: false });
+    const count = s.draftMs.filter((x) => x.trim()).length;
+    const editGoalAt = (gi) => { const g = this.state.goals[gi]; set({ screen: 'ms', editing: gi, draftTitle: g.title, draftMs: g.ms.slice(), draftDay: g.day, sel: null }); };
+    const sel = s.sel && s.goals[s.sel.gi] ? s.sel : null;
+    const sg = sel ? s.goals[sel.gi] : null;
+
+    return {
+      title: isWeek ? weekTitle : `${MONTHS[fm]} ${fy}`,
+      viewLabel: isWeek ? 'Week' : 'Month',
+      isWeek, isMonth: !isWeek,
+      menuOpen: s.menuOpen, menuOpenStr: String(s.menuOpen),
+      toggleMenu: () => set({ menuOpen: !this.state.menuOpen }),
+      toWeek: () => set({ view: 'week', menuOpen: false }), toMonth: () => set({ view: 'month', menuOpen: false }),
+      prev: () => isWeek ? set({ week: s.week - 1 }) : set({ month: s.month - 1 }),
+      next: () => isWeek ? set({ week: s.week + 1 }) : set({ month: s.month + 1 }),
+      goToday: () => set({ week: 0, month: 0 }),
+      week, cells, mini,
+      miniTitle: `${MONTHS[mAnchor.getMonth()]} ${mAnchor.getFullYear()}`,
+      miniDow: ['S','M','T','W','T','F','S'],
+      hours: ['1 AM','2 AM','3 AM','4 AM','5 AM','6 AM','7 AM','8 AM','9 AM','10 AM','11 AM','12 PM'].map((label) => ({ label, cells: [1,2,3,4,5,6,7] })),
+      showHol: s.showHol, showRes: s.showRes,
+      toggleHol: () => set({ showHol: !this.state.showHol }),
+      toggleRes: () => set({ showRes: !this.state.showRes }),
+      hasGoals: s.goals.length > 0,
+      goalList: s.goals.map((g, gi) => {
+        const total = g.ms.filter((x) => x).length;
+        const done = g.ms.filter((x, i) => x && g.done[i]).length;
+        return { title: g.title, progress: `${done} of ${total} milestones done`,
+          dotStyle: `flex:none;width:14px;height:14px;border-radius:3px;margin-top:3px;background:${g.color}`,
+          barStyle: `display:block;height:4px;width:${total ? Math.round(100 * done / total) : 0}%;background:${g.color}`,
+          edit: () => editGoalAt(gi) };
+      }),
+      startPlan,
+      anyModal: !!s.screen,
+      dialogStyle: `width:100%;max-width:540px;background:${s.screen === 'detail' ? '#f0f4f9' : '#fff'};border-radius:28px;box-shadow:0 4px 8px 3px rgba(60,64,67,.15),0 1px 3px rgba(60,64,67,.3);overflow:hidden`,
+      showAsk: s.screen === 'ask', showGoal: s.screen === 'goal', showMs: s.screen === 'ms', showDetail: s.screen === 'detail' && !!sel,
+      later: () => set({ screen: null, toast: "We'll ask again the next time you sign in this week." }),
+      notYear: () => set({ screen: null, toast: 'You can add a resolution anytime from the sidebar.' }),
+      closeModal: () => set({ screen: null, sel: null }),
+      draftTitle: s.draftTitle,
+      titleChange: (e) => set({ draftTitle: e.target.value }),
+      noTitle: !s.draftTitle.trim(),
+      suggestions: ['Run a half marathon', 'Read 24 books', 'Learn conversational Spanish', 'Save for a big trip'].map((t) => ({ t, pick: () => set({ draftTitle: t }) })),
+      toMs: () => { if (this.state.draftTitle.trim()) set({ screen: 'ms' }); },
+      backToGoal: () => set({ screen: 'goal' }),
+      msStep: s.editing >= 0 ? 'Edit resolution' : 'Step 2 of 2',
+      dayOpts: [['first', '1st of the month'], ['mid', 'The 15th'], ['end', 'Last day of the month']].map(([k, label]) => {
+        const on = k === s.draftDay;
+        return { label, pressed: String(on), pick: () => set({ draftDay: k }),
+          style: `height:32px;padding:0 16px;border-radius:8px;font-size:14px;font-weight:500;border:1px solid ${on ? '#d3e3fd' : '#747775'};background:${on ? '#d3e3fd' : 'transparent'};color:${on ? '#041e49' : '#444746'}` };
+      }),
+      msRows: MONTHS.map((M, i) => ({
+        id: 'ms-' + i, month: SH[i], date: `${SH[i]} ${dayFor(s.draftDay, i)}`,
+        value: s.draftMs[i], ph: `Where do you want to be by ${M}?`,
+        onChange: (e) => { const a = this.state.draftMs.slice(); a[i] = e.target.value; set({ draftMs: a }); } })),
+      cantSave: count === 0,
+      saveLabel: s.editing >= 0 ? 'Save' : `Add ${count} to calendar`,
+      save: () => {
+        const st = this.state;
+        const c = st.draftMs.filter((x) => x.trim()).length;
+        if (!c) return;
+        const goals = st.goals.slice();
+        const prevG = st.editing >= 0 ? goals[st.editing] : null;
+        const g = { title: st.draftTitle.trim(), ms: st.draftMs.map((x) => x.trim()), day: st.draftDay,
+          done: prevG ? prevG.done : Array(12).fill(false), color: prevG ? prevG.color : COLORS[goals.length % COLORS.length] };
+        if (prevG) goals[st.editing] = g; else goals.push(g);
+        this.setState({ goals, screen: null, editing: -1, view: 'month', month: 0, showRes: true, sel: null, menuOpen: false,
+          toast: prevG ? 'Milestones updated' : `${c} milestone${c === 1 ? '' : 's'} added to Resolutions` });
+      },
+      dGoal: sg ? sg.title : '', dText: sg ? sg.ms[sel.m] : '',
+      dDate: sg ? `${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date(2027, sel.m, dayFor(sg.day, sel.m)).getDay()]}, ${MONTHS[sel.m]} ${dayFor(sg.day, sel.m)} · All day` : '',
+      dDot: sg ? `flex:none;width:16px;height:16px;border-radius:4px;margin-top:6px;background:${sg.color}` : '',
+      doneLabel: sg && sg.done[sel.m] ? 'Mark not done' : 'Mark as done',
+      toggleDone: () => { const st = this.state; const goals = st.goals.slice(); const g = { ...goals[sel.gi], done: goals[sel.gi].done.slice() }; g.done[sel.m] = !g.done[sel.m]; goals[sel.gi] = g; set({ goals }); },
+      editGoal: () => editGoalAt(sel.gi),
+      hasToast: !!s.toast, toast: s.toast,
+      dismissToast: () => set({ toast: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>
